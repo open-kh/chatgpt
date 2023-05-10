@@ -33,6 +33,8 @@ import { ModelSelect } from './ModelSelect';
 import { SystemPrompt } from './SystemPrompt';
 import { TemperatureSlider } from './Temperature';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
+import Logo from '../Logo';
+import Image from 'next/image';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -43,6 +45,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
 
   const {
     state: {
+      appName,
       selectedConversation,
       conversations,
       models,
@@ -347,22 +350,49 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
     };
   }, [messagesEndRef]);
 
+  const messages = [
+    {
+      title: '\"Code a snake game\"',
+      body: 'Code a basic snake game in python, give explanations for each step.'
+    },
+    {
+      title: '\"How do I make an HTTP request in Javascript?\"',
+      body: 'How do I make an HTTP request in Javascript?'
+    },
+    {
+      title: '\"Write an email from bullet list\"',
+      body: 'As a restaurant owner, write a professional email to the supplier to get these products every week: \n\n- Wine (x10)\n- Eggs (x24)\n- Bread (x12)'
+    },
+    {
+      title: '\"Got any creative ideas for a 10 year old\'s birthday?\"',
+      body: 'Got any creative ideas for a 10 year old\'s birthday?'
+    },
+    {
+      title: '\"Assist in a task\"',
+      body: 'How do I make a delicious lemon cheesecake?'
+    },
+    {
+      title: '\"Explain quantum computing in simple terms\"',
+      body: 'Explain quantum computing in simple terms'
+    },
+  ];
+
   return (
     <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
       {!(apiKey || serverSideApiKeyIsSet) ? (
         <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[600px]">
           <div className="text-center text-4xl font-bold text-black dark:text-white">
-            Welcome to Chatbot UI
+            Welcome to {appName}
           </div>
           <div className="text-center text-lg text-black dark:text-white">
-            <div className="mb-8">{`Chatbot UI is an open source clone of OpenAI's ChatGPT UI.`}</div>
+            <div className="mb-8">{appName+` is an open source clone of OpenAI's ChatGPT UI.`}</div>
             <div className="mb-2 font-bold">
-              Important: Chatbot UI is 100% unaffiliated with OpenAI.
+              Important: {appName} is 100% unaffiliated with OpenAI.
             </div>
           </div>
           <div className="text-center text-gray-500 dark:text-gray-400">
             <div className="mb-2">
-              Chatbot UI allows you to plug in your API key to use this UI with
+            {appName} allows you to plug in your API key to use this UI with
               their API.
             </div>
             <div className="mb-2">
@@ -398,70 +428,75 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           >
             {selectedConversation?.messages.length === 0 ? (
               <>
-                <div className="mx-auto flex flex-col space-y-5 md:space-y-10 px-3 pt-5 md:pt-12 sm:max-w-[600px]">
-                  <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
-                    {models.length === 0 ? (
+                <div className="mx-auto flex flex-col space-y-5 md:space-y-5 px-3 pt-5 md:pt-12 sm:max-w-[900px]">
+                  <div className="my-auto grid gap-8 lg:grid-cols-3">
+                    <div className="lg:col-span-1">
                       <div>
-                        <Spinner size="16px" className="mx-auto" />
+                        <div className="mb-3 flex items-center text-2xl font-semibold">
+                          <div className="h-10 w-10">
+                            <Image
+                              alt=""
+                              width={10}
+                              height={10}
+                              src="/favicon.ico"
+                              className="h-full h-full flex-none select-none"
+                            />
+                          </div>
+                          {appName}
+                        </div>
+                        <p className="text-base text-gray-600 dark:text-gray-400">
+                          Making the community`s best AI chat models available to everyone.
+                        </p>
                       </div>
-                    ) : (
-                      'Chatbot UI'
+                    </div>
+                  <div className="lg:col-span-1">
+                    {models.length > 0 && (
+                      <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
+                        <ModelSelect />
+                        <TemperatureSlider
+                          label={t('Temperature')}
+                          onChangeTemperature={(temperature) =>
+                            handleUpdateConversation(selectedConversation, {
+                              key: 'temperature',
+                              value: temperature,
+                            })
+                          }
+                        />
+                      </div>
                     )}
                   </div>
-
-                  {models.length > 0 && (
-                    <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
-                      <ModelSelect />
-
-                      <SystemPrompt
-                        conversation={selectedConversation}
-                        prompts={prompts}
-                        onChangePrompt={(prompt) =>
-                          handleUpdateConversation(selectedConversation, {
-                            key: 'prompt',
-                            value: prompt,
+                  <div className="lg:col-span-3 lg:mt-12">
+                    <p className="mb-3 text-gray-600 dark:text-gray-300">Examples</p>
+                      <div className="grid gap-3 lg:grid-cols-3 lg:gap-5">
+                        {
+                          messages.map(m=>{
+                            return (
+                              <>
+                                <button
+                                  type="button"
+                                  title="Prefix Example"
+                                  className="rounded-2xl border bg-gray-50 p-2.5 text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 sm:p-4"
+                                  onClick={()=>{
+                                    let message: Message = { role: "user", content: m.body }
+                                    setCurrentMessage(message);
+                                    handleSend(message, 0, null);
+                                  }}
+                                >{m.title}
+                                </button>
+                              </>
+                            )
                           })
                         }
-                      />
-
-                      <TemperatureSlider
-                        label={t('Temperature')}
-                        onChangeTemperature={(temperature) =>
-                          handleUpdateConversation(selectedConversation, {
-                            key: 'temperature',
-                            value: temperature,
-                          })
-                        }
-                      />
+                      </div>
                     </div>
-                  )}
+                  </div>
                 </div>
               </>
             ) : (
               <>
                 <div className="sticky top-0 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
-                  {t('Model')}: {selectedConversation?.model.name} | {t('Temp')}
-                  : {selectedConversation?.temperature} |
-                  <button
-                    className="ml-2 cursor-pointer hover:opacity-50"
-                    onClick={handleSettings}
-                  >
-                    <IconSettings size={18} />
-                  </button>
-                  <button
-                    className="ml-2 cursor-pointer hover:opacity-50"
-                    onClick={onClearAll}
-                  >
-                    <IconClearAll size={18} />
-                  </button>
+                  {selectedConversation?.name}
                 </div>
-                {showSettings && (
-                  <div className="flex flex-col space-y-10 md:mx-auto md:max-w-xl md:gap-6 md:py-3 md:pt-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
-                    <div className="flex h-full flex-col space-y-4 border-b border-neutral-200 p-4 dark:border-neutral-600 md:rounded-lg md:border">
-                      <ModelSelect />
-                    </div>
-                  </div>
-                )}
 
                 {selectedConversation?.messages.map((message, index) => (
                   <MemoizedChatMessage

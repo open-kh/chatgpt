@@ -1,4 +1,4 @@
-import { IconFolderPlus, IconMistOff, IconPlus } from '@tabler/icons-react';
+import { IconFolderPlus, IconMenu, IconMistOff, IconPlus } from '@tabler/icons-react';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -61,7 +61,13 @@ const Sidebar = <T,>({
       >
         <div className="flex items-center">
           <button
-            className="text-sidebar flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-white/20 p-3 text-white transition-colors duration-200 hover:bg-gray-500/10"
+            className="flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-full border border-white/20 p-3 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10"
+            onClick={handleCreateFolder}
+          >
+            <IconFolderPlus size={16} />
+          </button>
+          <button
+            className="ml-2 text-sidebar flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-full border border-white/20 p-3 text-white transition-colors duration-200 hover:bg-gray-500/10"
             onClick={() => {
               handleCreateItem();
               handleSearchTerm('');
@@ -69,13 +75,6 @@ const Sidebar = <T,>({
           >
             <IconPlus size={16} />
             {addItemButtonTitle}
-          </button>
-
-          <button
-            className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-white/20 p-3 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10"
-            onClick={handleCreateFolder}
-          >
-            <IconFolderPlus size={16} />
           </button>
         </div>
         <Search

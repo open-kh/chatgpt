@@ -22,6 +22,8 @@ import { MemoizedReactMarkdown } from '../Markdown/MemoizedReactMarkdown';
 import rehypeMathjax from 'rehype-mathjax';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import Wave from './Wave';
+import Logo from '../Logo';
 
 export interface Props {
   message: Message;
@@ -124,25 +126,22 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
     }
   }, [isEditing]);
 
+  let styleEl = 'relative max-sm:-ml-3 text-base min-h-[calc(2rem+theme(spacing[3.5]))] min-w-[100px] rounded-3xl px-4 py-2 border border-gray-100 bg-gradient-to-br from-gray-50 text-gray-600 prose-pre:my-2 dark:border-gray-800 dark:from-gray-800/40 dark:text-gray-300';
+
   return (
     <div
-      className={`group md:px-4 ${
-        message.role === 'assistant'
-          ? 'border-b border-black/10 bg-gray-50 text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
-          : 'border-b border-black/10 bg-white text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
-      }`}
+      className="group mx-auto"
       style={{ overflowWrap: 'anywhere' }}
     >
-      <div className="relative m-auto flex p-4 text-base md:max-w-2xl md:gap-6 md:py-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
+      <div className="relative m-auto flex py-2 text-base md:max-w-2xl lg:max-w-2xl lg:px-0 xl:max-w-3xl">
         <div className="min-w-[40px] text-right font-bold">
           {message.role === 'assistant' ? (
-            <IconRobot size={30} />
+            <Logo width={20} height={20} className='mt-3.5 w-[20px] h-[20px]'/>
           ) : (
-            <IconUser size={30} />
+            <div className="mt-3.5 h-3 w-3 flex-none rounded-full" />
           )}
         </div>
-
-        <div className="prose mt-[-2px] w-full dark:prose-invert">
+        <div className={message.role === 'assistant'?styleEl:styleEl+'left-0 bg-slate-200 border-slate-200 dark:bg-slate-700 dark:border-slate-600'}>
           {message.role === 'user' ? (
             <div className="flex w-full">
               {isEditing ? (
@@ -191,7 +190,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
               )}
 
               {!isEditing && (
-                <div className="md:-mr-8 ml-1 md:ml-0 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
+                <div className="absolute -bottom-2 right-0 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
                   <button
                     className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                     onClick={toggleEditing}
@@ -266,7 +265,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                 }`}
               </MemoizedReactMarkdown>
 
-              <div className="md:-mr-8 ml-1 md:ml-0 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
+              <div className="absolute bottom-1 right-0 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
                 {messagedCopied ? (
                   <IconCheck
                     size={20}

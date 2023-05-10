@@ -6,6 +6,7 @@ import { PluginKey } from '@/types/plugin';
 import { Prompt } from '@/types/prompt';
 
 export interface HomeInitialState {
+  appName: string;
   apiKey: string;
   pluginKeys: PluginKey[];
   loading: boolean;
@@ -30,6 +31,7 @@ export interface HomeInitialState {
 }
 
 export const initialState: HomeInitialState = {
+  appName: 'Open Brain',
   apiKey: '',
   loading: false,
   pluginKeys: [],

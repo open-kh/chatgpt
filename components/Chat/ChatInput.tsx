@@ -261,7 +261,7 @@ export const ChatInput = ({
       <div className="stretch mx-2 mt-4 flex flex-row gap-3 last:mb-2 md:mx-4 md:mt-[52px] md:last:mb-6 lg:mx-auto lg:max-w-3xl">
         {messageIsStreaming && (
           <button
-            className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
+            className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded-3xl border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
             onClick={handleStopConversation}
           >
             <IconPlayerStop size={16} /> {t('Stop Generating')}
@@ -272,16 +272,15 @@ export const ChatInput = ({
           selectedConversation &&
           selectedConversation.messages.length > 0 && (
             <button
-              className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
+              className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded-3xl border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
               onClick={onRegenerate}
-            >
-              <IconRepeat size={16} /> {t('Regenerate response')}
+            ><IconRepeat size={16} /> {t('Regenerate response')}
             </button>
           )}
 
-        <div className="relative mx-2 flex w-full flex-grow flex-col rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:bg-[#40414F] dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4">
+        <div className="relative mx-2 flex w-full flex-grow flex-col rounded-3xl border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:bg-[#40414F] dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4">
           <button
-            className="absolute left-2 top-2 rounded-sm p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
+            className="absolute left-2 top-2 rounded-2xl p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
             onClick={() => setShowPluginSelect(!showPluginSelect)}
             onKeyDown={(e) => {}}
           >
@@ -289,7 +288,7 @@ export const ChatInput = ({
           </button>
 
           {showPluginSelect && (
-            <div className="absolute left-0 bottom-14 rounded bg-white dark:bg-[#343541]">
+            <div className="absolute left-0 bottom-14 rounded-3xl bg-white dark:bg-[#343541]">
               <PluginSelect
                 plugin={plugin}
                 onKeyDown={(e: any) => {
@@ -313,7 +312,7 @@ export const ChatInput = ({
 
           <textarea
             ref={textareaRef}
-            className="m-0 w-full resize-none border-0 bg-transparent p-0 py-2 pr-8 pl-10 text-black dark:bg-transparent dark:text-white md:py-3 md:pl-10"
+            className="m-0 w-full resize-none rounded-3xl border-0 focus:border-none bg-transparent p-0 py-2 pr-8 pl-10 text-black dark:bg-transparent dark:text-white md:py-3 md:pl-10"
             style={{
               resize: 'none',
               bottom: `${textareaRef?.current?.scrollHeight}px`,
@@ -325,7 +324,7 @@ export const ChatInput = ({
               }`,
             }}
             placeholder={
-              t('Type a message or type "/" to select a prompt...') || ''
+              t('Type a message or switch to search...') || ''
             }
             value={content}
             rows={1}
@@ -335,8 +334,9 @@ export const ChatInput = ({
             onKeyDown={handleKeyDown}
           />
 
-          <button
-            className="absolute right-2 top-2 rounded-sm p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
+          {
+          (content?<button
+            className="absolute right-2 top-2 rounded-2xl p-1.5 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
             onClick={handleSend}
           >
             {messageIsStreaming ? (
@@ -344,10 +344,12 @@ export const ChatInput = ({
             ) : (
               <IconSend size={18} />
             )}
-          </button>
+          </button>:''
+          )
+          }
 
           {showScrollDownButton && (
-            <div className="absolute bottom-12 right-0 lg:bottom-0 lg:-right-10">
+            <div className="absolute items-center justify-center bottom-12 right-0 lg:bottom-2 lg:-right-10">
               <button
                 className="flex h-7 w-7 items-center justify-center rounded-full bg-neutral-300 text-gray-800 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-neutral-200"
                 onClick={onScrollDownClick}
@@ -380,17 +382,8 @@ export const ChatInput = ({
         </div>
       </div>
       <div className="px-3 pt-2 pb-3 text-center text-[12px] text-black/50 dark:text-white/50 md:px-4 md:pt-3 md:pb-6">
-        <a
-          href="https://github.com/mckaywrigley/chatbot-ui"
-          target="_blank"
-          rel="noreferrer"
-          className="underline"
-        >
-          ChatBot UI
-        </a>
-        .{' '}
-        {t(
-          "Chatbot UI is an advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and functionality.",
+       Model: {selectedConversation?.model.name} is an {t(
+          "advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and functionality.",
         )}
       </div>
     </div>

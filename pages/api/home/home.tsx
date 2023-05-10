@@ -63,6 +63,7 @@ const Home = ({
 
   const {
     state: {
+      appName,
       apiKey,
       lightMode,
       folders,
@@ -360,7 +361,7 @@ const Home = ({
       }}
     >
       <Head>
-        <title>Chatbot UI</title>
+        <title>{selectedConversation?.name??appName}</title>
         <meta name="description" content="ChatGPT but better." />
         <meta
           name="viewport"
@@ -386,7 +387,7 @@ const Home = ({
               <Chat stopConversationRef={stopConversationRef} />
             </div>
 
-            <Promptbar />
+            {/* <Promptbar /> */}
           </div>
         </main>
       )}
@@ -408,6 +409,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
   const googleApiKey = process.env.GOOGLE_API_KEY;
   const googleCSEId = process.env.GOOGLE_CSE_ID;
+  const appName = process.env.APP_NAME || 'Open Brain';
 
   if (googleApiKey && googleCSEId) {
     serverSidePluginKeysSet = true;
@@ -415,6 +417,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
   return {
     props: {
+      appName,
       serverSideApiKeyIsSet: !!process.env.OPENAI_API_KEY,
       defaultModelId,
       serverSidePluginKeysSet,

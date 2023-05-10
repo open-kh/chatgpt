@@ -9,6 +9,7 @@ import { getSettings, saveSettings } from '@/utils/app/settings';
 import { Settings } from '@/types/settings';
 
 import HomeContext from '@/pages/api/home/home.context';
+import { ModelSelect } from '../Chat/ModelSelect';
 
 interface Props {
   open: boolean;
@@ -65,37 +66,42 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
 
           <div
             ref={modalRef}
-            className="dark:border-netural-400 inline-block max-h-[400px] transform overflow-y-auto rounded-lg border border-gray-300 bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all dark:bg-[#202123] sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle"
+            className="dark:border-netural-400 inline-block max-h-[400px] transform overflow-y-auto rounded-3xl border border-gray-600 px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle bg-gradient-to-t from-gray-700 via-gray-600 to-gray-500 text-left"
             role="dialog"
           >
-            <div className="text-lg pb-4 font-bold text-black dark:text-neutral-200">
+            <div className="text-lg pb-4 font-bold text-neutral-200">
               {t('Settings')}
             </div>
+            <ModelSelect />
 
-            <div className="text-sm font-bold mb-2 text-black dark:text-neutral-200">
+            <div className="text-sm font-bold mb-2 text-neutral-200">
               {t('Theme')}
             </div>
+            <div
+              className="w-full rounded-lg border border-neutral-200 bg-transparent pr-2 text-neutral-900 dark:border-neutral-600 dark:text-white"
+              >
+              <select
+              className='w-full bg-transparent p-2'
+                value={state.theme}
+                onChange={(event) =>
+                  dispatch({ field: 'theme', value: event.target.value })
+                }
+              >
+                <option value="dark">{t('Dark mode')}</option>
+                <option value="light">{t('Light mode')}</option>
+              </select>
+            </div>
 
-            <select
-              className="w-full cursor-pointer bg-transparent p-2 text-neutral-700 dark:text-neutral-200"
-              value={state.theme}
-              onChange={(event) =>
-                dispatch({ field: 'theme', value: event.target.value })
-              }
-            >
-              <option value="dark">{t('Dark mode')}</option>
-              <option value="light">{t('Light mode')}</option>
-            </select>
 
             <button
               type="button"
-              className="w-full px-4 py-2 mt-6 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
+              className="w-full mt-3 rounded-3xl bg-gray-900 px-5 py-2 text-lg font-semibold border-neutral-200 uppercase text-gray-100 transition-colors hover:bg-gray-500"
               onClick={() => {
                 handleSave();
                 onClose();
               }}
             >
-              {t('Save')}
+              {t('Update')}
             </button>
           </div>
         </div>
