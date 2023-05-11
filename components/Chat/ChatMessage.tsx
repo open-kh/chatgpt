@@ -24,6 +24,7 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import Wave from './Wave';
 import Logo from '../Logo';
+import Btn from '../Buttons/Btn';
 
 export interface Props {
   message: Message;
@@ -126,15 +127,15 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
     }
   }, [isEditing]);
 
-  let styleEl = 'relative max-sm:-ml-3 text-base min-h-[calc(2rem+theme(spacing[3.5]))] min-w-[100px] rounded-3xl px-4 py-2 border border-gray-100 bg-gradient-to-br from-gray-50 text-gray-600 prose-pre:my-2 dark:border-gray-800 dark:from-gray-800/40 dark:text-gray-300';
-
+  let styleEl = 'relative max-sm:-ml-3 text-base rounded-3xl px-4 py-2 border border-gray-100 bg-gradient-to-br from-gray-50 text-gray-600 prose-pre:my-2 dark:border-gray-800 dark:from-gray-800/40 dark:text-gray-300';
+  // styleEl += styleEl+' max-xl:w-full'
   return (
     <div
       className="group mx-auto"
       style={{ overflowWrap: 'anywhere' }}
     >
-      <div className="relative m-auto flex py-2 text-base md:max-w-2xl lg:max-w-2xl lg:px-0 xl:max-w-3xl">
-        <div className="min-w-[40px] text-right font-bold">
+      <div className="m-auto flex py-2 text-base md:max-w-2xl lg:max-w-2xl lg:px-0 xl:max-w-3xl">
+        <div className="min-w-[40px] text-right">
           {message.role === 'assistant' ? (
             <Logo width={20} height={20} className='mt-3.5 w-[20px] h-[20px]'/>
           ) : (
@@ -148,7 +149,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                 <div className="flex w-full flex-col">
                   <textarea
                     ref={textareaRef}
-                    className="w-full resize-none whitespace-pre-wrap border-none dark:bg-[#343541]"
+                    className="resize-none whitespace-pre-wrap rounded-lg dark:bg-[#343541] dark:text-white"
                     value={messageContent}
                     onChange={handleInputChange}
                     onKeyDown={handlePressEnter}
@@ -164,27 +165,25 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                     }}
                   />
 
-                  <div className="mt-10 flex justify-center space-x-4">
-                    <button
-                      className="h-[40px] rounded-md bg-blue-500 px-4 py-1 text-sm font-medium text-white enabled:hover:bg-blue-600 disabled:opacity-50"
-                      onClick={handleEditMessage}
+                  <div className="mt-5 flex justify-center">
+                    <Btn onClick={handleEditMessage}
+                      className="dark:bg-gray-800"
+                      disabled={messageContent.trim().length <= 0}>
+                      {t('Update')}
+                    </Btn>
+                    <Btn 
+                      className="bg-gray-300"
                       disabled={messageContent.trim().length <= 0}
-                    >
-                      {t('Save & Submit')}
-                    </button>
-                    <button
-                      className="h-[40px] rounded-md border border-neutral-300 px-4 py-1 text-sm font-medium text-neutral-700 hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
                       onClick={() => {
                         setMessageContent(message.content);
                         setIsEditing(false);
-                      }}
-                    >
+                      }}>
                       {t('Cancel')}
-                    </button>
+                    </Btn>
                   </div>
                 </div>
               ) : (
-                <div className="prose whitespace-pre-wrap dark:prose-invert flex-1">
+                <div className="prose text-base whitespace-pre-wrap dark:prose-invert flex-1 sm:text-sm">
                   {message.content}
                 </div>
               )}
@@ -207,9 +206,9 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
               )}
             </div>
           ) : (
-            <div className="flex flex-row">
+            <div className="flex flex-row w-full">
               <MemoizedReactMarkdown
-                className="prose dark:prose-invert flex-1"
+                className="prose text-base dark:prose-invert flex-1 sm:text-sm"
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeMathjax]}
                 components={{

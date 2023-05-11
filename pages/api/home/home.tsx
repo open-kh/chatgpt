@@ -24,6 +24,7 @@ import {
 import { saveFolders } from '@/utils/app/folders';
 import { savePrompts } from '@/utils/app/prompts';
 import { getSettings } from '@/utils/app/settings';
+import { OPENAI_API_KEY } from '@/utils/server';
 
 import { Conversation } from '@/types/chat';
 import { KeyValuePair } from '@/types/data';
@@ -40,7 +41,6 @@ import HomeContext from './home.context';
 import { HomeInitialState, initialState } from './home.state';
 
 import { v4 as uuidv4 } from 'uuid';
-import { OPENAI_API_KEY } from '@/utils/server';
 
 interface Props {
   serverSideApiKeyIsSet: boolean;
@@ -362,7 +362,7 @@ const Home = ({
       }}
     >
       <Head>
-        <title>{selectedConversation?.name??appName}</title>
+        <title>{selectedConversation?.name ?? appName}</title>
         <meta name="description" content="ChatGPT but better." />
         <meta
           name="viewport"

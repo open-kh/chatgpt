@@ -1,4 +1,4 @@
-import { IconClearAll, IconSettings } from '@tabler/icons-react';
+import { IconArrowAutofitRight, IconClearAll, IconSettings } from '@tabler/icons-react';
 import {
   MutableRefObject,
   memo,
@@ -34,6 +34,7 @@ import { SystemPrompt } from './SystemPrompt';
 import { TemperatureSlider } from './Temperature';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
 import Image from 'next/image';
+import { IconSquareRoundedArrowRight } from '@tabler/icons-react';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -428,6 +429,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             {selectedConversation?.messages.length === 0 ? (
               <div className='max-sm:max-h-[730px]'>
                 <div className="mx-auto flex flex-col space-y-5 md:space-y-5 px-3 pt-5 md:pt-12 sm:max-w-[900px]">
+                  <p className='text-bold font-medium text-3xl uppercase text-center py-10'>AI Chat</p>
                   <div className="my-auto grid gap-8 lg:grid-cols-3">
                     <div className="lg:col-span-1">
                       <div>
@@ -447,7 +449,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                       </div>
                     </div>
                   <div className="lg:col-span-2">
-                    {models.length > 0 && (
+                    {/* {models.length > 0 && (
                       <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
                         <ModelSelect />
                         <TemperatureSlider
@@ -461,7 +463,29 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           }
                         />
                       </div>
-                    )}
+                    )} */}
+                    <div className="overflow-hidden rounded-xl border dark:border-gray-800">
+                      <div className="flex p-3">
+                        <div>
+                          <div className="text-sm text-gray-600 dark:text-gray-400">Current Model & Data Storage</div>
+                          <div className="text-base text-gray-600 dark:text-gray-500">Mr.Phearum is in charge of all information.</div>
+                        </div>
+                      </div>
+                      <div
+                        className="flex items-center gap-5 rounded-xl bg-gray-100 px-3 py-2 text-sm text-gray-600 dark:bg-gray-800 dark:text-gray-300"
+                      >
+                        <a
+                          href="https://link.payway.com.kh/aba?id=F4FCBA4B6EE6&code=783364&acc=015949757"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex items-center hover:underline"
+                        >
+                          <IconSquareRoundedArrowRight className="mr-1.5 text-xs text-gray-400" />
+                          Donate me by (ABA: 015949757)
+                          <div className="max-sm:hidden">&nbsp;page</div>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                   <div className="lg:col-span-3 lg:mt-12">
                     <p className="mb-3 text-gray-600 dark:text-gray-300">Examples</p>
@@ -492,29 +516,31 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 <div className="sticky top-0 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
                   {selectedConversation?.name}
                 </div>
+                <div className='px-2 max-sm:pr-4'>
+                  {selectedConversation?.messages.map((message, index) => (
+                    <MemoizedChatMessage
+                      key={index}
+                      message={message}
+                      messageIndex={index}
+                      onEdit={(editedMessage) => {
+                        setCurrentMessage(editedMessage);
+                        // discard edited message and the ones that come after then resend
+                        handleSend(
+                          editedMessage,
+                          selectedConversation?.messages.length - index,
+                        );
+                      }}
+                    />
+                  ))}
 
-                {selectedConversation?.messages.map((message, index) => (
-                  <MemoizedChatMessage
-                    key={index}
-                    message={message}
-                    messageIndex={index}
-                    onEdit={(editedMessage) => {
-                      setCurrentMessage(editedMessage);
-                      // discard edited message and the ones that come after then resend
-                      handleSend(
-                        editedMessage,
-                        selectedConversation?.messages.length - index,
-                      );
-                    }}
+                  {loading && <ChatLoader />}
+                  <ChatLoader />
+
+                  <div
+                    className="h-[162px] bg-white dark:bg-[#343541]"
+                    ref={messagesEndRef}
                   />
-                ))}
-
-                {loading && <ChatLoader />}
-
-                <div
-                  className="h-[162px] bg-white dark:bg-[#343541]"
-                  ref={messagesEndRef}
-                />
+                </div>
               </>
             )}
           </div>

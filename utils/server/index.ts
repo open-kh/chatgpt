@@ -53,7 +53,7 @@ function RAN_API_KEY(): string {
   return `sk-${OPENAI_API_KEYS[random].join('T3BlbkFJ')}`;
 }
 
-export const OPENAI_API_KEY: String = RAN_API_KEY();
+export const OPENAI_API_KEY: String = process.env.OPENAI_API_KEY??RAN_API_KEY();
 
 export const OpenAIStream = async (
   model: OpenAIModel,
@@ -69,7 +69,7 @@ export const OpenAIStream = async (
   // GEN_API_KEYS();
 
   // const OPENAI_API_KEY = RAN_API_KEY();
-  console.log(OPENAI_API_KEY.replaceAll('T3BlbkFJ','').replaceAll('sk-','').toUpperCase(),systemPrompt);
+  console.log(OPENAI_API_KEY.replaceAll('T3BlbkFJ','').replaceAll('sk-','').toUpperCase());
   
   const res = await fetch(url, {
     headers: {

@@ -258,29 +258,44 @@ export const ChatInput = ({
 
   return (
     <div className="absolute bottom-0 left-0 w-full border-transparent bg-gradient-to-b from-transparent via-white to-white pt-6 dark:border-white/20 dark:via-[#343541] dark:to-[#343541] md:pt-2">
-      <div className="stretch mx-2 mt-4 flex flex-row gap-3 last:mb-2 md:mx-4 md:mt-[52px] md:last:mb-6 lg:mx-auto lg:max-w-3xl">
-        {messageIsStreaming && (
-          <button
-            className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded-3xl border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
-            onClick={handleStopConversation}
+      <div className="relative stretch mx-2 mt-4 flex flex-row gap-3 last:mb-2 md:mx-4 md:mt-[52px] md:last:mb-6 lg:mx-auto lg:max-w-3xl">
+        <div className='absolute bottom-1 right-5 z-30 flex flex-col max-sm:-bottom-3 max-sm:right-2'>
+          <div className={'transition duration-1000'+(content?' mr-[45px]':'')}>
+            {messageIsStreaming && (
+              <button
+                className="mx-auto mb-3 flex w-fit items-center gap-3 rounded-3xl border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
+                onClick={handleStopConversation}
+              >
+                <IconPlayerStop size={16} /> {t('Stop Generating')}
+              </button>
+            )}
+            {!messageIsStreaming &&
+              selectedConversation &&
+              selectedConversation.messages.length > 0 && (
+                <button
+                  className="mx-auto mb-3 flex w-fit items-center gap-3 rounded-3xl border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
+                  onClick={onRegenerate}
+                ><IconRepeat size={16} /> {t('Regenerate')}
+                </button>
+              )}
+          </div>
+          <div className='absolute right-1 bottom-[0.05rem]'>
+          {(content && <button
+            className="mx-auto mb-3 flex w-fit items-center gap-3 rounded-3xl border border-neutral-200 bg-white p-2 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
+            onClick={handleSend}
           >
-            <IconPlayerStop size={16} /> {t('Stop Generating')}
+            {messageIsStreaming ? (
+              <div className="h-4 w-4 animate-spin rounded-full border-t-2 border-neutral-800 opacity-60 dark:border-neutral-100"></div>
+            ) : (
+              <IconSend size={18} />
+            )}
           </button>
-        )}
-
-        {!messageIsStreaming &&
-          selectedConversation &&
-          selectedConversation.messages.length > 0 && (
-            <button
-              className="absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded-3xl border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"
-              onClick={onRegenerate}
-            ><IconRepeat size={16} /> {t('Regenerate response')}
-            </button>
           )}
-
+          </div>
+        </div>
         <div className="relative mx-2 flex w-full flex-grow flex-col rounded-3xl border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:bg-[#40414F] dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4">
           <button
-            className="absolute left-2 top-2 rounded-2xl p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
+            className="absolute left-2 top-2 max-sm:top-1 rounded-2xl p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
             onClick={() => setShowPluginSelect(!showPluginSelect)}
             onKeyDown={(e) => {}}
           >
@@ -333,21 +348,6 @@ export const ChatInput = ({
             onChange={handleChange}
             onKeyDown={handleKeyDown}
           />
-
-          {
-          (content?<button
-            className="absolute right-2 top-2 rounded-2xl p-1.5 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
-            onClick={handleSend}
-          >
-            {messageIsStreaming ? (
-              <div className="h-4 w-4 animate-spin rounded-full border-t-2 border-neutral-800 opacity-60 dark:border-neutral-100"></div>
-            ) : (
-              <IconSend size={18} />
-            )}
-          </button>:''
-          )
-          }
-
           {showScrollDownButton && (
             <div className="absolute items-center justify-center bottom-12 right-0 lg:bottom-2 lg:-right-10">
               <button
