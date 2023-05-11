@@ -1,12 +1,12 @@
 {
-  "name": "ai-chatbot-starter",
+  "name": "ai-chatbot",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "pm2 start npm --name open-brain --  dev",
+    "deploy": "p2 start yarn --name \"openai\" -- startm",
     "lint": "next lint",
     "format": "prettier --write .",
     "test": "vitest",

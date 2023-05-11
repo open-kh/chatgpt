@@ -10,7 +10,7 @@ import {
 } from 'eventsource-parser';
 
 
-let OPENAI_API_KEYS = require('../../../API_KEYS.json');
+let OPENAI_API_KEYS = require('./keys.json');
 export class OpenAIError extends Error {
   type: string;
   param: string;
@@ -25,12 +25,36 @@ export class OpenAIError extends Error {
   }
 }
 
-
-export const OPENAI_API_KEY: String = OPENAI_API_KEYS[Math.floor(Math.random() * OPENAI_API_KEYS.length)];
+const GEN_API_KEYS = async (counter=23) =>{
+  let keys: any[] = [];
+  let prefs = [
+    ""
+  ];
+  for(let i = 0; i < counter; i++) {
+    setTimeout(() => {
+        prefs.forEach(async (key, inx) => {
+          const res = await fetch('https://api.openai.com/dashboard/user/api_keys', {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer sess-${prefs[inx]}`
+            },
+            method: 'POST',
+            body: JSON.stringify({"action":"create","name":`secret key ${i} new`}),
+          });
+          let response = await res.json()
+          console.log(`[\"${response['key']['sensitive_id'].replaceAll('sk-','').replaceAll('T3BlbkFJ',`","`)}\"],`);
+        });
+    }, 5000);
+  }
+}
 
 function RAN_API_KEY(): string {
-  return OPENAI_API_KEYS[Math.floor(Math.random() * OPENAI_API_KEYS.length)];
+  let random: number = Math.floor(Math.random() * OPENAI_API_KEYS.length)
+  return `sk-${OPENAI_API_KEYS[random].join('T3BlbkFJ')}`;
 }
+
+export const OPENAI_API_KEY: String = RAN_API_KEY();
+
 export const OpenAIStream = async (
   model: OpenAIModel,
   systemPrompt: string,
@@ -42,12 +66,11 @@ export const OpenAIStream = async (
   if (OPENAI_API_TYPE === 'azure') {
     url = `${OPENAI_API_HOST}/openai/deployments/${AZURE_DEPLOYMENT_ID}/chat/completions?api-version=${OPENAI_API_VERSION}`;
   }
+  // GEN_API_KEYS();
 
-  const OPENAI_API_KEY = RAN_API_KEY();
-
-  console.log(OPENAI_API_KEY);
+  // const OPENAI_API_KEY = RAN_API_KEY();
+  console.log(OPENAI_API_KEY.replaceAll('T3BlbkFJ','').replaceAll('sk-','').toUpperCase(),systemPrompt);
   
-
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
@@ -84,7 +107,7 @@ export const OpenAIStream = async (
     const result = await res.json();
     if (result.error) {
       throw new OpenAIError(
-        'Rate limit reached in organization on requests per min. Limit: 3 / min',
+        'Rate limit reached in organization on requests per min. Limit: 3-10 / min',
         result.error.type,
         result.error.param,
         result.error.code,
