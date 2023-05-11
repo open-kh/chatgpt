@@ -10,7 +10,7 @@ import {
 } from 'eventsource-parser';
 
 
-const OPENAI_API_KEYS = JSON.parse(JSON.stringify(process.env.OPENAI_API_KEY))
+let OPENAI_API_KEYS = require('../../../API_KEYS.json');
 export class OpenAIError extends Error {
   type: string;
   param: string;
@@ -25,8 +25,12 @@ export class OpenAIError extends Error {
   }
 }
 
+
 export const OPENAI_API_KEY: String = OPENAI_API_KEYS[Math.floor(Math.random() * OPENAI_API_KEYS.length)];
 
+function RAN_API_KEY(): string {
+  return OPENAI_API_KEYS[Math.floor(Math.random() * OPENAI_API_KEYS.length)];
+}
 export const OpenAIStream = async (
   model: OpenAIModel,
   systemPrompt: string,
@@ -38,6 +42,8 @@ export const OpenAIStream = async (
   if (OPENAI_API_TYPE === 'azure') {
     url = `${OPENAI_API_HOST}/openai/deployments/${AZURE_DEPLOYMENT_ID}/chat/completions?api-version=${OPENAI_API_VERSION}`;
   }
+
+  const OPENAI_API_KEY = RAN_API_KEY();
 
   console.log(OPENAI_API_KEY);
   
