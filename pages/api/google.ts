@@ -9,6 +9,8 @@ import { GoogleBody, GoogleSource } from '@/types/google';
 import { Readability } from '@mozilla/readability';
 import endent from 'endent';
 import jsdom, { JSDOM } from 'jsdom';
+import { OPENAI_API_KEY } from '@/utils/server';
+// import { OPENAI_API_KEY } from '@/utils/server';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
   try {
@@ -114,7 +116,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
     const answerRes = await fetch(`${OPENAI_API_HOST}/v1/chat/completions`, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
         ...(process.env.OPENAI_ORGANIZATION && {
           'OpenAI-Organization': process.env.OPENAI_ORGANIZATION,
         }),

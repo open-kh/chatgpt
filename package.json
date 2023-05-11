@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "pm2 start npm --name open-brain --  start",
+    "deploy": "pm2 start npm --name open-brain --  dev",
     "lint": "next lint",
     "format": "prettier --write .",
     "test": "vitest",

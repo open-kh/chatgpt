@@ -10,20 +10,13 @@ import {
 } from 'eventsource-parser';
 
 
-export const OPENAI_API_KEYS = [
-  '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',
-  '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',
-  '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',
-  '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',
-  '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',
-  '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',
-  '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',
-  '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',
-  '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',
-  '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',
-  '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',
-  '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',
-  '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'
+const OPENAI_API_KEYS = [
+  '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',
+  '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',
+  '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',
+  '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',
+  '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',
+  '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'
 ]
 export class OpenAIError extends Error {
   type: string;
@@ -39,6 +32,8 @@ export class OpenAIError extends Error {
   }
 }
 
+export const OPENAI_API_KEY: String = OPENAI_API_KEYS[Math.floor(Math.random() * OPENAI_API_KEYS.length)];
+
 export const OpenAIStream = async (
   model: OpenAIModel,
   systemPrompt: string,
@@ -51,16 +46,17 @@ export const OpenAIStream = async (
     url = `${OPENAI_API_HOST}/openai/deployments/${AZURE_DEPLOYMENT_ID}/chat/completions?api-version=${OPENAI_API_VERSION}`;
   }
 
-  key = OPENAI_API_KEYS[Math.floor(Math.random() * OPENAI_API_KEYS.length)];
+  console.log(OPENAI_API_KEY);
+  
 
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
       ...(OPENAI_API_TYPE === 'openai' && {
-        Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY}`
+        Authorization: `Bearer ${OPENAI_API_KEY}`
       }),
       ...(OPENAI_API_TYPE === 'azure' && {
-        'api-key': `${key ? key : process.env.OPENAI_API_KEY}`
+        'api-key': `${OPENAI_API_KEY}`
       }),
       ...((OPENAI_API_TYPE === 'openai' && OPENAI_ORGANIZATION) && {
         'OpenAI-Organization': OPENAI_ORGANIZATION,

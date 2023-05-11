@@ -40,6 +40,7 @@ import HomeContext from './home.context';
 import { HomeInitialState, initialState } from './home.state';
 
 import { v4 as uuidv4 } from 'uuid';
+import { OPENAI_API_KEY } from '@/utils/server';
 
 interface Props {
   serverSideApiKeyIsSet: boolean;
@@ -418,7 +419,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   return {
     props: {
       appName,
-      serverSideApiKeyIsSet: !!process.env.OPENAI_API_KEY,
+      serverSideApiKeyIsSet: !!OPENAI_API_KEY,
       defaultModelId,
       serverSidePluginKeysSet,
       ...(await serverSideTranslations(locale ?? 'en', [

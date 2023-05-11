@@ -33,7 +33,6 @@ import { ModelSelect } from './ModelSelect';
 import { SystemPrompt } from './SystemPrompt';
 import { TemperatureSlider } from './Temperature';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
-import Logo from '../Logo';
 import Image from 'next/image';
 
 interface Props {
@@ -452,6 +451,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                       <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
                         <ModelSelect />
                         <TemperatureSlider
+                          key={'ertyjnhv'}
                           label={t('Temperature')}
                           onChangeTemperature={(temperature) =>
                             handleUpdateConversation(selectedConversation, {
@@ -467,10 +467,9 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                     <p className="mb-3 text-gray-600 dark:text-gray-300">Examples</p>
                       <div className="grid gap-3 lg:grid-cols-3 lg:gap-5">
                         {
-                          messages.map(m=>{
-                            return (
-                              <>
-                                <button
+                          messages.map((m, i)=>(
+                              <button
+                                  key={i}
                                   type="button"
                                   title="Prefix Example"
                                   className="rounded-2xl border bg-gray-50 p-2.5 text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 sm:p-4"
@@ -481,9 +480,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                                   }}
                                 >{m.title}
                                 </button>
-                              </>
-                            )
-                          })
+                            ))
                         }
                       </div>
                     </div>
