@@ -10,14 +10,7 @@ import {
 } from 'eventsource-parser';
 
 
-const OPENAI_API_KEYS = [
-  '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',
-  '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',
-  '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',
-  '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',
-  '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',
-  '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'
-]
+const OPENAI_API_KEYS = JSON.parse(JSON.stringify(process.env.OPENAI_API_KEY))
 export class OpenAIError extends Error {
   type: string;
   param: string;
