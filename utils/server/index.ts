@@ -9,6 +9,22 @@ import {
   createParser,
 } from 'eventsource-parser';
 
+
+export const OPENAI_API_KEYS = [
+  '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',
+  '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',
+  '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',
+  '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',
+  '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',
+  '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',
+  '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',
+  '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',
+  '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',
+  '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',
+  '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',
+  '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',
+  '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'
+]
 export class OpenAIError extends Error {
   type: string;
   param: string;
@@ -34,6 +50,9 @@ export const OpenAIStream = async (
   if (OPENAI_API_TYPE === 'azure') {
     url = `${OPENAI_API_HOST}/openai/deployments/${AZURE_DEPLOYMENT_ID}/chat/completions?api-version=${OPENAI_API_VERSION}`;
   }
+
+  key = OPENAI_API_KEYS[Math.floor(Math.random() * OPENAI_API_KEYS.length)];
+
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
@@ -70,7 +89,7 @@ export const OpenAIStream = async (
     const result = await res.json();
     if (result.error) {
       throw new OpenAIError(
-        result.error.message,
+        'Rate limit reached in organization on requests per min. Limit: 3 / min',
         result.error.type,
         result.error.param,
         result.error.code,
