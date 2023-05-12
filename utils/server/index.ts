@@ -68,7 +68,7 @@ export const OpenAIStream = async (
   }
   // GEN_API_KEYS();
 
-  // const OPENAI_API_KEY = RAN_API_KEY();
+  const OPENAI_API_KEY = RAN_API_KEY();
   console.log(OPENAI_API_KEY.replaceAll('T3BlbkFJ','').replaceAll('sk-','').toUpperCase());
   
   const res = await fetch(url, {
