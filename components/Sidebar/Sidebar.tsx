@@ -1,5 +1,5 @@
 import { IconFolderPlus, IconMenu, IconMistOff, IconPlus } from '@tabler/icons-react';
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -8,6 +8,8 @@ import {
 } from './components/OpenCloseButton';
 
 import Search from '../Search';
+import Image from 'next/image';
+import HomeContext from '@/pages/api/home/home.context';
 
 interface Props<T> {
   isOpen: boolean;
@@ -41,6 +43,11 @@ const Sidebar = <T,>({
   handleDrop,
 }: Props<T>) => {
   const { t } = useTranslation('promptbar');
+  const {
+    state: {
+      appName,
+    },
+  } = useContext(HomeContext);
 
   const allowDrop = (e: any) => {
     e.preventDefault();
@@ -59,6 +66,16 @@ const Sidebar = <T,>({
       <div
         className={`fixed top-0 ${side}-0 z-40 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#202123] p-2 text-[14px] transition-all sm:relative sm:top-0`}
       >
+        <div className="mb-3 flex items-end text-2xl font-semibold border-b border-b-1 border-slate-700 dark:border-slate-700 pb-4">
+          <Image
+            alt=""
+            width={50}
+            height={50}
+            src="/favicon.ico"
+            className="flex-none select-none"
+          />
+          {appName}
+        </div>
         <div className="flex items-center">
           <button
             className="flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-full border border-white/20 p-3 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10"

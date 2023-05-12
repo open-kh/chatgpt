@@ -189,19 +189,22 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
               )}
 
               {!isEditing && (
-                <div className="absolute -bottom-2 right-0 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
-                  <button
-                    className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-                    onClick={toggleEditing}
-                  >
-                    <IconEdit size={20} />
-                  </button>
-                  <button
-                    className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-                    onClick={handleDeleteMessage}
-                  >
-                    <IconTrash size={20} />
-                  </button>
+                <div className="absolute -left-[40px] -top-1 items-center md:items-start justify-end md:justify-start">
+                  <div className='text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 border border-slate-700 rounded-md invisible group-hover:visible focus:visible flex flex-col gap-1'>
+                    <button
+                      className=""
+                      onClick={toggleEditing}
+                    >
+                      <IconEdit size={17} />
+                    </button>
+                    <hr />
+                    <button
+                      className="text-purple-300"
+                      onClick={handleDeleteMessage}
+                    >
+                      <IconTrash size={17} />
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
@@ -263,15 +266,16 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                   messageIsStreaming && messageIndex == (selectedConversation?.messages.length ?? 0) - 1 ? '`▍`' : ''
                 }`}
               </MemoizedReactMarkdown>
-              <div className="absolute bottom-3.5 right-4 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
+              <div className="absolute invisible group-hover:visible focus:visible border border-slate-400 dark:border-slate-700 rounded-xl bottom-1.5 right-2 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
                 {messagedCopied ? (
-                  <IconCheck
-                    size={20}
-                    className="text-green-500 dark:text-green-400"
-                  />
+                  <button
+                    className="p-1 text-green-500 dark:text-green-400"
+                  >
+                    <IconCheck size={20} />
+                  </button>
                 ) : (
                   <button
-                    className="p-1 invisible group-hover:visible focus:visible border border-slate-400 dark:border-slate-700 rounded-xl text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                    className="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                     onClick={copyOnClick}
                   >
                     <IconCopy size={20} />

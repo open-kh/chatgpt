@@ -39,12 +39,6 @@ html {
   }
 }
 
-/* @media screen {
-} */
-.prose{
-  width: 100%;
-}
-
 pre:has(div.codeblock) {
   padding: 0;
 }

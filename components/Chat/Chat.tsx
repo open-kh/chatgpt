@@ -432,11 +432,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                   <div className="my-auto grid gap-8 lg:grid-cols-3">
                     <div className="lg:col-span-1">
                       <div>
-                        <div className="mb-3 flex items-center text-2xl font-semibold">
+                        <div className="mb-3 flex items-end text-2xl font-semibold">
                           <Image
                             alt=""
-                            width={60}
-                            height={60}
+                            width={45}
+                            height={45}
                             src="/favicon.ico"
                             className="flex-none select-none"
                           />
@@ -521,7 +521,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               </div>
             ) : (
               <>
-                <div className="sticky top-0 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
+                <div className="max-sm:hidden sm:sticky top-0 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
                   {selectedConversation?.name}
                 </div>
                 <div className='px-2 max-sm:pr-4'>
