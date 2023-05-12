@@ -33,8 +33,8 @@ import { ModelSelect } from './ModelSelect';
 import { SystemPrompt } from './SystemPrompt';
 import { TemperatureSlider } from './Temperature';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
-import Image from 'next/image';
 import { IconSquareRoundedArrowRight } from '@tabler/icons-react';
+import Image from 'next/image';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -376,7 +376,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       body: 'Explain quantum computing in simple terms'
     },
   ];
-
   return (
     <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
       {!(apiKey || serverSideApiKeyIsSet) ? (
@@ -464,11 +463,20 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         />
                       </div>
                     )} */}
-                    <div className="overflow-hidden rounded-xl border dark:border-gray-800">
+                    <div className="group cursor-pointer overflow-hidden rounded-xl border dark:border-gray-800">
                       <div className="flex p-3">
-                        <div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Current Model & Data Storage</div>
-                          <div className="text-base text-gray-600 dark:text-gray-500">Mr.Phearum is in charge of all information.</div>
+                        <div className='w-0 h-0 transition-all ease-in-out invisible group-hover:w-[170px] group-hover:h-auto group-hover:visible focus:visible focus:w-full hover:-translate-y-1 hover:scale-110 duration-900'>
+                          <Image
+                              alt=""
+                              width={150}
+                              height={150}
+                              src="/ABA.png"
+                              className="p-1"
+                            />
+                        </div>
+                        <div className='text-base text-gray-600 w-auto'>
+                          <p className=" dark:text-gray-300">Current Model & Data Storage</p>
+                          <p className="dark:text-gray-400">Mr.Phearum is in charge of all information.</p>
                         </div>
                       </div>
                       <div
@@ -481,7 +489,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           className="flex items-center hover:underline"
                         >
                           <IconSquareRoundedArrowRight className="mr-1.5 text-xs text-gray-400" />
-                          Donate me by (ABA: 015949757)
+                          Support me by (ABA: 015949757)
                           <div className="max-sm:hidden">&nbsp;page</div>
                         </a>
                       </div>
@@ -517,28 +525,31 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                   {selectedConversation?.name}
                 </div>
                 <div className='px-2 max-sm:pr-4'>
-                  {selectedConversation?.messages.map((message, index) => (
-                    <MemoizedChatMessage
-                      key={index}
-                      message={message}
-                      messageIndex={index}
-                      onEdit={(editedMessage) => {
-                        setCurrentMessage(editedMessage);
-                        // discard edited message and the ones that come after then resend
-                        handleSend(
-                          editedMessage,
-                          selectedConversation?.messages.length - index,
-                        );
-                      }}
+                  <div className='sm:ml-0 md:mr-5 lg:ml-10 xl:ml-20'>
+                    {selectedConversation?.messages.map((message, index) => (
+                      <MemoizedChatMessage
+                        key={index}
+                        message={message}
+                        messageIndex={index}
+                        onEdit={(editedMessage) => {
+                          setCurrentMessage(editedMessage);
+                          // discard edited message and the ones that come after then resend
+                          handleSend(
+                            editedMessage,
+                            selectedConversation?.messages.length - index,
+                          );
+                        }}
+                      />
+                    ))}
+
+                    {loading && <ChatLoader />}
+                    {/* <ChatLoader /> */}
+
+                    <div
+                      className="h-[162px] bg-white dark:bg-[#343541]"
+                      ref={messagesEndRef}
                     />
-                  ))}
-
-                  {loading && <ChatLoader />}
-
-                  <div
-                    className="h-[162px] bg-white dark:bg-[#343541]"
-                    ref={messagesEndRef}
-                  />
+                  </div>
                 </div>
               </>
             )}

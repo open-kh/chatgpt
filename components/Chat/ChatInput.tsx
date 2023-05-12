@@ -260,7 +260,7 @@ export const ChatInput = ({
     <div className="absolute bottom-0 left-0 w-full border-transparent bg-gradient-to-b from-transparent via-white to-white pt-6 dark:border-white/20 dark:via-[#343541] dark:to-[#343541] md:pt-2">
       <div className="relative stretch mx-2 mt-4 flex flex-row gap-3 last:mb-2 md:mx-4 md:mt-[52px] md:last:mb-6 lg:mx-auto lg:max-w-3xl">
         <div className='absolute bottom-1 right-5 z-30 flex flex-col max-sm:-bottom-3 max-sm:right-2'>
-          <div className={'transition duration-1000'+(content?' mr-[45px]':'')}>
+          <div className={'transition-all ease-in-out duration-900'+(content?' mr-[45px]':'')}>
             {messageIsStreaming && (
               <button
                 className="mx-auto mb-3 flex w-fit items-center gap-3 rounded-3xl border border-neutral-200 bg-white py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 dark:bg-[#343541] dark:text-white md:mb-0 md:mt-2"

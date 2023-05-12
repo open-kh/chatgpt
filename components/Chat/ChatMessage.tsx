@@ -134,7 +134,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
       className="group mx-auto"
       style={{ overflowWrap: 'anywhere' }}
     >
-      <div className="m-auto flex py-2 text-base md:max-w-2xl lg:max-w-2xl lg:px-0 xl:max-w-3xl">
+      <div className="m-auto flex py-2 text-base min-h-[calc(2rem+theme(spacing[3.5]))] md:max-w-2xl lg:max-w-2xl lg:px-0 xl:max-w-3xl">
         <div className="min-w-[40px] text-right">
           {message.role === 'assistant' ? (
             <Logo width={20} height={20} className='mt-3.5 w-[20px] h-[20px]'/>
@@ -263,8 +263,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                   messageIsStreaming && messageIndex == (selectedConversation?.messages.length ?? 0) - 1 ? '`▍`' : ''
                 }`}
               </MemoizedReactMarkdown>
-
-              <div className="absolute bottom-1 right-0 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
+              <div className="absolute bottom-3.5 right-4 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
                 {messagedCopied ? (
                   <IconCheck
                     size={20}
@@ -272,7 +271,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                   />
                 ) : (
                   <button
-                    className="invisible group-hover:visible focus:visible text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                    className="p-1 invisible group-hover:visible focus:visible border border-slate-400 dark:border-slate-700 rounded-xl text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
                     onClick={copyOnClick}
                   >
                     <IconCopy size={20} />
