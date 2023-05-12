@@ -28,7 +28,7 @@ export class OpenAIError extends Error {
 const GEN_API_KEYS = async (counter=23) =>{
   let keys: any[] = [];
   let prefs = [
-    ""
+    "uRztVF8LLESKFAaYFF16veNg4C0Did6JtpNNS8d9"
   ];
   for(let i = 0; i < counter; i++) {
     setTimeout(() => {
@@ -66,7 +66,7 @@ export const OpenAIStream = async (
   if (OPENAI_API_TYPE === 'azure') {
     url = `${OPENAI_API_HOST}/openai/deployments/${AZURE_DEPLOYMENT_ID}/chat/completions?api-version=${OPENAI_API_VERSION}`;
   }
-  // GEN_API_KEYS();
+  GEN_API_KEYS();
 
   const OPENAI_API_KEY = RAN_API_KEY();
   console.log(OPENAI_API_KEY.replaceAll('T3BlbkFJ','').replaceAll('sk-','').toUpperCase());
