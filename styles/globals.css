@@ -34,15 +34,22 @@ html {
 
 @media (max-width: 720px) {
   pre {
-    width: calc(100vw - 110px);
+    width: calc(100vw - 80px);
+    margin-left: -8px;
   }
+}
+
+/* @media screen {
+} */
+.prose{
+  width: 100%;
 }
 
 pre:has(div.codeblock) {
   padding: 0;
 }
 .prose :where(pre):not(:where([class~="not-prose"] *)){
-  background-color: #1f1f1f9d;
+  background-color: transparent;
   padding: 0.543em;
   padding-top: 0;
 }

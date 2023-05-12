@@ -60,17 +60,15 @@ export const CodeBlock: FC<Props> = memo(({ language, value }) => {
     URL.revokeObjectURL(url);
   };
   return (
-    <div className="codeblock relative font-sans text-[16px]">
-      <div className="flex items-center justify-between py-1.5 px-4">
-        <span className="text-xs lowercase text-white">{language}</span>
-
+    <div className="codeblock relative font-sans text-[14px]">
+      <div className="absolute flex items-center justify-between right-0 p-1">
         <div className="flex items-center">
           <button
             className="flex gap-1.5 items-center rounded bg-none p-1 text-xs text-white"
             onClick={copyToClipboard}
           >
             {isCopied ? <IconCheck size={18} /> : <IconClipboard size={18} />}
-            {isCopied ? t('Copied!') : null}
+            {isCopied ? t('Copied!') : language}
           </button>
           <button
             className="flex items-center rounded bg-none p-1 text-xs text-white"

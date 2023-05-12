@@ -128,7 +128,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
   }, [isEditing]);
 
   let styleEl = 'relative max-sm:-ml-3 text-base rounded-3xl px-4 py-2 border border-gray-100 bg-gradient-to-br from-gray-50 text-gray-600 prose-pre:my-2 dark:border-gray-800 dark:from-gray-800/40 dark:text-gray-300';
-  // styleEl += styleEl+' max-xl:w-full'
+  // styleEl += styleEl+' xl:w-full'
   return (
     <div
       className="group mx-auto"
@@ -206,9 +206,9 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
               )}
             </div>
           ) : (
-            <div className="flex flex-row w-full">
+            <div className="flex flex-row w-full py-2">
               <MemoizedReactMarkdown
-                className="prose text-base dark:prose-invert flex-1 sm:text-sm"
+                className="prose text-base dark:prose-invert w-full flex-1 sm:text-sm"
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeMathjax]}
                 components={{
