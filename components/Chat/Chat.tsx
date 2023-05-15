@@ -420,8 +420,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         <ErrorMessageDiv error={modelError} />
       ) : (
         <>
-          <div
-            className="max-h-full overflow-x-hidden"
+          <div className="max-h-full overflow-x-hidden"
             ref={chatContainerRef}
             onScroll={handleScroll}
           >
@@ -490,7 +489,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         >
                           <IconSquareRoundedArrowRight className="mr-1.5 text-xs text-gray-400" />
                           Support me by (ABA: 015949757)
-                          <div className="max-sm:hidden">&nbsp;page</div>
+                          <div className="max-sm:hidden">&nbsp;</div>
                         </a>
                       </div>
                     </div>

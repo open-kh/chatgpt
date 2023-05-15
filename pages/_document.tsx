@@ -10,7 +10,8 @@ export default function Document(props: Props) {
   const currentLocale =
     props.__NEXT_DATA__.locale ?? i18nextConfig.i18n.defaultLocale;
   return (
-    <Html lang={currentLocale}>
+    <>
+      <Html lang={currentLocale}>
       <Head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-title" content="AI Chat"></meta>
@@ -20,5 +21,6 @@ export default function Document(props: Props) {
         <NextScript />
       </body>
     </Html>
+    </>
   );
 }
