@@ -1,4 +1,4 @@
-export default ({slot=3884568135, client=5328097012407543})=>{
+export default function Instanse({slot=3884568135, client=5328097012407543}){
   return (
     <ins className="adsbygoogle"
       style={{display: 'block'}}

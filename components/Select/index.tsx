@@ -7,7 +7,7 @@ import HomeContext from '@/pages/api/home/home.context';
 import { getServerSideProps } from '@/pages';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export default () => {
+export default function SelectLanguage(){
   let settings = getSettings();
   const [language, setLanguange] = useState(settings.language);
   const { dispatch } = useContext(HomeContext);
