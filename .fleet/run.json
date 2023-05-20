@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "type": "docker-build",
+      "name": "Docker-build configuration",
+      "file": "/",
+    },
+    
+  ]
+}

@@ -1,7 +1,8 @@
 #!/bin/sh
 
-COUNT=10
+COUNT=3
 for i in $(seq 1 $COUNT)
 do
-  PORT=300$i pm2 start yarn --name chatbot-vm -- start --max-memory-restart 100M
+  PORT=300$i pm2 start yarn --name vm-bot -- start #--max-memory-restart 150M
 done
+pm2 save

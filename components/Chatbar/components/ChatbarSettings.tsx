@@ -15,6 +15,7 @@ import { ClearConversations } from './ClearConversations';
 import { PluginKeys } from './PluginKeys';
 import { saveSettings } from '@/utils/app/settings';
 import { getSettings } from '@/utils/app/settings';
+import SelectLang from '@/components/Select';
 
 export const ChatbarSettings = () => {
   const { t } = useTranslation('sidebar');
@@ -35,7 +36,7 @@ export const ChatbarSettings = () => {
 
   return (
     <div className="flex flex-col items-center space-y-1 border-t border-white/20 pt-1 text-sm">
-    
+      <SelectLang />
       <SidebarButton
         text={t('Themes')}
         icon={<IconColorFilter size={18} />}

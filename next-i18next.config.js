@@ -7,6 +7,7 @@ module.exports = {
       "en",
       "es",
       "fr",
+      "km",
       "he",
       "id",
       "it",

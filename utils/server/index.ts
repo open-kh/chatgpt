@@ -9,6 +9,38 @@ import {
   createParser,
 } from 'eventsource-parser';
 
+interface LangCodes {
+  [key: string]: string;
+}
+
+export const LANGS: LangCodes = {
+  'bn': 'বাংলাদেশ', // Bengali language for Bangladesh
+  'my': 'မြန်မာ (ဗမာ)', // Burmese language for Myanmar (Burma)
+  'zh': '中国', // Chinese language for China
+  'id': 'Bahasa Indonesia', // Indonesian language for Indonesia
+  'ja': '日本語', // Japanese language for Japan
+  'km': 'ភាសាខ្មែរ', // Khmer language for Cambodia
+  'ko': '한국어', // Korean language for South Korea
+  'ky': 'Кыргызча', // Kyrgyz language for Kyrgyzstan
+  'lo': 'ພາສາລາວ', // Lao language for Laos
+  'ms': 'Bahasa Melayu', // Malay language for Malaysia
+  'mn': 'Монгол хэл', // Mongolian language for Mongolia
+  'ne': 'नेपाली', // Nepali language for Nepal
+  'ur': 'اردو', // Urdu language for Pakistan
+  'fa': 'فارسی', // Persian language for Iran
+  'fil': 'Filipino', // Filipino language for Philippines
+  'ru': 'русский язык', // Russian language for Russia
+  'sa': 'العربية السعودية', // Arabic language for Saudi Arabia
+  'si': 'සිංහල', // Sinhala language for Sri Lanka
+  'tg': 'тоҷикӣ', // Tajik language for Tajikistan
+  'th': 'ภาษาไทย', // Thai language for Thailand
+  'tr': 'Türkçe', // Turkish language for Turkey
+  'tk': 'Türkmen dili', // Turkmen language for Turkmenistan
+  'uk': 'українська мова', // Ukrainian language for Ukraine
+  'uz': "o'zbek tilida", // Uzbek language for Uzbekistan
+  'vi': 'Tiếng Việt', // Vietnamese language for Vietnam
+};
+
 
 let OPENAI_API_KEYS = require('./keys.json');
 export class OpenAIError extends Error {
@@ -22,29 +54,6 @@ export class OpenAIError extends Error {
     this.type = type;
     this.param = param;
     this.code = code;
-  }
-}
-
-const GEN_API_KEYS = async (counter=23) =>{
-  let keys: any[] = [];
-  let prefs = [
-    "uRztVF8LLESKFAaYFF16veNg4C0Did6JtpNNS8d9"
-  ];
-  for(let i = 0; i < counter; i++) {
-    setTimeout(() => {
-        prefs.forEach(async (key, inx) => {
-          const res = await fetch('https://api.openai.com/dashboard/user/api_keys', {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer sess-${prefs[inx]}`
-            },
-            method: 'POST',
-            body: JSON.stringify({"action":"create","name":`secret key ${i} new`}),
-          });
-          let response = await res.json()
-          console.log(`[\"${response['key']['sensitive_id'].replaceAll('sk-','').replaceAll('T3BlbkFJ',`","`)}\"],`);
-        });
-    }, 5000);
   }
 }
 
@@ -66,11 +75,14 @@ export const OpenAIStream = async (
   if (OPENAI_API_TYPE === 'azure') {
     url = `${OPENAI_API_HOST}/openai/deployments/${AZURE_DEPLOYMENT_ID}/chat/completions?api-version=${OPENAI_API_VERSION}`;
   }
-  // GEN_API_KEYS();
-
+  const now = new Date();
+  now.setHours(now.getHours() + 7);
+  const formattedDateTime = now.toISOString().replace(/T/, '|').replace(/\..+/, '');
+  
   const OPENAI_API_KEY = RAN_API_KEY();
-  // console.log(OPENAI_API_KEY.replaceAll('T3BlbkFJ','').replaceAll('sk-','').toUpperCase());
-  console.log(OPENAI_API_KEY.split('T3BlbkFJ')[1].toUpperCase(),messages[messages.length - 1]['content']);
+  let latestMessage: Message = messages[messages.length - 1];
+
+  console.log(formattedDateTime,latestMessage.content);
   
   const res = await fetch(url, {
     headers: {
@@ -106,6 +118,7 @@ export const OpenAIStream = async (
 
   if (res.status !== 200) {
     const result = await res.json();
+    
     if (result.error) {
       throw new OpenAIError(
         'Rate limit reached in organization on requests per min. Limit: 3-10 / min',
@@ -150,6 +163,5 @@ export const OpenAIStream = async (
       }
     },
   });
-
   return stream;
 };

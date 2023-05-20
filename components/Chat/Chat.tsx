@@ -35,6 +35,10 @@ import { TemperatureSlider } from './Temperature';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
 import { IconSquareRoundedArrowRight } from '@tabler/icons-react';
 import Image from 'next/image';
+import Select from '../Select';
+import { getSettings } from '@/utils/app/settings';
+import { LANGS } from '@/utils/server';
+import Instanse from '../Instanse';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -42,7 +46,6 @@ interface Props {
 
 export const Chat = memo(({ stopConversationRef }: Props) => {
   const { t } = useTranslation('chat');
-
   const {
     state: {
       appName,
@@ -66,6 +69,9 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [showScrollDownButton, setShowScrollDownButton] =
     useState<boolean>(false);
+  
+let settings = getSettings()
+const transitions:string = (settings.language==='default'?'':`. Please in ${LANGS[settings.language!.toString()]} Language.`)
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -100,7 +106,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           model: updatedConversation.model,
           messages: updatedConversation.messages,
           key: apiKey,
-          prompt: updatedConversation.prompt,
+          prompt: updatedConversation.prompt+transitions,
           temperature: updatedConversation.temperature,
         };
         const endpoint = getEndpoint(plugin);
@@ -110,12 +116,12 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         } else {
           body = JSON.stringify({
             ...chatBody,
-            googleAPIKey: pluginKeys
-              .find((key) => key.pluginId === 'google-search')
-              ?.requiredKeys.find((key) => key.key === 'GOOGLE_API_KEY')?.value,
-            googleCSEId: pluginKeys
-              .find((key) => key.pluginId === 'google-search')
-              ?.requiredKeys.find((key) => key.key === 'GOOGLE_CSE_ID')?.value,
+            // googleAPIKey: pluginKeys
+            //   .find((key) => key.pluginId === 'google-search')
+            //   ?.requiredKeys.find((key) => key.key === 'GOOGLE_API_KEY')?.value,
+            // googleCSEId: pluginKeys
+            //   .find((key) => key.pluginId === 'google-search')
+            //   ?.requiredKeys.find((key) => key.key === 'GOOGLE_CSE_ID')?.value,
           });
         }
         const controller = new AbortController();
@@ -134,6 +140,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           return;
         }
         const data = response.body;
+        
         if (!data) {
           homeDispatch({ field: 'loading', value: false });
           homeDispatch({ field: 'messageIsStreaming', value: false });
@@ -145,10 +152,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             const customName =
               content.length > 30 ? content.substring(0, 30) + '...' : content;
             updatedConversation = {
-              ...updatedConversation,
+                ...updatedConversation,
               name: customName,
             };
           }
+          
           homeDispatch({ field: 'loading', value: false });
           const reader = data.getReader();
           const decoder = new TextDecoder();
@@ -163,7 +171,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             }
             const { value, done: doneReading } = await reader.read();
             done = doneReading;
-            const chunkValue = decoder.decode(value);
+            const chunkValue = decoder.decode(value).replaceAll('ChatGPT', appName).replace('by OpenAI', 'by OpenAI and deployed by **Mr. Phearum**');
             text += chunkValue;
             if (isFirst) {
               isFirst = false;
@@ -175,6 +183,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 ...updatedConversation,
                 messages: updatedMessages,
               };
+              
               homeDispatch({
                 field: 'selectedConversation',
                 value: updatedConversation,
@@ -182,6 +191,9 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             } else {
               const updatedMessages: Message[] =
                 updatedConversation.messages.map((message, index) => {
+                  // if (index === updatedConversation.messages.length - 2) {
+                  //   return latesChat;
+                  // } 
                   if (index === updatedConversation.messages.length - 1) {
                     return {
                       ...message,
@@ -424,6 +436,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             ref={chatContainerRef}
             onScroll={handleScroll}
           >
+            <div className="flix flex-col">
+              <Instanse slot={3884568135} client={5328097012407543} />
+              <Instanse slot={3884568135} client={5328097012407543} />
+            </div>
             {selectedConversation?.messages.length === 0 ? (
               <div className='max-sm:max-h-[730px]'>
                 <div className="mx-auto flex flex-col space-y-5 md:space-y-5 px-3 pt-5 md:pt-12 sm:max-w-[900px]">
@@ -552,6 +568,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 </div>
               </>
             )}
+            <div className="flix flex-col">
+              <Instanse slot={3884568135} client={5328097012407543} />
+              <Instanse slot={3884568135} client={5328097012407543} />
+            </div>
           </div>
 
           <ChatInput

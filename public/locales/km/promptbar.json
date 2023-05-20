@@ -1,0 +1,12 @@
+{
+  "New prompt": "ការ​សង្ខេប​ថ្មី",
+  "New folder": "ថត​ថ្មី",
+  "No prompts.": "គ្មាន​ការ​សង្ខេប។",
+  "Search prompts...": "ស្វែងរក​ការ​សង្ខេប...",
+  "Name": "ឈ្មោះ",
+  "Description": "ការ​ពិពណ៌នា",
+  "A description for your prompt.": "វាល​បរិយាយ​អំពី​ការ​សង្ខេប​របស់​អ្នក។",
+  "Prompt": "ការ​សង្ខេប",
+  "Prompt content. Use {{}} to denote a variable. Ex: {{name}} is a {{adjective}} {{noun}}": "មាតិកា​ការ​សង្ខេប។ ប្រើ {{}} ដើម្បី​បញ្ចេញ​អថេរ។ ឧទាហរណ៍: {{name}} ជា {{adjective}} {{noun}}",
+  "Save": "រក្សាទុក"
+}

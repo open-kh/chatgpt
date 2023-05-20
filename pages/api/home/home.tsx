@@ -422,12 +422,12 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
       serverSideApiKeyIsSet: !!OPENAI_API_KEY,
       defaultModelId,
       serverSidePluginKeysSet,
-      ...(await serverSideTranslations(locale ?? 'en', [
+      ...(await serverSideTranslations(locale ?? 'kh', [
         'common',
         'chat',
         'sidebar',
         'markdown',
-        'promptbar',
+        // 'promptbar',
         'settings',
       ])),
     },
