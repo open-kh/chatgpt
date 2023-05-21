@@ -1,4 +1,9 @@
-import { IconArrowAutofitRight, IconClearAll, IconSettings } from '@tabler/icons-react';
+import {
+  IconArrowAutofitRight,
+  IconClearAll,
+  IconSettings,
+} from '@tabler/icons-react';
+import { IconSquareRoundedArrowRight } from '@tabler/icons-react';
 import {
   MutableRefObject,
   memo,
@@ -11,6 +16,7 @@ import {
 import toast from 'react-hot-toast';
 
 import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 
 import { getEndpoint } from '@/utils/app/api';
 import {
@@ -18,27 +24,25 @@ import {
   saveConversations,
   updateConversation,
 } from '@/utils/app/conversation';
+import { getSettings } from '@/utils/app/settings';
 import { throttle } from '@/utils/data/throttle';
+import { LANGS } from '@/utils/server';
 
 import { ChatBody, Conversation, Message } from '@/types/chat';
 import { Plugin } from '@/types/plugin';
 
 import HomeContext from '@/pages/api/home/home.context';
 
+import Instanse from '../Instanse';
+import Select from '../Select';
 import Spinner from '../Spinner';
 import { ChatInput } from './ChatInput';
 import { ChatLoader } from './ChatLoader';
 import { ErrorMessageDiv } from './ErrorMessageDiv';
+import { MemoizedChatMessage } from './MemoizedChatMessage';
 import { ModelSelect } from './ModelSelect';
 import { SystemPrompt } from './SystemPrompt';
 import { TemperatureSlider } from './Temperature';
-import { MemoizedChatMessage } from './MemoizedChatMessage';
-import { IconSquareRoundedArrowRight } from '@tabler/icons-react';
-import Image from 'next/image';
-import Select from '../Select';
-import { getSettings } from '@/utils/app/settings';
-import { LANGS } from '@/utils/server';
-import Instanse from '../Instanse';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -51,14 +55,12 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       appName,
       selectedConversation,
       conversations,
-      models,
       apiKey,
       pluginKeys,
       serverSideApiKeyIsSet,
-      messageIsStreaming,
       modelError,
       loading,
-      prompts,
+      language
     },
     handleUpdateConversation,
     dispatch: homeDispatch,
@@ -70,14 +72,13 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   const [showScrollDownButton, setShowScrollDownButton] =
     useState<boolean>(false);
   
-    const messagesEndRef = useRef<HTMLDivElement>(null);
-    const chatContainerRef = useRef<HTMLDivElement>(null);
-    const textareaRef = useRef<HTMLTextAreaElement>(null);
-    
-    const handleSend = useCallback(
-      async (message: Message, deleteCount = 0, plugin: Plugin | null = null) => {
-      let settings = getSettings()
-      const transitions:string = (settings.language==='default'?'':` Please in ${settings.language} Language.`)
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  
+  const handleSend = useCallback(
+    async (message: Message, deleteCount = 0, plugin: Plugin | null = null) => {
+      const transitions: string = language === 'default'?'': ` Using ${LANGS[language]} language.`;
       if (selectedConversation) {
         let updatedConversation: Conversation;
         if (deleteCount) {
@@ -105,7 +106,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           model: updatedConversation.model,
           messages: updatedConversation.messages,
           key: apiKey,
-          prompt: updatedConversation.prompt+transitions,
+          prompt: updatedConversation.prompt + transitions,
           temperature: updatedConversation.temperature,
         };
         const endpoint = getEndpoint(plugin);
@@ -139,7 +140,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           return;
         }
         const data = response.body;
-        
+
         if (!data) {
           homeDispatch({ field: 'loading', value: false });
           homeDispatch({ field: 'messageIsStreaming', value: false });
@@ -148,14 +149,13 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         if (!plugin) {
           if (updatedConversation.messages.length === 1) {
             const { content } = message;
-            const customName =
-              content.length > 30 ? content.substring(0, 30) + '...' : content;
+            const customName = content.length > 30 ? content.substring(0, 30) + '...' : content;
             updatedConversation = {
-                ...updatedConversation,
+              ...updatedConversation,
               name: customName,
             };
           }
-          
+
           homeDispatch({ field: 'loading', value: false });
           const reader = data.getReader();
           const decoder = new TextDecoder();
@@ -182,7 +182,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 ...updatedConversation,
                 messages: updatedMessages,
               };
-              
+
               homeDispatch({
                 field: 'selectedConversation',
                 value: updatedConversation,
@@ -190,9 +190,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             } else {
               const updatedMessages: Message[] =
                 updatedConversation.messages.map((message, index) => {
-                  // if (index === updatedConversation.messages.length - 2) {
-                  //   return latesChat;
-                  // } 
                   if (index === updatedConversation.messages.length - 1) {
                     return {
                       ...message,
@@ -363,28 +360,28 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
 
   const messages = [
     {
-      title: '\"Code a snake game\"',
-      body: 'Code a basic snake game in python, give explanations for each step.'
+      title: '"Code a snake game"',
+      body: 'Code a basic snake game in python, give explanations for each step.',
     },
     {
-      title: '\"How do I make an HTTP request in Javascript?\"',
-      body: 'How do I make an HTTP request in Javascript?'
+      title: '"How do I make an HTTP request in Javascript?"',
+      body: 'How do I make an HTTP request in Javascript?',
     },
     {
-      title: '\"Write an email from bullet list\"',
-      body: 'As a restaurant owner, write a professional email to the supplier to get these products every week: \n\n- Wine (x10)\n- Eggs (x24)\n- Bread (x12)'
+      title: '"Write an email from bullet list"',
+      body: 'As a restaurant owner, write a professional email to the supplier to get these products every week: \n\n- Wine (x10)\n- Eggs (x24)\n- Bread (x12)',
     },
     {
-      title: '\"Got any creative ideas for a 10 year old\'s birthday?\"',
-      body: 'Got any creative ideas for a 10 year old\'s birthday?'
+      title: '"Got any creative ideas for a 10 year old\'s birthday?"',
+      body: "Got any creative ideas for a 10 year old's birthday?",
     },
     {
-      title: '\"Assist in a task\"',
-      body: 'How do I make a delicious lemon cheesecake?'
+      title: '"Assist in a task"',
+      body: 'How do I make a delicious lemon cheesecake?',
     },
     {
-      title: '\"Explain quantum computing in simple terms\"',
-      body: 'Explain quantum computing in simple terms'
+      title: '"Explain quantum computing in simple terms"',
+      body: 'Explain quantum computing in simple terms',
     },
   ];
   return (
@@ -395,14 +392,16 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             Welcome to {appName}
           </div>
           <div className="text-center text-lg text-black dark:text-white">
-            <div className="mb-8">{appName+` is an open source clone of OpenAI's ChatGPT UI.`}</div>
+            <div className="mb-8">
+              {appName + ` is an open source clone of OpenAI's ChatGPT UI.`}
+            </div>
             <div className="mb-2 font-bold">
               Important: {appName} is 100% unaffiliated with OpenAI.
             </div>
           </div>
           <div className="text-center text-gray-500 dark:text-gray-400">
             <div className="mb-2">
-            {appName} allows you to plug in your API key to use this UI with
+              {appName} allows you to plug in your API key to use this UI with
               their API.
             </div>
             <div className="mb-2">
@@ -431,7 +430,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         <ErrorMessageDiv error={modelError} />
       ) : (
         <>
-          <div className="max-h-full overflow-x-hidden"
+          <div
+            className="max-h-full overflow-x-hidden"
             ref={chatContainerRef}
             onScroll={handleScroll}
           >
@@ -440,9 +440,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               <Instanse slot={3884568135} client={5328097012407543} />
             </div>
             {selectedConversation?.messages.length === 0 ? (
-              <div className='max-sm:max-h-[730px]'>
+              <div className="max-sm:max-h-[730px]">
                 <div className="mx-auto flex flex-col space-y-5 md:space-y-5 px-3 pt-5 md:pt-12 sm:max-w-[900px]">
-                  <p className='text-bold font-medium text-3xl uppercase text-center py-10'>AI Chat</p>
+                  <p className="text-bold font-medium text-3xl uppercase text-center py-10">
+                    AI Chat
+                  </p>
                   <div className="my-auto grid gap-8 lg:grid-cols-3">
                     <div className="lg:col-span-1">
                       <div>
@@ -457,12 +459,13 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           {appName}
                         </div>
                         <p className="text-base text-gray-600 dark:text-gray-400">
-                          Making the community`s best AI chat models available to everyone.
+                          Making the community`s best AI chat models available
+                          to everyone.
                         </p>
                       </div>
                     </div>
-                  <div className="lg:col-span-2">
-                    {/* {models.length > 0 && (
+                    <div className="lg:col-span-2">
+                      {/* {models.length > 0 && (
                       <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
                         <ModelSelect />
                         <TemperatureSlider
@@ -477,57 +480,64 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         />
                       </div>
                     )} */}
-                    <div className="group cursor-pointer overflow-hidden rounded-xl border dark:border-gray-800">
-                      <div className="flex p-3">
-                        <div className='w-0 h-0 transition-all ease-in-out invisible group-hover:w-[170px] group-hover:h-auto group-hover:visible focus:visible focus:w-full hover:-translate-y-1 hover:scale-110 duration-900'>
-                          <Image
+                      <div className="group cursor-pointer overflow-hidden rounded-xl border dark:border-gray-800">
+                        <div className="flex p-3">
+                          <div className="w-0 h-0 transition-all ease-in-out invisible group-hover:w-[170px] group-hover:h-auto group-hover:visible focus:visible focus:w-full hover:-translate-y-1 hover:scale-110 duration-900">
+                            <Image
                               alt=""
                               width={150}
                               height={150}
                               src="/ABA.png"
                               className="p-1"
                             />
+                          </div>
+                          <div className="text-base text-gray-600 w-auto">
+                            <p className=" dark:text-gray-300">
+                              Current Model & Data Storage
+                            </p>
+                            <p className="dark:text-gray-400">
+                              5x faster, Mr.Phearum is in charge of all
+                              information.
+                            </p>
+                          </div>
                         </div>
-                        <div className='text-base text-gray-600 w-auto'>
-                          <p className=" dark:text-gray-300">Current Model & Data Storage</p>
-                  <p className="dark:text-gray-400">5x faster, Mr.Phearum is in charge of all information.</p>
+                        <div className="flex items-center gap-5 rounded-xl bg-gray-100 px-3 py-2 text-sm text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                          <a
+                            href="https://link.payway.com.kh/aba?id=F4FCBA4B6EE6&code=783364&acc=015949757"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex items-center hover:underline"
+                          >
+                            <IconSquareRoundedArrowRight className="mr-1.5 text-xs text-gray-400" />
+                            Support me by (ABA: 015949757)
+                            <div className="max-sm:hidden">&nbsp;</div>
+                          </a>
                         </div>
-                      </div>
-                      <div
-                        className="flex items-center gap-5 rounded-xl bg-gray-100 px-3 py-2 text-sm text-gray-600 dark:bg-gray-800 dark:text-gray-300"
-                      >
-                        <a
-                          href="https://link.payway.com.kh/aba?id=F4FCBA4B6EE6&code=783364&acc=015949757"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="flex items-center hover:underline"
-                        >
-                          <IconSquareRoundedArrowRight className="mr-1.5 text-xs text-gray-400" />
-                          Support me by (ABA: 015949757)
-                          <div className="max-sm:hidden">&nbsp;</div>
-                        </a>
                       </div>
                     </div>
-                  </div>
-                  <div className="lg:col-span-3 lg:mt-12">
-                    <p className="mb-3 text-gray-600 dark:text-gray-300">Examples</p>
+                    <div className="lg:col-span-3 lg:mt-12">
+                      <p className="mb-3 text-gray-600 dark:text-gray-300">
+                        Examples
+                      </p>
                       <div className="grid gap-3 lg:grid-cols-3 lg:gap-5">
-                        {
-                          messages.map((m, i)=>(
-                              <button
-                                  key={i}
-                                  type="button"
-                                  title="Prefix Example"
-                                  className="rounded-2xl border bg-gray-50 p-2.5 text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 sm:p-4"
-                                  onClick={()=>{
-                                    let message: Message = { role: "user", content: m.body }
-                                    setCurrentMessage(message);
-                                    handleSend(message, 0, null);
-                                  }}
-                                >{m.title}
-                                </button>
-                            ))
-                        }
+                        {messages.map((m, i) => (
+                          <button
+                            key={i}
+                            type="button"
+                            title="Prefix Example"
+                            className="rounded-2xl border bg-gray-50 p-2.5 text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 sm:p-4"
+                            onClick={() => {
+                              let message: Message = {
+                                role: 'user',
+                                content: m.body,
+                              };
+                              setCurrentMessage(message);
+                              handleSend(message, 0, null);
+                            }}
+                          >
+                            {m.title}
+                          </button>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -538,8 +548,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 <div className="max-sm:hidden sm:sticky top-0 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
                   {selectedConversation?.name}
                 </div>
-                <div className='px-2 max-sm:pr-4'>
-                  <div className='sm:ml-0 md:mr-5 lg:ml-10 xl:ml-20'>
+                <div className="px-2 max-sm:pr-4">
+                  <div className="sm:ml-0 md:mr-5 lg:ml-10 xl:ml-20">
                     {selectedConversation?.messages.map((message, index) => (
                       <MemoizedChatMessage
                         key={index}

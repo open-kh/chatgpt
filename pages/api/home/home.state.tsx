@@ -54,5 +54,5 @@ export const initialState: HomeInitialState = {
   defaultModelId: undefined,
   serverSideApiKeyIsSet: false,
   serverSidePluginKeysSet: false,
-  language: 'Cambodia'
+  language: 'km'
 };

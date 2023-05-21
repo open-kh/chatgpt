@@ -5,7 +5,7 @@ const STORAGE_KEY = 'settings';
 export const getSettings = (): Settings => {
   let settings: Settings = {
     theme: 'dark',
-    language: 'Cambodia',
+    language: 'km',
   };
   const settingsJson = localStorage.getItem(STORAGE_KEY);
   if (settingsJson) {
