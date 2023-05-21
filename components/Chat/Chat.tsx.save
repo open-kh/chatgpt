@@ -491,7 +491,7 @@ const transitions:string = (settings.language==='default'?'':`. Please in ${LANG
                         </div>
                         <div className='text-base text-gray-600 w-auto'>
                           <p className=" dark:text-gray-300">Current Model & Data Storage</p>
-                  <p className="dark:text-gray-400">5x faster, Mr.Phearum is in charge of all information.</p>
+                          <p className="dark:text-gray-400">5x faster than usMr.Phearum is in charge of all information.</p>
                         </div>
                       </div>
                       <div
