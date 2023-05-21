@@ -1,9 +1,11 @@
 #!/bin/sh
 
+pm2 kill
+
 COUNT=15
 for i in $(seq 1 $COUNT)
 do
-  pm2 kill ${i-1}
-  PORT=300$i pm2 start yarn --name vm-bot -- start #--max-memory-restart 100M
+  PORT=300$i pm2 --max-memory-restart 150M --name vm-bot start yarn -- start
 done
+
 pm2 save
