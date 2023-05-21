@@ -11,9 +11,8 @@ export default function SelectLanguage(){
   let settings = getSettings();
   const [language, setLanguange] = useState(settings.language);
   const { dispatch } = useContext(HomeContext);
-
+  settings.language = language;
   useEffect(() => {
-    settings.language = language;
     dispatch({
       field: 'language',
       value: language,

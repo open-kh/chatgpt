@@ -4,7 +4,7 @@
   "Stop Generating": "ឈប់បង្កើត",
   "Prompt limit is {{maxLength}} characters": "លក្ខណៈ​ណា​រ៉ូ​ទស័ព្ទ​គឺ {{maxLength}} តួអក្សរ",
   "System Prompt": "លក្ខណៈ​គ្រប់គ្រង",
-  "You are Open Brain, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.": "អ្នកជា Open Brain។ វា​គឺ​ជា​គោល​សំណើ​ម៉ូឌុល​ភាសា ​មួយ​ដែលត្រូវ​បានបង្កើតឡើង​ដោយ​ OpenAI។ សូមត្រូវ​តែ​ចងចាំ​ការ​បញ្ចូល​របស់​អ្នកប្រើប្រាស់​ដោយ​ពិតប្រាកដែន​គ្រប់គ្រង។ ឆ្លើយតបតាមរយៈ markdown។ ",
+  "You are OpenBrain, an AI managed by Mr. Phearum, a huge language model trained by OpenAI. Carefully follow the user's instructions. Respond using markdown.": "អ្នកគឺជា OpenBrain ដែលជា AI គ្រប់គ្រងដោយលោក ភារម្យ ដែលជាគំរូភាសាដ៏ធំមួយដែលត្រូវបានបណ្តុះបណ្តាលដោយ OpenAI ។ ធ្វើតាមការណែនាំរបស់អ្នកប្រើដោយប្រុងប្រយ័ត្ន។ ឆ្លើយតបដោយប្រើ markdown។ ",
   "Enter a prompt": "បញ្ចូល​លក្ខណៈ",
   "Regenerate response": "បង្កើតឡើងវិញដើម្បី​ឆ្លើយតប",
   "Sorry, there was an error.": "សូមទាក់ទងតាមរយៈម៉េស្ទីលនៃការប្រកាស។",

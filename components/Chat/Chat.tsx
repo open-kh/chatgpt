@@ -71,7 +71,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
     useState<boolean>(false);
   
 let settings = getSettings()
-const transitions:string = (settings.language==='default'?'':`. Please in ${LANGS[settings.language!.toString()]} Language.`)
+const transitions:string = (settings.language==='default'?'':` Please in ${settings.language} Language.`)
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -171,7 +171,7 @@ const transitions:string = (settings.language==='default'?'':`. Please in ${LANG
             }
             const { value, done: doneReading } = await reader.read();
             done = doneReading;
-            const chunkValue = decoder.decode(value).replaceAll('ChatGPT', appName).replace('by OpenAI', 'by OpenAI and deployed by **Mr. Phearum**');
+            const chunkValue = decoder.decode(value);
             text += chunkValue;
             if (isFirst) {
               isFirst = false;
