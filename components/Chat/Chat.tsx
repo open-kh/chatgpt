@@ -435,10 +435,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             ref={chatContainerRef}
             onScroll={handleScroll}
           >
-            <div className="flix flex-col">
+            {/* <div className="flix flex-col">
               <Instanse slot={3884568135} client={5328097012407543} />
               <Instanse slot={3884568135} client={5328097012407543} />
-            </div>
+            </div> */}
             {selectedConversation?.messages.length === 0 ? (
               <div className="max-sm:max-h-[730px]">
                 <div className="mx-auto flex flex-col space-y-5 md:space-y-5 px-3 pt-5 md:pt-12 sm:max-w-[900px]">
@@ -577,10 +577,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 </div>
               </>
             )}
-            <div className="flix flex-col">
+            {/* <div className="flix flex-col">
               <Instanse slot={3884568135} client={5328097012407543} />
               <Instanse slot={3884568135} client={5328097012407543} />
-            </div>
+            </div> */}
           </div>
 
           <ChatInput

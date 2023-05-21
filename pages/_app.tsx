@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ['latin'] });
 function App({ Component, pageProps }: AppProps<{}>) {
   const queryClient = new QueryClient();
   useEffect(()=>{
-    setTimeout(()=>console.clear(),300)
+    setTimeout(()=>console.clear(),700)
   },[])
 
   return (

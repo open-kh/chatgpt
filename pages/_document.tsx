@@ -15,15 +15,15 @@ export default function Document(props: Props) {
       <Head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-title" content="AI Chat"></meta>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5328097012407543"
-     crossOrigin="anonymous"></script>
+        {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5328097012407543"
+     crossOrigin="anonymous"></script> */}
       </Head>
       <body>
         <Main />
         <NextScript />
-        <script defer>
+        {/* <script defer>
             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        </script> */}
       </body>
     </Html>
     </>
