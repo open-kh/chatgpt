@@ -70,15 +70,14 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   const [showScrollDownButton, setShowScrollDownButton] =
     useState<boolean>(false);
   
-let settings = getSettings()
-const transitions:string = (settings.language==='default'?'':` Please in ${settings.language} Language.`)
-
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const chatContainerRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  const handleSend = useCallback(
-    async (message: Message, deleteCount = 0, plugin: Plugin | null = null) => {
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+    const chatContainerRef = useRef<HTMLDivElement>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    
+    const handleSend = useCallback(
+      async (message: Message, deleteCount = 0, plugin: Plugin | null = null) => {
+      let settings = getSettings()
+      const transitions:string = (settings.language==='default'?'':` Please in ${settings.language} Language.`)
       if (selectedConversation) {
         let updatedConversation: Conversation;
         if (deleteCount) {
@@ -491,7 +490,7 @@ const transitions:string = (settings.language==='default'?'':` Please in ${setti
                         </div>
                         <div className='text-base text-gray-600 w-auto'>
                           <p className=" dark:text-gray-300">Current Model & Data Storage</p>
-                          <p className="dark:text-gray-400">Mr.Phearum is in charge of all information.</p>
+                  <p className="dark:text-gray-400">5x faster, Mr.Phearum is in charge of all information.</p>
                         </div>
                       </div>
                       <div
