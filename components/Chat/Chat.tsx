@@ -1,6 +1,8 @@
 import {
   IconArrowAutofitRight,
   IconClearAll,
+  IconDeviceMobile,
+  IconDeviceMobileX,
   IconSettings,
 } from '@tabler/icons-react';
 import { IconSquareRoundedArrowRight } from '@tabler/icons-react';
@@ -442,7 +444,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             {selectedConversation?.messages.length === 0 ? (
               <div className="max-sm:max-h-[730px]">
                 <div className="mx-auto flex flex-col space-y-5 md:space-y-5 px-3 pt-5 md:pt-12 sm:max-w-[900px]">
-                  <p className="text-bold font-medium text-3xl uppercase text-center py-10">
+                  <p className="max-sm:hidden md:block text-bold font-medium text-3xl uppercase text-center py-10">
                     AI Chat
                   </p>
                   <div className="my-auto grid gap-8 lg:grid-cols-3">
@@ -498,6 +500,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                             <p className="dark:text-gray-400">
                               5x faster, Mr.Phearum is in charge of all
                               information.
+                              <span className='flex mt-2'>
+                                <IconDeviceMobile className="mr-1.5 text-xs text-gray-400" />
+                                UI supported on mobile
+                              </span>
                             </p>
                           </div>
                         </div>
@@ -519,25 +525,27 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                       <p className="mb-3 text-gray-600 dark:text-gray-300">
                         Examples
                       </p>
-                      <div className="grid gap-3 lg:grid-cols-3 lg:gap-5">
-                        {messages.map((m, i) => (
-                          <button
-                            key={i}
-                            type="button"
-                            title="Prefix Example"
-                            className="rounded-2xl border bg-gray-50 p-2.5 text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 sm:p-4"
-                            onClick={() => {
-                              let message: Message = {
-                                role: 'user',
-                                content: m.body,
-                              };
-                              setCurrentMessage(message);
-                              handleSend(message, 0, null);
-                            }}
-                          >
-                            {m.title}
-                          </button>
-                        ))}
+                      <div className='max-sm:mb-[150px]'>
+                        <div className="grid gap-3 lg:grid-cols-3 lg:gap-5">
+                          {messages.map((m, i) => (
+                            <button
+                              key={i}
+                              type="button"
+                              title="Prefix Example"
+                              className="rounded-2xl border bg-gray-50 p-2.5 text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 sm:p-4"
+                              onClick={() => {
+                                let message: Message = {
+                                  role: 'user',
+                                  content: m.body,
+                                };
+                                setCurrentMessage(message);
+                                handleSend(message, 0, null);
+                              }}
+                            >
+                              {m.title}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>

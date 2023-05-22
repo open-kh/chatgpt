@@ -121,14 +121,14 @@ export const OpenAIStream = async (
     
     if (result.error) {
       throw new OpenAIError(
-        'Rate limit reached in organization on requests per min. Limit: 3-10 / min',
+        `Please retry! The organization\'s request per minute rate limit has been surpassed.`,
         result.error.type,
         result.error.param,
         result.error.code,
       );
     } else {
       throw new Error(
-        `OpenAI API returned an error: ${
+        `The following error was returned by organization: ${
           decoder.decode(result?.value) || result.statusText
         }`,
       );

@@ -2,12 +2,10 @@
 	"short_name": "Open Brain",
 	"name": "Open Brain: It is an artificial intelligence platform that provides an interactive environment for machine learning experimentation and development",
 	"description": "Open Brain is a powerful and versatile platform for machine learning development and deployment, offering a streamlined and intuitive interface for users of all skill levels, along with robust tools and resources for advanced experimentation and research.",
-	"start_url": "/?source=pwa",
-	"background_color": "#3367D6",
-	"display": "standalone",
-	"theme_color": "#3367D6",
-	"scope": "/",
-	"id": "/?source=pwa",
+	"start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
 	"icons": [
 		{
 			"src": "/images/1024.png",
@@ -24,5 +22,6 @@
 			"type": "image/png",
 			"sizes": "512x512"
 		}
-	]
+	],
+  "orientation": "portrait"
 }
