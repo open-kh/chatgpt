@@ -81,8 +81,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   const handleSend = useCallback(
     async (message: Message, deleteCount = 0, plugin: Plugin | null = null) => {
       const transitions: string = language === 'default'?'': ` Answer must be ${LANGS[language]} language.`;
-      console.log(transitions);
-      
+      // console.log(transitions);
       if (selectedConversation) {
         let updatedConversation: Conversation;
         if (deleteCount) {
