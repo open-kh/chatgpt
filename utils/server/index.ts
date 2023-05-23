@@ -62,12 +62,12 @@ function RAN_API_KEY(): string {
   return `sk-${OPENAI_API_KEYS[random].join('T3BlbkFJ')}`;
 }
 
-export const OPENAI_API_KEY: String = process.env.OPENAI_API_KEY??RAN_API_KEY();
+export const OPENAI_API_KEY: String = process.env.OPENAI_API_KEY ?? RAN_API_KEY();
 
 export const OpenAIStream = async (
   model: OpenAIModel,
   systemPrompt: string,
-  temperature : number,
+  temperature: number,
   key: string,
   messages: Message[],
 ) => {
@@ -78,13 +78,11 @@ export const OpenAIStream = async (
   const now = new Date();
   now.setHours(now.getHours() + 7);
   const formattedDateTime = now.toISOString().replace(/T/, '|').replace(/\..+/, '');
-  
-  const OPENAI_API_KEY = RAN_API_KEY();
+
+  let OPENAI_API_KEY = RAN_API_KEY();
   let latestMessage: Message = messages[messages.length - 1];
 
-  console.log(formattedDateTime,latestMessage.content);
-  
-  const res = await fetch(url, {
+  const streamData = () => fetch(url, {
     headers: {
       'Content-Type': 'application/json',
       ...(OPENAI_API_TYPE === 'openai' && {
@@ -99,7 +97,7 @@ export const OpenAIStream = async (
     },
     method: 'POST',
     body: JSON.stringify({
-      ...(OPENAI_API_TYPE === 'openai' && {model: model.id}),
+      ...(OPENAI_API_TYPE === 'openai' && { model: model.id }),
       messages: [
         {
           role: 'system',
@@ -113,27 +111,32 @@ export const OpenAIStream = async (
     }),
   });
 
+  let count: number = 0;
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
-
-  if (res.status !== 200) {
-    const result = await res.json();
-    
-    if (result.error) {
-      throw new OpenAIError(
-        `Please retry! The organization\'s request per minute rate limit has been surpassed.`,
-        result.error.type,
-        result.error.param,
-        result.error.code,
-      );
-    } else {
-      throw new Error(
-        `The following error was returned by organization: ${
-          decoder.decode(result?.value) || result.statusText
-        }`,
-      );
+  let res = await streamData();
+  while (true) {
+    count++;
+    if (res.status !== 200) {
+      const result = await res.json();
+      if (result.error) {
+        OPENAI_API_KEY = RAN_API_KEY();
+        res = await streamData();
+        continue;
+        throw new OpenAIError(
+          `Please retry! The organization\'s request per minute rate limit has been surpassed.`,
+          result.error.type,
+          result.error.param,
+          result.error.code,
+        );
+      } else {
+        throw new Error(`The following error was returned by organization: ${decoder.decode(result?.value) || result.statusText}`);
+      }
+    }else if (res.status === 200){
+      break;
     }
   }
+  console.log(count, formattedDateTime, latestMessage.content);
 
   const stream = new ReadableStream({
     async start(controller) {
