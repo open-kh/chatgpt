@@ -24,7 +24,7 @@ export default function SelectLanguage(){
       <div className="mb-1 w-full rounded border border-neutral-200 bg-transparent pr-2 text-neutral-900 dark:border-neutral-600 dark:text-white">
         <select
           className="w-full cursor-pointer bg-transparent p-2"
-          placeholder="Select a language"
+          placeholder="Answer as language"
           onChange={(e) => {
             setLanguange(e.target.value);
           }}
@@ -34,7 +34,7 @@ export default function SelectLanguage(){
             value="default"
             className="dark:bg-[#343541] dark:text-white"
           >
-            Default
+            Answer contain language
           </option>
 
           {Object.keys(LANGS).map((i) => (
@@ -44,7 +44,7 @@ export default function SelectLanguage(){
               className="dark:bg-[#343541] dark:text-white"
               selected={i === language}
             >
-              {LANGS[i]}
+            {LANGS[i]}
             </option>
           ))}
         </select>

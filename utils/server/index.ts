@@ -13,34 +13,60 @@ interface LangCodes {
   [key: string]: string;
 }
 
+// export const LANGS: LangCodes = {
+//   'bn': 'বাংলাদেশ', // Bengali language for Bangladesh
+//   'my': 'မြန်မာ (ဗမာ)', // Burmese language for Myanmar (Burma)
+//   'zh': '中国', // Chinese language for China
+//   'id': 'Bahasa Indonesia', // Indonesian language for Indonesia
+//   'ja': '日本語', // Japanese language for Japan
+//   'km': 'ភាសាខ្មែរ', // Khmer language for Cambodia
+//   'ko': '한국어', // Korean language for South Korea
+//   'ky': 'Кыргызча', // Kyrgyz language for Kyrgyzstan
+//   'lo': 'ພາສາລາວ', // Lao language for Laos
+//   'ms': 'Bahasa Melayu', // Malay language for Malaysia
+//   'mn': 'Монгол хэл', // Mongolian language for Mongolia
+//   'ne': 'नेपाली', // Nepali language for Nepal
+//   'ur': 'اردو', // Urdu language for Pakistan
+//   'fa': 'فارسی', // Persian language for Iran
+//   'fil': 'Filipino', // Filipino language for Philippines
+//   'ru': 'русский язык', // Russian language for Russia
+//   'sa': 'العربية السعودية', // Arabic language for Saudi Arabia
+//   'si': 'සිංහල', // Sinhala language for Sri Lanka
+//   'tg': 'тоҷикӣ', // Tajik language for Tajikistan
+//   'th': 'ภาษาไทย', // Thai language for Thailand
+//   'tr': 'Türkçe', // Turkish language for Turkey
+//   'tk': 'Türkmen dili', // Turkmen language for Turkmenistan
+//   'uk': 'українська мова', // Ukrainian language for Ukraine
+//   'uz': "o'zbek tilida", // Uzbek language for Uzbekistan
+//   'vi': 'Tiếng Việt', // Vietnamese language for Vietnam
+// };
 export const LANGS: LangCodes = {
-  'bn': 'বাংলাদেশ', // Bengali language for Bangladesh
-  'my': 'မြန်မာ (ဗမာ)', // Burmese language for Myanmar (Burma)
-  'zh': '中国', // Chinese language for China
-  'id': 'Bahasa Indonesia', // Indonesian language for Indonesia
-  'ja': '日本語', // Japanese language for Japan
-  'km': 'ភាសាខ្មែរ', // Khmer language for Cambodia
-  'ko': '한국어', // Korean language for South Korea
-  'ky': 'Кыргызча', // Kyrgyz language for Kyrgyzstan
-  'lo': 'ພາສາລາວ', // Lao language for Laos
-  'ms': 'Bahasa Melayu', // Malay language for Malaysia
-  'mn': 'Монгол хэл', // Mongolian language for Mongolia
-  'ne': 'नेपाली', // Nepali language for Nepal
-  'ur': 'اردو', // Urdu language for Pakistan
-  'fa': 'فارسی', // Persian language for Iran
-  'fil': 'Filipino', // Filipino language for Philippines
-  'ru': 'русский язык', // Russian language for Russia
-  'sa': 'العربية السعودية', // Arabic language for Saudi Arabia
-  'si': 'සිංහල', // Sinhala language for Sri Lanka
-  'tg': 'тоҷикӣ', // Tajik language for Tajikistan
-  'th': 'ภาษาไทย', // Thai language for Thailand
-  'tr': 'Türkçe', // Turkish language for Turkey
-  'tk': 'Türkmen dili', // Turkmen language for Turkmenistan
-  'uk': 'українська мова', // Ukrainian language for Ukraine
-  'uz': "o'zbek tilida", // Uzbek language for Uzbekistan
-  'vi': 'Tiếng Việt', // Vietnamese language for Vietnam
+  'bn': 'Bengali (বাংলা)',
+  'my': 'Burmese (ဗမာ)',
+  'zh': 'Chinese (中国)',
+  'id': 'Indonesian (Bahasa Indonesia)',
+  'ja': 'Japanese (日本語)',
+  'km': 'Khmer (ភាសាខ្មែរ)',
+  'ko': 'Korean (한국어)',
+  'ky': 'Kyrgyz (Кыргызча)',
+  'lo': 'Lao (ພາສາລາວ)',
+  'ms': 'Malay (Bahasa Melayu)',
+  'mn': 'Mongolian (Монгол хэл)',
+  'ne': 'Nepali (नेपाली)',
+  'ur': 'Urdu (اردو)',
+  'fa': 'Persian (فارسی)',
+  'fil': 'Filipino (Filipino)',
+  'ru': 'Russian (русский язык)',
+  'sa': 'Arabic (Saudi Arabia) (العربية السعودية)',
+  'si': 'Sinhala (සිංහල)',
+  'tg': 'Tajik (тоҷикӣ)',
+  'th': 'Thai (ภาษาไทย)',
+  'tr': 'Turkish (Türkçe)',
+  'tk': 'Turkmen (Türkmen dili)',
+  'uk': 'Ukrainian (українська мова)',
+  'uz': 'Uzbek (o´zbek tili)',
+  'vi': 'Vietnamese (Tiếng Việt)'
 };
-
 
 let OPENAI_API_KEYS = require('./keys.json');
 export class OpenAIError extends Error {
