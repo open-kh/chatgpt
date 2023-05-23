@@ -34,7 +34,7 @@ export default function SelectLanguage(){
             value="default"
             className="dark:bg-[#343541] dark:text-white"
           >
-            Answer contain language
+            Answer all language
           </option>
 
           {Object.keys(LANGS).map((i) => (
