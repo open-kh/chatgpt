@@ -19,6 +19,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/serviceWorkerRegistration.js", "pages/reportWebVitals.js", "pages/service-worker.js"],
   "exclude": ["node_modules"]
 }

@@ -4,8 +4,6 @@ import { getSettings, saveSettings } from '@/utils/app/settings';
 import { LANGS } from '@/utils/server';
 
 import HomeContext from '@/pages/api/home/home.context';
-import { getServerSideProps } from '@/pages';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function SelectLanguage(){
   let settings = getSettings();
@@ -25,6 +23,7 @@ export default function SelectLanguage(){
         <select
           className="w-full cursor-pointer bg-transparent p-2"
           placeholder="Answer as language"
+          defaultValue={language}
           onChange={(e) => {
             setLanguange(e.target.value);
           }}
@@ -42,7 +41,6 @@ export default function SelectLanguage(){
               key={i}
               value={i}
               className="dark:bg-[#343541] dark:text-white"
-              selected={i === language}
             >
             {LANGS[i]}
             </option>
