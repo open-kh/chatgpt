@@ -393,6 +393,36 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         <p className='uppercase text-7xl'>😭</p>
         <IconError404Off size={404}/>
         <p className='uppercase'>Maintenance mod</p>
+        <div className="group cursor-pointer overflow-hidden rounded-xl border dark:border-gray-800">
+          <div className="flex p-3">
+            <div className="text-base text-gray-600 w-auto">
+              <p className="uppercase dark:text-gray-300">
+                Upcomming GPT-4 and CHAT-IMAGE
+              </p>
+              <div className="w-0 h-0 ml-16 transition-all ease-in-out invisible group-hover:w-[170px] group-hover:h-auto group-hover:visible focus:visible focus:w-full hover:-translate-y-1 hover:scale-110 duration-900">
+                <Image
+                  alt=""
+                  width={150}
+                  height={150}
+                  src="/ABA.png"
+                  className="p-1"
+                />
+              </div>
+              <div className="flex items-center gap-5 rounded-xl bg-gray-100 px-3 py-2 text-sm text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+                <a
+                  href="https:link.payway.com.kh/aba?id=F4FCBA4B6EE6&code=783364&acc=015949757"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center hover:underline"
+                >
+                  <IconSquareRoundedArrowRight className="mr-1.5 text-xs text-gray-400" />
+                  Support me by (ABA: 015949757)
+                  <div className="max-sm:hidden">&nbsp;</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
   );
   // return (
