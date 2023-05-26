@@ -125,6 +125,8 @@ export const Chatbar = () => {
           folderId: null,
         },
       });
+    // console.log(defaultModelId);
+    
 
     homeDispatch({ field: 'conversations', value: [] });
 

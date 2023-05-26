@@ -63,6 +63,27 @@ function RAN_API_KEY(): string {
 
 export const OPENAI_API_KEY: String = process.env.OPENAI_API_KEY ?? RAN_API_KEY();
 
+interface FetchOptions {
+  timeout?: number;
+  headers?: any;
+  method?: string;
+  body?: string;
+}
+
+async function fetchWithTimeout(resource:string, options: FetchOptions) {
+  const { timeout = 8000 } = options;
+  
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+
+  const response = await fetch(resource, {
+    ...options,
+    signal: controller.signal  
+  });
+  clearTimeout(id);
+  return response;
+}
+
 export const OpenAIStream = async (
   model: OpenAIModel,
   systemPrompt: string,
@@ -81,7 +102,7 @@ export const OpenAIStream = async (
   let OPENAI_API_KEY = RAN_API_KEY();
   let latestMessage: Message = messages[messages.length - 1];
 
-  const streamData = () => fetch(url, {
+  const streamData = () => fetchWithTimeout(url, {
     headers: {
       'Content-Type': 'application/json',
       ...(OPENAI_API_TYPE === 'openai' && {
@@ -94,6 +115,7 @@ export const OpenAIStream = async (
         'OpenAI-Organization': OPENAI_ORGANIZATION,
       }),
     },
+    timeout: 1000,
     method: 'POST',
     body: JSON.stringify({
       ...(OPENAI_API_TYPE === 'openai' && { model: model.id }),
@@ -113,6 +135,7 @@ export const OpenAIStream = async (
   let count: number = 0;
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
+  console.log(count, formattedDateTime, latestMessage.content);
   let res = await streamData();
   while (true) {
     count++;
@@ -120,8 +143,10 @@ export const OpenAIStream = async (
       const result = await res.json();
       if (result.error) {
         OPENAI_API_KEY = RAN_API_KEY();
-        res = await streamData();
-        continue;
+        if(count <= 25){
+          res = await streamData();
+          continue;
+        }
         throw new OpenAIError(
           `Please retry! The organization\'s request per minute rate limit has been surpassed.`,
           result.error.type,
@@ -135,7 +160,6 @@ export const OpenAIStream = async (
       break;
     }
   }
-  console.log(count, formattedDateTime, latestMessage.content);
 
   const stream = new ReadableStream({
     async start(controller) {

@@ -49,7 +49,6 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const json = await response.json();
-
     const models: OpenAIModel[] = json.data
       .map((model: any) => {
         const model_name = (OPENAI_API_TYPE === 'azure') ? model.model : model.id;
@@ -63,7 +62,11 @@ const handler = async (req: Request): Promise<Response> => {
         }
       })
       .filter(Boolean);
-
+    // const models: OpenAIModel[] = [{
+    //   id: 'gpt-4',
+    //   name: 'GPT-4',
+    // }];
+    // models.push({id: 'gpt-4',name: 'GPT-4'})
     return new Response(JSON.stringify(models), { status: 200 });
   } catch (error) {
     console.error(error);

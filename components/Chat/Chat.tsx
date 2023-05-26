@@ -3,6 +3,7 @@ import {
   IconClearAll,
   IconDeviceMobile,
   IconDeviceMobileX,
+  IconError404Off,
   IconSettings,
 } from '@tabler/icons-react';
 import { IconSquareRoundedArrowRight } from '@tabler/icons-react';
@@ -387,6 +388,13 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       body: 'Explain quantum computing in simple terms',
     },
   ];
+  return (
+      <div className='bg-gray-800 flex flex-col text-3xl items-center justify-center h-full w-full'>
+        <p className='uppercase text-7xl'>😭</p>
+        <IconError404Off size={404}/>
+        <p className='uppercase'>Maintenance mod</p>
+      </div>
+  );
   return (
     <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
       {!(apiKey || serverSideApiKeyIsSet) ? (
