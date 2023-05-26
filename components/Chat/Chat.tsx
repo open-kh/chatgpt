@@ -438,7 +438,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           </div>
         </div>
       ) : modelError ? (
-        <ErrorMessageDiv error={modelError} />
+        <>H</>
+        // <ErrorMessageDiv error={modelError} />
       ) : (
         <>
           <div
