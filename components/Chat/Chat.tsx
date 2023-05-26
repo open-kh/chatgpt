@@ -1,5 +1,6 @@
 import {
   IconArrowAutofitRight,
+  IconArrowRight,
   IconClearAll,
   IconDeviceMobile,
   IconDeviceMobileX,
@@ -392,6 +393,12 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       <div className='bg-gray-800 flex flex-col text-3xl items-center justify-center h-full w-full'>
         <p className='uppercase text-7xl'>😭</p>
         <IconError404Off size={404}/>
+        <div className='flex flex-row shadow-sm bg-slate-500 text-white px-3 py-1 rounded-2xl mb-2'>
+          <IconArrowRight className='mt-1.5 mr-3'/>
+          <a href="http://chat.openkh.org" className='uppercase dark:text-gray-300' target="_blank" rel="noopener noreferrer">
+            Testing
+          </a>
+        </div>
         <p className='uppercase'>Maintenance mod</p>
         <div className="group cursor-pointer overflow-hidden rounded-xl border dark:border-gray-800">
           <div className="flex p-3">
