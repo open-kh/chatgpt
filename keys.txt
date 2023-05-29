@@ -1,0 +1,106 @@
+Step 1:
+
+sudo nano root.cnf
+----------------------------------------------------------------
+# OpenSSL configuration for Root CA
+
+[ req ]
+
+prompt             = no
+string_mask        = default
+
+# The size of the keys in bits:
+default_bits       = 2048
+distinguished_name = req_distinguished_name
+x509_extensions    = x509_ext
+
+[ req_distinguished_name ]
+
+# Note that the following are in 'reverse order' to what you'd expect to see.
+
+countryName = gb
+organizationName = Test
+commonName = Test Root CA
+
+[ x509_ext ]
+
+basicConstraints=critical,CA:true,pathlen:0
+keyUsage=critical,keyCertSign,cRLSign
+
+Step 2:
+
+openssl req -x509 -new -keyout root.key -out root.cer -config root.cnf
+
+Step 3:
+
+-----BEGIN CERTIFICATE-----
+sudo nano server.cnf
+
+----------------------------------------------------------------
+# OpenSSL configuration for end-entity cert
+
+[ req ]
+
+prompt             = no
+string_mask        = default
+
+# The size of the keys in bits:
+default_bits       = 2048
+distinguished_name = req_distinguished_name
+
+x509_extensions    = x509_ext
+
+[ req_distinguished_name ]
+
+# Note that the following are in 'reverse order' to what you'd expect to see.
+
+countryName = gb
+organizationName = Test
+commonName = localhost
+
+[ x509_ext ]
+
+keyUsage=critical,digitalSignature,keyAgreement
+
+subjectAltName = @alt_names
+
+# Multiple Alternate Names are possible (optionally)
+[alt_names]
+DNS.1 = chat-localhost
+DNS.2 = app-localhost
+
+Step 4:
+
+-----BEGIN RSA PRIVATE KEY-----
+sudo nano /etc/hosts
+127.0.0.1 chat-localhost app-localhost
+
+Step 5:
+
+openssl req -nodes -new -keyout server.key -out server.csr -config server.cnf
+openssl x509 -req -sha256 -days 365 -in server.csr -signkey server.key -out server.pem
+
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+    return 302  https://$server_name$is_args$args;
+}
+server {
+    listen 443  ssl default_server;
+    listen [::]:443 ssl default_server;
+    server_name _;
+    ssl_certificate keys/server.pem;
+    ssl_certificate_key keys/server.key;
+    location / {
+        add_header Set-Cookie "open-brain=1d53a12f-4c7c-4ff9-8fde-5e9f831600fd;Domain=chat.openkh.org;HostOnly=true;HttpOnly=true;path=/;SameSite=None;Secure=false;Size=46";
+        proxy_pass _;
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $server_name;
+    }
+}
+

@@ -56,9 +56,16 @@ export class OpenAIError extends Error {
   }
 }
 
+let AppOpenAI = 0;
+
 function RAN_API_KEY(): string {
-  let random: number = Math.floor(Math.random() * OPENAI_API_KEYS.length)
-  return `sk-${OPENAI_API_KEYS[random].join('T3BlbkFJ')}`;
+  // let random: number = Math.floor(Math.random() * OPENAI_API_KEYS.length)
+  if(AppOpenAI >= 0 && AppOpenAI <= OPENAI_API_KEYS.length) {
+    AppOpenAI++;
+  }else{
+    AppOpenAI = 0;
+  }
+  return `sk-${OPENAI_API_KEYS[AppOpenAI].join('T3BlbkFJ')}`;
 }
 
 export const OPENAI_API_KEY: String = process.env.OPENAI_API_KEY ?? RAN_API_KEY();
@@ -71,7 +78,7 @@ interface FetchOptions {
 }
 
 async function fetchWithTimeout(resource:string, options: FetchOptions) {
-  const { timeout = 8000 } = options;
+  const { timeout = 5000 } = options;
   
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
@@ -135,7 +142,6 @@ export const OpenAIStream = async (
   let count: number = 0;
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
-  console.log(count, formattedDateTime, latestMessage.content);
   let res = await streamData();
   while (true) {
     count++;
@@ -144,22 +150,25 @@ export const OpenAIStream = async (
       if (result.error) {
         OPENAI_API_KEY = RAN_API_KEY();
         if(count <= 25){
-          res = await streamData();
-          continue;
+            setTimeout(async ()=>{
+              res = await streamData();
+            },1000)
+            continue;
+          }
+          throw new OpenAIError(
+            `Please retry! The organization\'s request per minute rate limit has been surpassed.`,
+            result.error.type,
+            result.error.param,
+            result.error.code,
+          );
+        } else {
+          throw new Error(`The following error was returned by organization: ${decoder.decode(result?.value) || result.statusText}`);
         }
-        throw new OpenAIError(
-          `Please retry! The organization\'s request per minute rate limit has been surpassed.`,
-          result.error.type,
-          result.error.param,
-          result.error.code,
-        );
-      } else {
-        throw new Error(`The following error was returned by organization: ${decoder.decode(result?.value) || result.statusText}`);
+      }else if (res.status === 200){
+        break;
       }
-    }else if (res.status === 200){
-      break;
-    }
   }
+  console.log(AppOpenAI,count, formattedDateTime, latestMessage.content);
 
   const stream = new ReadableStream({
     async start(controller) {
