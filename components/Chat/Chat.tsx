@@ -555,7 +555,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           <div className="text-base text-gray-600 w-auto">
                             <p className=" dark:text-red-500">MAINTENANCE MOD</p>
                             <p className="dark:text-gray-400">
-                              5x faster, Mr.Phearum is in charge of all
+                              Give [any,many,more,...] information as OpenBrain can, Mr.Phearum is in charge of all
                               information.
                               <span className="flex mt-2">
                                 <IconDeviceMobile className="mr-1.5 text-xs text-gray-400" />
