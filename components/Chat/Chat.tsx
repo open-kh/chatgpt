@@ -553,7 +553,22 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                             />
                           </div>
                           <div className="text-base text-gray-600 w-auto">
-                            <p className=" dark:text-red-500">MAINTENANCE MOD</p>
+                            <p className=" dark:text-red-500 flex">MAINTENANCE MOD
+                              <span className='pl-2 flex text-brack dark:text-white'>
+                                <svg
+                                    viewBox="0 0 32 32"
+                                    width="1.2em"
+                                    height="1.2em"
+                                    className="mr-1.5 mt-1 text-xs"
+                                  >
+                                    <path
+                                      fill="currentColor"
+                                      d="M10 6v2h12.59L6 24.59L7.41 26L24 9.41V22h2V6H10z"
+                                    ></path>
+                                </svg>
+                                <a href="http://chat.openkh.org" target="_blank" rel="noopener noreferrer">TEST HERE</a>
+                              </span>
+                            </p>
                             <p className="dark:text-gray-400">
                               Give [any,many,more,...] information as OpenBrain can, Mr.Phearum is in charge of all
                               information.
