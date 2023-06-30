@@ -36,7 +36,7 @@ export const ChatbarSettings = () => {
 
   return (
     <div className="flex flex-col items-center space-y-1 border-t border-white/20 pt-1 text-sm">
-      <SelectLang />
+      {/* <SelectLang /> */}
       <SidebarButton
         text={t('Themes')}
         icon={<IconColorFilter size={18} />}

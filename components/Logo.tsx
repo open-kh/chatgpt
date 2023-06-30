@@ -13,7 +13,7 @@ export default function Logo(props: Props) {
         width={props.width??10}
         height={props.height??10}
         src="/loading.png"
-        className="h-full h-full flex-none select-none"
+        className="h-full w-full flex-none select-none"
       />
     </div>
   )

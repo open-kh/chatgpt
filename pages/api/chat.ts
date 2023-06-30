@@ -8,6 +8,7 @@ import wasm from '../../node_modules/@dqbd/tiktoken/lite/tiktoken_bg.wasm?module
 
 import tiktokenModel from '@dqbd/tiktoken/encoders/cl100k_base.json';
 import { Tiktoken, init } from '@dqbd/tiktoken/lite/init';
+import { POST } from '@/hooks/useChat';
 
 export const config = {
   runtime: 'edge',
@@ -51,6 +52,9 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     encoding.free();
+
+    const usechat = await POST(messagesToSend);
+    return usechat;
 
     const stream = await OpenAIStream(model, promptToSend, temperatureToUse, key, messagesToSend);
 

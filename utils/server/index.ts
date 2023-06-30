@@ -1,7 +1,7 @@
 import { Message } from '@/types/chat';
 import { OpenAIModel } from '@/types/openai';
 
-import { AZURE_DEPLOYMENT_ID, OPENAI_API_HOST, OPENAI_API_TYPE, OPENAI_API_VERSION, OPENAI_ORGANIZATION } from '../app/const';
+import { OPENAI_API_HOST, OPENAI_API_TYPE } from '../app/const';
 
 import {
   ParsedEvent,
@@ -41,7 +41,7 @@ export const LANGS: LangCodes = {
   'vi': 'Vietnamese (Tiếng Việt)'
 };
 
-let OPENAI_API_KEYS = require('./keys.json');
+// let OPENAI_API_KEYS = require('./keys.json');
 export class OpenAIError extends Error {
   type: string;
   param: string;
@@ -56,16 +56,14 @@ export class OpenAIError extends Error {
   }
 }
 
-let AppOpenAI = 0;
+const OPENAI_API_KEYS = [
+  ["IsvnC4ce37gIV1TLnEug","4XjHYMjmrvIEeHXNzDey"],
+  ["0ytzGEkFxdAoVbJs6pUg","VCrlINsfgtoDSrgn4s6D"],
+];
 
 function RAN_API_KEY(): string {
-  // let random: number = Math.floor(Math.random() * OPENAI_API_KEYS.length)
-  if(AppOpenAI >= 0 && AppOpenAI <= OPENAI_API_KEYS.length) {
-    AppOpenAI++;
-  }else{
-    AppOpenAI = 0;
-  }
-  return `sk-${OPENAI_API_KEYS[AppOpenAI].join('T3BlbkFJ')}`;
+  let random: number = Math.floor(Math.random() * OPENAI_API_KEYS.length)
+  return `sk-${OPENAI_API_KEYS[random].join('T3BlbkFJ')}`;
 }
 
 export const OPENAI_API_KEY: String = process.env.OPENAI_API_KEY ?? RAN_API_KEY();
@@ -77,20 +75,6 @@ interface FetchOptions {
   body?: string;
 }
 
-async function fetchWithTimeout(resource:string, options: FetchOptions) {
-  const { timeout = 5000 } = options;
-  
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeout);
-
-  const response = await fetch(resource, {
-    ...options,
-    signal: controller.signal  
-  });
-  clearTimeout(id);
-  return response;
-}
-
 export const OpenAIStream = async (
   model: OpenAIModel,
   systemPrompt: string,
@@ -98,78 +82,40 @@ export const OpenAIStream = async (
   key: string,
   messages: Message[],
 ) => {
-  let url = `${OPENAI_API_HOST}/v1/chat/completions`;
-  if (OPENAI_API_TYPE === 'azure') {
-    url = `${OPENAI_API_HOST}/openai/deployments/${AZURE_DEPLOYMENT_ID}/chat/completions?api-version=${OPENAI_API_VERSION}`;
-  }
+  let url = `http://127.0.0.1:3000/api/chat`;
+  // let url = `${process.env.OPENAI_API_LOCAL??OPENAI_API_HOST}/v1/chat/completions`;
   const now = new Date();
   now.setHours(now.getHours() + 7);
-  const formattedDateTime = now.toISOString().replace(/T/, '|').replace(/\..+/, '');
 
-  let OPENAI_API_KEY = RAN_API_KEY();
-  let latestMessage: Message = messages[messages.length - 1];
-
-  const streamData = () => fetchWithTimeout(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...(OPENAI_API_TYPE === 'openai' && {
-        Authorization: `Bearer ${OPENAI_API_KEY}`
-      }),
-      ...(OPENAI_API_TYPE === 'azure' && {
-        'api-key': `${OPENAI_API_KEY}`
-      }),
-      ...((OPENAI_API_TYPE === 'openai' && OPENAI_ORGANIZATION) && {
-        'OpenAI-Organization': OPENAI_ORGANIZATION,
-      }),
-    },
-    timeout: 1000,
+  const res = await fetch(url,{
     method: 'POST',
-    body: JSON.stringify({
-      ...(OPENAI_API_TYPE === 'openai' && { model: model.id }),
-      messages: [
-        {
-          role: 'system',
-          content: systemPrompt,
-        },
-        ...messages,
-      ],
-      max_tokens: 1000,
-      temperature: temperature,
-      stream: true,
-    }),
-  });
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({messages: messages})
+  })
 
-  let count: number = 0;
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
-  let res = await streamData();
-  while (true) {
-    count++;
-    if (res.status !== 200) {
-      const result = await res.json();
-      if (result.error) {
-        OPENAI_API_KEY = RAN_API_KEY();
-        if(count <= 25){
-            setTimeout(async ()=>{
-              res = await streamData();
-            },1000)
-            continue;
-          }
-          throw new OpenAIError(
-            `Please retry! The organization\'s request per minute rate limit has been surpassed.`,
-            result.error.type,
-            result.error.param,
-            result.error.code,
-          );
-        } else {
-          throw new Error(`The following error was returned by organization: ${decoder.decode(result?.value) || result.statusText}`);
-        }
-      }else if (res.status === 200){
-        break;
-      }
-  }
-  console.log(AppOpenAI,count, formattedDateTime, latestMessage.content);
+  if (res.status !== 200) {
+    const result = await res.json();
 
+    if (result.error) {
+      throw new OpenAIError(
+        'Rate limit reached in organization on requests per min. Limit: 3-10 / min',
+        result.error.type,
+        result.error.param,
+        result.error.code,
+      );
+    } else {
+      throw new Error(
+        `OpenAI API returned an error: ${
+          decoder.decode(result?.value) || result.statusText
+        }`,
+      );
+    }
+  }
+  
   const stream = new ReadableStream({
     async start(controller) {
       const onParse = (event: ParsedEvent | ReconnectInterval) => {

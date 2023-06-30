@@ -104,7 +104,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
                 onClick={() => handleExportData()}
               />
             </div>
-            <div className='group relative py-2 px-4 pb-0 mb-2 rounded-lg border border-slate-700'>
+            {/* <div className='group relative py-2 px-4 pb-0 mb-2 rounded-lg border border-slate-700'>
               <ModelSelect />
               <TemperatureSlider
                   label={t('Temperature')}
@@ -115,7 +115,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
                     })
                   }
                 />
-            </div>
+            </div> */}
 
             <div className='group relative py-2 px-4 mb-2 rounded-lg border border-slate-700'>
               <div className="text-sm font-bold mb-2 text-neutral-200">

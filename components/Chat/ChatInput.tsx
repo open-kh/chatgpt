@@ -381,9 +381,9 @@ export const ChatInput = ({
         </div>
       </div>
       <div className="px-3 pt-2 pb-3 text-center text-[12px] text-black/50 dark:text-white/50 md:px-4 md:pt-3 md:pb-6">
-       Model: {selectedConversation?.model.name} is an {t(
+       {/* Model: {selectedConversation?.model.name} is an {t(
           "advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and functionality.",
-        )}
+        )} */}
       </div>
     </div>
   );

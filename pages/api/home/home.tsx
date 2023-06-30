@@ -410,6 +410,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
   const googleApiKey = process.env.GOOGLE_API_KEY;
   const googleCSEId = process.env.GOOGLE_CSE_ID;
+  
   const appName = process.env.APP_NAME || 'Open Brain';
 
   if (googleApiKey && googleCSEId) {
