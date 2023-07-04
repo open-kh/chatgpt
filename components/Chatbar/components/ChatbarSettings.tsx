@@ -1,5 +1,5 @@
 import { IconColorFilter, IconFileExport, IconSettings } from '@tabler/icons-react';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 
@@ -13,29 +13,60 @@ import { SidebarButton } from '../../Sidebar/SidebarButton';
 import ChatbarContext from '../Chatbar.context';
 import { ClearConversations } from './ClearConversations';
 import { PluginKeys } from './PluginKeys';
-import { saveSettings } from '@/utils/app/settings';
-import { getSettings } from '@/utils/app/settings';
+import { saveSettings, getSettings } from '@/utils/app/settings';
 import SelectLang from '@/components/Select';
 
 export const ChatbarSettings = () => {
   const { t } = useTranslation('sidebar');
   const [isSettingDialogOpen, setIsSettingDialog] = useState<boolean>(false);
-
+  const [serviceSelected, setServiceSelected] = useState<string>('openai');
+  
   const {
     state: {
       apiKey,
+      service,
       serverSideApiKeyIsSet,
       serverSidePluginKeysSet,
     },
     dispatch,
   } = useContext(HomeContext);
 
+  useEffect(()=>{
+    setServiceSelected(service)
+  },[service])
+  
   const {
     handleApiKeyChange,
   } = useContext(ChatbarContext);
 
   return (
-    <div className="flex flex-col items-center space-y-1 border-t border-white/20 pt-1 text-sm">
+    <div className="flex flex-col items-center space-y-1 border-t border-white/20 pt-1 text-md">
+      <div className="w-full rounded-lg border border-neutral-200 bg-transparent pr-2 text-neutral-900 dark:text-white">
+        <select
+          className="w-full bg-transparent p-3 border-none uppercase"
+          placeholder={t('Select a model') || ''}
+          defaultValue={serviceSelected}
+          onChange={(e)=>{
+            let settings = getSettings();
+            settings.service = `${e.target.value}`;
+            dispatch({
+              field: 'service',
+              value: settings.service,
+            });
+            saveSettings(settings);
+          }}
+        >
+          {['openai', 'facebook'].map((model) => (
+            <option
+              key={model}
+              value={model}
+              className="dark:bg-[#343541] text-white"
+            >
+              Service {model}
+            </option>
+          ))}
+        </select>
+      </div>
       {/* <SelectLang /> */}
       <SidebarButton
         text={t('Themes')}

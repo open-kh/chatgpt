@@ -8,7 +8,8 @@ import wasm from '../../node_modules/@dqbd/tiktoken/lite/tiktoken_bg.wasm?module
 
 import tiktokenModel from '@dqbd/tiktoken/encoders/cl100k_base.json';
 import { Tiktoken, init } from '@dqbd/tiktoken/lite/init';
-import { POST } from '@/hooks/useChat';
+import * as hf from '@/hooks/useHF';
+import * as gpt from '@/hooks/useGPT';
 
 export const config = {
   runtime: 'edge',
@@ -16,7 +17,9 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const { model, messages, key, prompt, temperature } = (await req.json()) as ChatBody;
+    const json = await req.json()
+    const { model, messages, key, prompt, temperature } = json as ChatBody;
+    const { service } = json;
 
     await init((imports) => WebAssembly.instantiate(wasm, imports));
     const encoding = new Tiktoken(
@@ -50,14 +53,17 @@ const handler = async (req: Request): Promise<Response> => {
       tokenCount += tokens.length;
       messagesToSend = [message, ...messagesToSend];
     }
-
     encoding.free();
 
-    const usechat = await POST(messagesToSend);
-    return usechat;
+    if(service == 'facebook'){
+      const usechat = await hf.POST(messagesToSend);
+      return usechat;
+    }else{
+      const usechat = await gpt.POST(messagesToSend, true);
+      return usechat;
+    }
 
     const stream = await OpenAIStream(model, promptToSend, temperatureToUse, key, messagesToSend);
-
     return new Response(stream);
   } catch (error) {
     console.error(error);

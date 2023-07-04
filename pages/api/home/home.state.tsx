@@ -10,7 +10,8 @@ export interface HomeInitialState {
   apiKey: string;
   pluginKeys: PluginKey[];
   loading: boolean;
-  lightMode: 'light' | 'dark';
+  service: 'openai'|'facebook'|'other';
+  lightMode: 'light' | 'dark' | string | undefined;
   language: string;
   messageIsStreaming: boolean;
   modelError: ErrorMessage | null;
@@ -36,6 +37,7 @@ export const initialState: HomeInitialState = {
   apiKey: '',
   loading: false,
   pluginKeys: [],
+  service: 'facebook',
   lightMode: 'dark',
   messageIsStreaming: false,
   modelError: null,

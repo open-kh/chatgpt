@@ -60,6 +60,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       selectedConversation,
       conversations,
       apiKey,
+      service,
       pluginKeys,
       serverSideApiKeyIsSet,
       modelError,
@@ -115,15 +116,16 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           messages: updatedConversation.messages,
           key: apiKey,
           prompt: updatedConversation.prompt + transitions,
-          temperature: updatedConversation.temperature,
+          temperature: updatedConversation.temperature
         };
         const endpoint = getEndpoint(plugin);
         let body;
         if (!plugin) {
-          body = JSON.stringify(chatBody);
+          body = JSON.stringify({...chatBody,service});
         } else {
           body = JSON.stringify({
             ...chatBody,
+            service
             // googleAPIKey: pluginKeys
             //   .find((key) => key.pluginId === 'google-search')
             //   ?.requiredKeys.find((key) => key.key === 'GOOGLE_API_KEY')?.value,
@@ -636,8 +638,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               </div>
             ) : (
               <>
-                <div className="max-sm:hidden sm:sticky top-0 z-10 flex justify-center border border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
-                  {selectedConversation?.name}
+                <div className="sm:sticky top-0 z-10 relative flex border justify-around border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
+                   <span className='uppercase w-full'></span>
+                   <span className='uppercase'>{selectedConversation?.name}</span>
+                   <span className='uppercase text-end w-full pr-2'>{`${service}`}</span>
                 </div>
                 <div className="px-2 max-sm:pr-4">
                   <div className="sm:ml-0 md:mr-5 lg:ml-10 xl:ml-20">
