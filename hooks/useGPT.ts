@@ -33,6 +33,7 @@ export async function POST(
         { role: 'system', content: DEFAULT_SYSTEM_PROMPT },
         ...messages,
       ],
+      model: 'gpt-4',
       stream,
     }),
   });
