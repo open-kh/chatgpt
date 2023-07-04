@@ -43,7 +43,7 @@ export const ChatbarSettings = () => {
     <div className="flex flex-col items-center space-y-1 border-t border-white/20 pt-1 text-md">
       <div className="w-full rounded-lg border border-neutral-200 bg-transparent pr-2 text-neutral-900 dark:text-white">
         <select
-          className="w-full bg-transparent p-3 border-none uppercase"
+          className="w-full cursor-pointer text-gray-400 bg-transparent p-2 uppercase"
           placeholder={t('Select a model') || ''}
           defaultValue={serviceSelected}
           onChange={(e)=>{

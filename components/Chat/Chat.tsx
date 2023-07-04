@@ -535,7 +535,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                       </div>
                     )} */}
 
-                        <div className="flex items-center rounded-xl bg-gray-100 p-1 text-sm dark:bg-gray-800 mb-4">
+                        <div className="flex items-center rounded-xl bg-gray-100 text-gray-700 p-1 text-sm dark:bg-gray-800 mb-4">
                           <span className="mr-2 inline-flex items-center rounded-lg bg-gradient-to-br from-yellow-300 px-2 py-1 text-xxs font-medium uppercase leading-3 text-yellow-700 dark:from-[#373010] dark:text-yellow-400">
                             New
                           </span>
@@ -543,18 +543,18 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           <div className="ml-auto shrink-0">
                           </div>
                         </div>
-                      <div className="group cursor-pointer overflow-hidden rounded-xl border dark:border-gray-800">
-                        <div className="flex p-3">
-                          <div className="w-0 h-0 transition-all ease-in-out invisible group-hover:w-[170px] group-hover:h-auto group-hover:visible focus:visible focus:w-full hover:-translate-y-1 hover:scale-110 duration-900">
+                      <div className="group max-sm:h-[auto] overflow-hidden rounded-xl border dark:border-gray-800">
+                        <div className="flex max-sm:group-hover:h-[350px] max-sm:relative p-3">
+                          <div className="w-0 h-0 transition-all ease-in-out invisible group-hover:w-[170px] max-sm:group-hover:w-full group-hover:visible group-focus:visible group-focus:w-full hover:-translate-y-1 hover:scale-110 duration-900">
                             <Image
                               alt=""
-                              width={150}
-                              height={150}
+                              width={350}
+                              height={350}
                               src="/ABA.png"
-                              className="p-1"
+                              className="hidden max-sm:px-7 max-sm:absolute cursor-pointer group-focus:block group-hover:block"
                             />
                           </div>
-                          <div className="text-base text-gray-600 w-auto">
+                          <div className="pl-2 text-base text-gray-600 w-auto max-sm:w-full max-sm:group-focus:invisible max-sm:group-hover:invisible">
                             <p className=" dark:text-red-500 flex">MAINTENANCE MOD
                               <span className='pl-2 flex text-brack dark:text-white'>
                                 <svg
@@ -568,7 +568,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                                       d="M10 6v2h12.59L6 24.59L7.41 26L24 9.41V22h2V6H10z"
                                     ></path>
                                 </svg>
-                                <a href="http://chat.openkh.org" target="_blank" rel="noopener noreferrer">TEST HERE</a>
+                                <a href="http://chat.openkh.org" className=' shadow-xl rounded-md px-2 border border-red-600 cursor-pointer' target="_blank" rel="noopener noreferrer">TEST HERE</a>
                               </span>
                             </p>
                             <p className="dark:text-gray-400">
@@ -638,9 +638,9 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               </div>
             ) : (
               <>
-                <div className="sm:sticky top-0 z-10 relative flex border justify-around border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200">
+                <div className="sm:sticky top-0 z-10 relative flex border justify-around border-b-neutral-300 bg-neutral-100 py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
                    <span className='uppercase w-full'></span>
-                   <span className='uppercase'>{selectedConversation?.name}</span>
+                   <span className='uppercase max-sm:hidden'>{selectedConversation?.name}</span>
                    <span className='uppercase text-end w-full pr-2'>{`${service}`}</span>
                 </div>
                 <div className="px-2 max-sm:pr-4">
