@@ -92,4 +92,3 @@ export const ChatMode = memo(({ children }: Props) => {
   );
 });
 ChatMode.displayName = 'ChatMode';
-// export default ChatMode;
