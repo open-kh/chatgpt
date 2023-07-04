@@ -20,12 +20,13 @@ import Btn from '../Buttons/Btn';
 import Logo from '../Logo';
 import { CodeBlock } from '../Markdown/CodeBlock';
 import { MemoizedReactMarkdown } from '../Markdown/MemoizedReactMarkdown';
-import { IconOpenAI } from '../ui/icons';
+import { IconFacebook, IconOpenAI } from '../ui/icons';
 import Wave from './Wave';
 
 import rehypeMathjax from 'rehype-mathjax';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import { ChatIcon } from './ChatIcon';
 
 export interface Props {
   message: Message;
@@ -41,6 +42,7 @@ export const ChatMessage: FC<Props> = memo(
       state: {
         selectedConversation,
         conversations,
+        service,
         currentMessage,
         messageIsStreaming,
       },
@@ -150,11 +152,11 @@ export const ChatMessage: FC<Props> = memo(
           <div className="min-w-[40px] text-right">
             {message.role === 'user' ? (
               <div className="shadow-md text-center py-1.5 rounded-md w-[30px] h-[30px]">
-                <IconUser className="mx-auto" />
+                <IconUser className="mx-auto"  width={20} />
               </div>
             ) : (
               <div className="shadow-md text-center py-1.5 mt-2 rounded-md w-[30px] h-[30px]">
-                <IconOpenAI className="mx-auto" width={35} height={35} />
+                <ChatIcon/>
               </div>
             )}
           </div>

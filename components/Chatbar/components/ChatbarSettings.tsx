@@ -27,7 +27,7 @@ export const ChatbarSettings = () => {
   const [serviceSelected, setServiceSelected] = useState<string>('openai');
 
   const {
-    state: { apiKey, service, serverSideApiKeyIsSet, serverSidePluginKeysSet },
+    state: { service,apiKey, serverSideApiKeyIsSet, serverSidePluginKeysSet },
     dispatch,
   } = useContext(HomeContext);
 
@@ -38,7 +38,7 @@ export const ChatbarSettings = () => {
       value: settings.service
     })
     setServiceSelected(settings.service);
-  }, []);
+  }, [service]);
 
   const { handleApiKeyChange } = useContext(ChatbarContext);
 

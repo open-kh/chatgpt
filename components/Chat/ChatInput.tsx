@@ -2,6 +2,7 @@ import {
   IconArrowDown,
   IconBolt,
   IconBrandGoogle,
+  IconMessage,
   IconPlayerStop,
   IconRepeat,
   IconSend,
@@ -27,6 +28,8 @@ import HomeContext from '@/pages/api/home/home.context';
 import { PluginSelect } from './PluginSelect';
 import { PromptList } from './PromptList';
 import { VariableModal } from './VariableModal';
+import { IconOpenAI } from '../ui/icons';
+import { ChatIcon } from './ChatIcon';
 
 interface Props {
   onSend: (message: Message, plugin: Plugin | null) => void;
@@ -48,7 +51,7 @@ export const ChatInput = ({
   const { t } = useTranslation('chat');
 
   const {
-    state: { selectedConversation, messageIsStreaming, prompts },
+    state: { service,selectedConversation, messageIsStreaming, prompts },
 
     dispatch: homeDispatch,
   } = useContext(HomeContext);
@@ -302,10 +305,16 @@ export const ChatInput = ({
           <button
             className="absolute left-2 top-2 max-sm:top-1 rounded-2xl p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
             // onClick={() => setShowPluginSelect(!showPluginSelect)}
+            // onClick={() => {
+            //   // handleCreateItem();
+            //   // handleSearchTerm('');
+            // }}
             onKeyDown={(e) => {}}
           >
-            {/* {plugin ? <IconBrandGoogle size={20} /> : <IconBolt size={20} />} */}
-            {!plugin && <IconBolt size={20} />}
+            {/* <IconMessage size={20} /> */}
+            <ChatIcon/>
+            {/* {service=='facebook' ? <IconMessage size={20} /> : <IconOpenAI className="mx-auto" width={20}/>} */}
+            {/* {!plugin && <IconBolt size={20} />} */}
           </button>
 
           {showPluginSelect && (

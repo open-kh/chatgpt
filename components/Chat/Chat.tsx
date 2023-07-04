@@ -18,7 +18,6 @@ import {
   saveConversations,
   updateConversation,
 } from '@/utils/app/conversation';
-import { getSettings } from '@/utils/app/settings';
 import { throttle } from '@/utils/data/throttle';
 import { LANGS } from '@/utils/server';
 
@@ -28,16 +27,11 @@ import { Plugin } from '@/types/plugin';
 import HomeContext from '@/pages/api/home/home.context';
 
 import Instanse from '../Instanse';
-import Select from '../Select';
-import Spinner from '../Spinner';
 import { ChatInput } from './ChatInput';
 import { ChatLoader } from './ChatLoader';
 import { ChatMode } from './ChatMod';
 import { ErrorMessageDiv } from './ErrorMessageDiv';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
-import { ModelSelect } from './ModelSelect';
-import { SystemPrompt } from './SystemPrompt';
-import { TemperatureSlider } from './Temperature';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -386,7 +380,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       body: 'Explain quantum computing in simple terms',
     },
   ];
-  // return <ChatMode/>;
+  // return <div className="relative flex-1 justify-center overflow-hidden bg-white dark:bg-[#343541]">
+  //   <div className='max-sm:max-h-[730px] absolute top-[20%] left-[30%] w-[40%] overflow-x-hidden'>
+  //     <ChatMode/>
+  //   </div>
+  // </div>;
   return (
     <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
       {!(apiKey || serverSideApiKeyIsSet) ? (
@@ -395,133 +393,139 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         <ErrorMessageDiv error={modelError} />
       ) : (
         <>
-          <div
-            className="max-h-full overflow-x-hidden"
-            ref={chatContainerRef}
-            onScroll={handleScroll}
-          >
-            {/* <div className="flix flex-col">
-              <Instanse slot={3884568135} client={5328097012407543} />
-              <Instanse slot={3884568135} client={5328097012407543} />
-            </div> */}
-            {selectedConversation?.messages.length === 0 ? (
-              <div className="max-sm:max-h-[730px]">
-                <div className="mx-auto flex flex-col space-y-5 md:space-y-5 px-3 pt-5 md:pt-12 sm:max-w-[900px]">
-                  <p className="max-sm:hidden md:block text-bold font-medium text-3xl uppercase text-center py-10">
-                    AI Chat
-                  </p>
-                  <div className="my-auto grid gap-8 lg:grid-cols-3">
-                    <div className="lg:col-span-1">
-                      <div>
-                        <div className="mb-3 flex items-end text-2xl font-semibold">
-                          <Image
-                            alt=""
-                            width={45}
-                            height={45}
-                            src="/favicon.ico"
-                            className="flex-none select-none"
-                          />
-                          {appName}
+            <div
+              className="max-h-full overflow-x-hidden"
+              ref={chatContainerRef}
+              onScroll={handleScroll}
+            >
+              {selectedConversation?.messages.length === 0 ? (
+                <div className="max-sm:max-h-[730px]">
+                  <div className="mx-auto flex flex-col space-y-5 md:space-y-5 px-3 pt-5 md:pt-12 sm:max-w-[900px]">
+                    <p className="max-sm:hidden md:block text-bold font-medium text-3xl uppercase text-center py-10">
+                      AI Chat
+                    </p>
+                    <div className="my-auto grid gap-8 lg:grid-cols-3">
+                      <div className="lg:col-span-1">
+                        <div>
+                          <div className="mb-3 flex items-end text-2xl font-semibold">
+                            <Image
+                              alt=""
+                              width={45}
+                              height={45}
+                              src="/favicon.ico"
+                              className="flex-none select-none"
+                            />
+                            {appName}
+                          </div>
+                          <p className="text-base text-gray-600 dark:text-gray-400">
+                            Making the community`s best AI chat models available
+                            to everyone.
+                          </p>
                         </div>
-                        <p className="text-base text-gray-600 dark:text-gray-400">
-                          Making the community`s best AI chat models available
-                          to everyone.
+                      </div>
+                      <div className="lg:col-span-2">
+                        <ChatMode />
+                      </div>
+                      <div className="lg:col-span-3 lg:mt-12">
+                        <p className="mb-3 text-gray-600 dark:text-gray-300">
+                          Examples
                         </p>
-                      </div>
-                    </div>
-                    <div className="lg:col-span-2">
-                      <ChatMode />
-                    </div>
-                    <div className="lg:col-span-3 lg:mt-12">
-                      <p className="mb-3 text-gray-600 dark:text-gray-300">
-                        Examples
-                      </p>
-                      <div className="max-sm:mb-[150px]">
-                        <div className="grid gap-3 lg:grid-cols-3 lg:gap-5">
-                          {messages.map((m, i) => (
-                            <button
-                              key={i}
-                              type="button"
-                              title="Prefix Example"
-                              className="rounded-2xl border bg-gray-50 p-2.5 text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 sm:p-4"
-                              onClick={() => {
-                                let message: Message = {
-                                  role: 'user',
-                                  content: m.body,
-                                };
-                                setCurrentMessage(message);
-                                handleSend(message, 0, null);
-                              }}
-                            >
-                              {m.title}
-                            </button>
-                          ))}
+                        <div className="max-sm:mb-[150px]">
+                          <div className="grid gap-3 lg:grid-cols-3 lg:gap-5">
+                            {messages.map((m, i) => (
+                              <button
+                                key={i}
+                                type="button"
+                                title="Prefix Example"
+                                className="rounded-2xl border bg-gray-50 p-2.5 text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 sm:p-4"
+                                onClick={() => {
+                                  let message: Message = {
+                                    role: 'user',
+                                    content: m.body,
+                                  };
+                                  setCurrentMessage(message);
+                                  handleSend(message, 0, null);
+                                }}
+                              >
+                                {m.title}
+                              </button>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ) : (
-              <>
-                <div className="sticky max-sm:hidden top-0 z-10 flex border justify-around py-2 text-sm text-neutral-500 dark:border-none shadow-sm dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
-                  <span className="uppercase w-full"></span>
-                  <span className="uppercase  w-full text-center max-sm:hidden">
-                    {selectedConversation?.name}
-                  </span>
-                  <span className="uppercase text-end w-full pr-2">{`${service}`}</span>
-                </div>
-                <div className="">
-                    {selectedConversation?.messages.map((message, index) => (
-                      <MemoizedChatMessage
-                        key={index}
-                        message={message}
-                        messageIndex={index}
-                        onEdit={(editedMessage) => {
-                          setCurrentMessage(editedMessage);
-                          // discard edited message and the ones that come after then resend
-                          handleSend(
-                            editedMessage,
-                            selectedConversation?.messages.length - index,
-                          );
-                        }}
-                      />
-                    ))}
-
-                    {loading && <ChatLoader />}
-                    {/* <ChatLoader /> */}
-
-                    <div
-                      className="h-[162px] bg-white dark:bg-[#343541]"
-                      ref={messagesEndRef}
-                    />
+              ) : (
+                <>
+                  <div className="sticky max-sm:hidden top-0 z-10 flex border justify-around py-2 text-sm text-neutral-500 dark:border-none shadow-sm dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
+                    {/* <span className="uppercase w-full"></span> */}
+                    <span className="uppercase  w-full text-center max-sm:hidden">
+                      {selectedConversation?.name}
+                    </span>
+                    {/* <span className="uppercase text-end w-full pr-2">{`${service}`}</span> */}
                   </div>
-              </>
-            )}
-            {/* <div className="flix flex-col">
-              <Instanse slot={3884568135} client={5328097012407543} />
-              <Instanse slot={3884568135} client={5328097012407543} />
-            </div> */}
-          </div>
+                  <div className="">
+                      {selectedConversation?.messages.map((message, index) => (
+                        <MemoizedChatMessage
+                          key={index}
+                          message={message}
+                          messageIndex={index}
+                          onEdit={(editedMessage) => {
+                            setCurrentMessage(editedMessage);
+                            // discard edited message and the ones that come after then resend
+                            handleSend(
+                              editedMessage,
+                              selectedConversation?.messages.length - index,
+                            );
+                          }}
+                        />
+                      ))}
 
-          <ChatInput
-            stopConversationRef={stopConversationRef}
-            textareaRef={textareaRef}
-            onSend={(message, plugin) => {
-              setCurrentMessage(message);
-              handleSend(message, 0, plugin);
-            }}
-            onScrollDownClick={handleScrollDown}
-            onRegenerate={() => {
-              if (currentMessage) {
-                handleSend(currentMessage, 2, null);
-              }
-            }}
-            showScrollDownButton={showScrollDownButton}
-          />
+                      {loading && <ChatLoader />}
+                      {/* <ChatLoader /> */}
+
+                      <div
+                        className="h-[162px] bg-white dark:bg-[#343541]"
+                        ref={messagesEndRef}
+                      />
+                    </div>
+                </>
+              )}
+            </div>
+            {/* <Instanse slot={3884568135} client={5328097012407543} /> */}
+
+            <ChatInput
+              stopConversationRef={stopConversationRef}
+              textareaRef={textareaRef}
+              onSend={(message, plugin) => {
+                setCurrentMessage(message);
+                handleSend(message, 0, plugin);
+              }}
+              onScrollDownClick={handleScrollDown}
+              onRegenerate={() => {
+                if (currentMessage) {
+                  handleSend(currentMessage, 2, null);
+                }
+              }}
+              showScrollDownButton={showScrollDownButton}
+            />
         </>
       )}
     </div>
   );
 });
 Chat.displayName = 'Chat';
+
+
+
+{/* <div>
+<div className="flix flex-col">
+  <Instanse slot={3884568135} client={5328097012407543} />
+  <Instanse slot={3884568135} client={5328097012407543} />
+</div>
+<div className="flix flex-col">
+  <Instanse slot={3884568135} client={5328097012407543} />
+  <Instanse slot={3884568135} client={5328097012407543} />
+</div>
+</div> */}
