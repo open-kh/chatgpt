@@ -32,8 +32,13 @@ export const ChatbarSettings = () => {
   } = useContext(HomeContext);
 
   useEffect(() => {
-    setServiceSelected(service);
-  }, [service]);
+    const settings = getSettings()
+    dispatch({
+      field: 'service',
+      value: settings.service
+    })
+    setServiceSelected(settings.service);
+  }, []);
 
   const { handleApiKeyChange } = useContext(ChatbarContext);
 
@@ -43,7 +48,7 @@ export const ChatbarSettings = () => {
         <select
           className="w-full cursor-pointer text-gray-400 bg-transparent p-2 uppercase"
           placeholder={t('Select a model') || ''}
-          defaultValue={serviceSelected}
+          value={serviceSelected}
           onChange={(e) => {
             let settings = getSettings();
             settings.service = `${e.target.value}`;

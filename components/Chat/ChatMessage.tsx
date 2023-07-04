@@ -135,7 +135,7 @@ export const ChatMessage: FC<Props> = memo(
       }
     }, [isEditing]);
 
-    let styleEl = 'text-base rounded-xl py-2 prose-pre:my-2 ';
+    let styleEl = 'rounded-xl py-2 prose-pre:my-2 ';
     // styleEl += styleEl+' xl:w-full'
     return (
       <div
@@ -146,7 +146,7 @@ export const ChatMessage: FC<Props> = memo(
         }`}
         style={{ overflowWrap: 'anywhere' }}
       >
-        <div className="mx-auto flex py-2 text-base min-h-[calc(2rem+theme(spacing[3.5]))] md:max-w-2xl lg:max-w-2xl lg:px-0 xl:max-w-3xl">
+        <div className="mx-auto flex py-2 min-h-[calc(2rem+theme(spacing[3.5]))] md:max-w-xl lg:max-w-xl lg:px-0 xl:max-w-2xl">
           <div className="min-w-[40px] text-right">
             {message.role === 'user' ? (
               <div className="shadow-md text-center py-1.5 rounded-md w-[30px] h-[30px]">
@@ -206,7 +206,7 @@ export const ChatMessage: FC<Props> = memo(
                     </div>
                   </div>
                 ) : (
-                  <div className="prose text-base whitespace-pre-wrap dark:prose-invert flex-1 sm:text-sm">
+                  <div className="prose whitespace-pre-wrap dark:prose-invert flex-1 sm:text-sm">
                     {message.content}
                   </div>
                 )}

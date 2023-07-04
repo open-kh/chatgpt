@@ -464,7 +464,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               </div>
             ) : (
               <>
-                <div className="max-sm:sticky top-0 z-10 relative flex border justify-around py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
+                <div className="sticky max-sm:hidden top-0 z-10 flex border justify-around py-2 text-sm text-neutral-500 dark:border-none shadow-sm dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
                   <span className="uppercase w-full"></span>
                   <span className="uppercase  w-full text-center max-sm:hidden">
                     {selectedConversation?.name}
@@ -472,7 +472,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                   <span className="uppercase text-end w-full pr-2">{`${service}`}</span>
                 </div>
                 <div className="">
-                  <div className="">
                     {selectedConversation?.messages.map((message, index) => (
                       <MemoizedChatMessage
                         key={index}
@@ -490,14 +489,13 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                     ))}
 
                     {loading && <ChatLoader />}
-                    {/* <ChatLoader /> */}
+                    <ChatLoader />
 
                     <div
                       className="h-[162px] bg-white dark:bg-[#343541]"
                       ref={messagesEndRef}
                     />
                   </div>
-                </div>
               </>
             )}
             {/* <div className="flix flex-col">
