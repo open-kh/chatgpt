@@ -458,7 +458,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 </div>
               ) : (
                 <>
-                  <div className="sticky max-sm:hidden top-0 z-10 flex border justify-around py-2 text-sm text-neutral-500 dark:border-none shadow-sm dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
+                  <div className="sticky mb-1 bg-slate-50 max-sm:hidden top-0 z-10 flex border justify-around py-2 text-sm text-neutral-500 dark:border-none shadow-md dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
                     {/* <span className="uppercase w-full"></span> */}
                     <span className="uppercase  w-full text-center max-sm:hidden">
                       {selectedConversation?.name}

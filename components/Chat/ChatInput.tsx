@@ -303,13 +303,13 @@ export const ChatInput = ({
         </div>
         <div className="relative mx-2 flex w-full flex-grow flex-col rounded-3xl border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 dark:bg-[#40414F] dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4">
           <button
-            className="absolute left-2 top-2 max-sm:top-1 rounded-2xl p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
+            className="absolute cursor-default left-2 top-2 max-sm:top-1 rounded-2xl p-1 text-neutral-800 opacity-60 dark:bg-opacity-50 dark:text-neutral-100"
             // onClick={() => setShowPluginSelect(!showPluginSelect)}
             // onClick={() => {
             //   // handleCreateItem();
             //   // handleSearchTerm('');
             // }}
-            onKeyDown={(e) => {}}
+            // onKeyDown={(e) => {}}
           >
             {/* <IconMessage size={20} /> */}
             <ChatIcon/>
@@ -364,7 +364,7 @@ export const ChatInput = ({
           {showScrollDownButton && (
             <div className="absolute items-center justify-center bottom-12 right-0 lg:bottom-2 lg:-right-10">
               <button
-                className="flex h-7 w-7 items-center justify-center rounded-full bg-neutral-300 text-gray-800 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-neutral-200"
+                className="flex h-7 w-7 items-center justify-center rounded-full bg-neutral-100 text-gray-800 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-neutral-200"
                 onClick={onScrollDownClick}
               >
                 <IconArrowDown size={18} />

@@ -63,7 +63,7 @@ export const ChatbarSettings = () => {
             <option
               key={model}
               value={model}
-              className="dark:bg-[#343541] text-white"
+              className="bg-[#343541] text-white"
             >
               Service {model}
             </option>

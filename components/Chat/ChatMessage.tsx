@@ -143,7 +143,7 @@ export const ChatMessage: FC<Props> = memo(
       <div
         className={`group max-sm:px-2 ${
           message.role === 'user'
-            ? 'dark:bg-[#444654] dark:text-neutral-200'
+            ? ' bg-slate-50 dark:bg-[#444654] dark:text-neutral-200'
             : ''
         }`}
         style={{ overflowWrap: 'anywhere' }}
@@ -152,7 +152,7 @@ export const ChatMessage: FC<Props> = memo(
           <div className="min-w-[40px] text-right">
             {message.role === 'user' ? (
               <div className="shadow-md text-center py-1.5 rounded-md w-[30px] h-[30px]">
-                <IconUser className="mx-auto"  width={20} />
+                <IconUser className="mx-auto text-slate-400"  width={20} />
               </div>
             ) : (
               <div className="shadow-md text-center py-1.5 mt-2 rounded-md w-[30px] h-[30px]">
@@ -214,13 +214,11 @@ export const ChatMessage: FC<Props> = memo(
                 )}
 
                 {!isEditing && (
-                  <div className="absolute -left-[40px] -top-1 items-center md:items-start justify-end md:justify-start">
-                    <div className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 border border-slate-700 rounded-md invisible group-hover:visible focus:visible flex flex-col gap-1">
+                  <div className="relative max-sm:absolute max-sm:left-1 left-2 bottom-1 max-sm:top-3.5 items-center">
+                    <div className="text-gray-500 absolute hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 border border-slate-700 rounded-md invisible group-hover:visible focus:visible flex flex-row gap-1 p-1">
                       <button className="" onClick={toggleEditing}>
                         <IconEdit size={17} />
-                      </button>
-                      <hr />
-                      <button
+                      </button> | <button
                         className="text-purple-300"
                         onClick={handleDeleteMessage}
                       >
@@ -299,19 +297,21 @@ export const ChatMessage: FC<Props> = memo(
                       : ''
                   }`}
                 </MemoizedReactMarkdown>
-                <div className="absolute invisible group-hover:visible focus:visible border border-slate-400 dark:border-slate-700 rounded-xl bottom-1.5 right-2 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
-                  {messagedCopied ? (
-                    <button className="p-1 text-green-500 dark:text-green-400">
-                      <IconCheck size={20} />
-                    </button>
-                  ) : (
-                    <button
-                      className="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-                      onClick={copyOnClick}
-                    >
-                      <IconCopy size={20} />
-                    </button>
-                  )}
+                <div className='relative top-5 -right-12 invisible group-hover:visible group-focus:visible'>
+                  <div className="absolute border border-slate-400 dark:border-slate-700 rounded-xl bottom-1.5 right-2 flex flex-col md:flex-row gap-4 md:gap-1 items-center md:items-start justify-end md:justify-start">
+                    {messagedCopied ? (
+                      <button className="p-1 text-green-500 dark:text-green-400">
+                        <IconCheck size={20} />
+                      </button>
+                    ) : (
+                      <button
+                        className="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                        onClick={copyOnClick}
+                      >
+                        <IconCopy size={20} />
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             )}

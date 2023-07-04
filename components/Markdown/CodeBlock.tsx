@@ -60,9 +60,9 @@ export const CodeBlock: FC<Props> = memo(({ language, value }) => {
     URL.revokeObjectURL(url);
   };
   return (
-    <div className="codeblock relative font-sans text-[14px]">
+    <div className="codeblock group/code relative font-sans text-[14px]">
       <div className="absolute flex items-center justify-between right-0 p-1">
-        <div className="flex items-center border border-slate-700 rounded-md">
+        <div className="flex invisible group-hover/code:visible group-focus/code:visible items-center border border-slate-700 rounded-md">
           <button
             className="flex gap-1.5 items-center rounded bg-none p-1 text-xs text-white"
             onClick={copyToClipboard}
