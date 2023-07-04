@@ -14,31 +14,31 @@ interface LangCodes {
 }
 
 export const LANGS: LangCodes = {
-  'bn': 'Bengali (বাংলা)',
-  'my': 'Burmese (ဗမာ)',
-  'zh': 'Chinese (中国)',
-  'id': 'Indonesian (Bahasa Indonesia)',
-  'ja': 'Japanese (日本語)',
-  'km': 'Khmer (ភាសាខ្មែរ)',
-  'ko': 'Korean (한국어)',
-  'ky': 'Kyrgyz (Кыргызча)',
-  'lo': 'Lao (ພາສາລາວ)',
-  'ms': 'Malay (Bahasa Melayu)',
-  'mn': 'Mongolian (Монгол хэл)',
-  'ne': 'Nepali (नेपाली)',
-  'ur': 'Urdu (اردو)',
-  'fa': 'Persian (فارسی)',
-  'fil': 'Filipino (Filipino)',
-  'ru': 'Russian (русский язык)',
-  'sa': 'Arabic (Saudi Arabia) (العربية السعودية)',
-  'si': 'Sinhala (සිංහල)',
-  'tg': 'Tajik (тоҷикӣ)',
-  'th': 'Thai (ภาษาไทย)',
-  'tr': 'Turkish (Türkçe)',
-  'tk': 'Turkmen (Türkmen dili)',
-  'uk': 'Ukrainian (українська мова)',
-  'uz': 'Uzbek (o´zbek tili)',
-  'vi': 'Vietnamese (Tiếng Việt)'
+  bn: 'Bengali (বাংলা)',
+  my: 'Burmese (ဗမာ)',
+  zh: 'Chinese (中国)',
+  id: 'Indonesian (Bahasa Indonesia)',
+  ja: 'Japanese (日本語)',
+  km: 'Khmer (ភាសាខ្មែរ)',
+  ko: 'Korean (한국어)',
+  ky: 'Kyrgyz (Кыргызча)',
+  lo: 'Lao (ພາສາລາວ)',
+  ms: 'Malay (Bahasa Melayu)',
+  mn: 'Mongolian (Монгол хэл)',
+  ne: 'Nepali (नेपाली)',
+  ur: 'Urdu (اردو)',
+  fa: 'Persian (فارسی)',
+  fil: 'Filipino (Filipino)',
+  ru: 'Russian (русский язык)',
+  sa: 'Arabic (Saudi Arabia) (العربية السعودية)',
+  si: 'Sinhala (සිංහල)',
+  tg: 'Tajik (тоҷикӣ)',
+  th: 'Thai (ภาษาไทย)',
+  tr: 'Turkish (Türkçe)',
+  tk: 'Turkmen (Türkmen dili)',
+  uk: 'Ukrainian (українська мова)',
+  uz: 'Uzbek (o´zbek tili)',
+  vi: 'Vietnamese (Tiếng Việt)',
 };
 
 // let OPENAI_API_KEYS = require('./keys.json');
@@ -57,16 +57,17 @@ export class OpenAIError extends Error {
 }
 
 const OPENAI_API_KEYS = [
-  ["IsvnC4ce37gIV1TLnEug","4XjHYMjmrvIEeHXNzDey"],
-  ["0ytzGEkFxdAoVbJs6pUg","VCrlINsfgtoDSrgn4s6D"],
+  ['IsvnC4ce37gIV1TLnEug', '4XjHYMjmrvIEeHXNzDey'],
+  ['0ytzGEkFxdAoVbJs6pUg', 'VCrlINsfgtoDSrgn4s6D'],
 ];
 
 function RAN_API_KEY(): string {
-  let random: number = Math.floor(Math.random() * OPENAI_API_KEYS.length)
+  let random: number = Math.floor(Math.random() * OPENAI_API_KEYS.length);
   return `sk-${OPENAI_API_KEYS[random].join('T3BlbkFJ')}`;
 }
 
-export const OPENAI_API_KEY: String = process.env.OPENAI_API_KEY ?? RAN_API_KEY();
+export const OPENAI_API_KEY: String =
+  process.env.OPENAI_API_KEY ?? RAN_API_KEY();
 
 interface FetchOptions {
   timeout?: number;
@@ -88,14 +89,14 @@ export const OpenAIStream = async (
   const now = new Date();
   now.setHours(now.getHours() + 7);
 
-  const res = await fetch(url,{
+  const res = await fetch(url, {
     method: 'POST',
     headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${OPENAI_API_KEY}`,
     },
-    body: JSON.stringify({messages: messages})
-  })
+    body: JSON.stringify({ messages: messages }),
+  });
 
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
@@ -117,7 +118,7 @@ export const OpenAIStream = async (
       );
     }
   }
-  
+
   const stream = new ReadableStream({
     async start(controller) {
       const onParse = (event: ParsedEvent | ReconnectInterval) => {

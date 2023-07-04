@@ -42,7 +42,7 @@ html {
 pre:has(div.codeblock) {
   padding: 0;
 }
-.prose :where(pre):not(:where([class~="not-prose"] *)){
+.prose :where(pre):not(:where([class~='not-prose'] *)) {
   background-color: transparent;
   padding: 0.543em;
   padding-top: 0;

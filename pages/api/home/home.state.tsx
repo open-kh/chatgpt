@@ -10,7 +10,7 @@ export interface HomeInitialState {
   apiKey: string;
   pluginKeys: PluginKey[];
   loading: boolean;
-  service: 'openai'|'facebook'|'other';
+  service: 'openai' | 'facebook' | 'other';
   lightMode: 'light' | 'dark' | string | undefined;
   language: string;
   messageIsStreaming: boolean;
@@ -56,5 +56,5 @@ export const initialState: HomeInitialState = {
   defaultModelId: undefined,
   serverSideApiKeyIsSet: false,
   serverSidePluginKeysSet: false,
-  language: 'default'
+  language: 'default',
 };

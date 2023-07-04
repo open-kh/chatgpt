@@ -1,3 +1,6 @@
+import * as gpt from '@/hooks/useGPT';
+import * as hf from '@/hooks/useHF';
+
 import { DEFAULT_SYSTEM_PROMPT, DEFAULT_TEMPERATURE } from '@/utils/app/const';
 import { OpenAIError, OpenAIStream } from '@/utils/server';
 
@@ -8,8 +11,6 @@ import wasm from '../../node_modules/@dqbd/tiktoken/lite/tiktoken_bg.wasm?module
 
 import tiktokenModel from '@dqbd/tiktoken/encoders/cl100k_base.json';
 import { Tiktoken, init } from '@dqbd/tiktoken/lite/init';
-import * as hf from '@/hooks/useHF';
-import * as gpt from '@/hooks/useGPT';
 
 export const config = {
   runtime: 'edge',
@@ -17,7 +18,7 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const json = await req.json()
+    const json = await req.json();
     const { model, messages, key, prompt, temperature } = json as ChatBody;
     const { service } = json;
 
@@ -55,15 +56,21 @@ const handler = async (req: Request): Promise<Response> => {
     }
     encoding.free();
 
-    if(service == 'facebook'){
+    if (service == 'facebook') {
       const usechat = await hf.POST(messagesToSend);
       return usechat;
-    }else{
+    } else {
       const usechat = await gpt.POST(messagesToSend, true);
       return usechat;
     }
 
-    const stream = await OpenAIStream(model, promptToSend, temperatureToUse, key, messagesToSend);
+    const stream = await OpenAIStream(
+      model,
+      promptToSend,
+      temperatureToUse,
+      key,
+      messagesToSend,
+    );
     return new Response(stream);
   } catch (error) {
     console.error(error);

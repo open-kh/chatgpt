@@ -1,3 +1,4 @@
+import { IconFileExport } from '@tabler/icons-react';
 import { FC, useContext, useEffect, useReducer, useRef } from 'react';
 
 import { useTranslation } from 'next-i18next';
@@ -9,13 +10,14 @@ import { getSettings, saveSettings } from '@/utils/app/settings';
 import { Settings } from '@/types/settings';
 
 import HomeContext from '@/pages/api/home/home.context';
-import { ModelSelect } from '../Chat/ModelSelect';
+
 import { ClearConversations } from '../Chatbar/components/ClearConversations';
-import { Import } from './Import';
-import { SidebarButton } from '../Sidebar/SidebarButton';
-import { IconFileExport } from '@tabler/icons-react';
-import ChatbarContext from '../Chatbar/Chatbar.context';
+
+import { ModelSelect } from '../Chat/ModelSelect';
 import { TemperatureSlider } from '../Chat/Temperature';
+import ChatbarContext from '../Chatbar/Chatbar.context';
+import { SidebarButton } from '../Sidebar/SidebarButton';
+import { Import } from './Import';
 
 interface Props {
   open: boolean;
@@ -28,10 +30,11 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
   const { state, dispatch } = useCreateReducer<Settings>({
     initialState: settings,
   });
-  const { state: {
-    conversations,
-    selectedConversation,
-  },dispatch: homeDispatch,handleUpdateConversation } = useContext(HomeContext);
+  const {
+    state: { conversations, selectedConversation },
+    dispatch: homeDispatch,
+    handleUpdateConversation,
+  } = useContext(HomeContext);
   const {
     handleClearConversations,
     handleImportConversations,
@@ -84,16 +87,17 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             className="inline-block flex-col gap-2 transform overflow-y-auto rounded-3xl border px-4 pt-5 pb-4 align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 sm:align-middle bg-gray-800 text-left"
             role="dialog"
           >
-
             <div className="text-lg pb-4 font-bold text-neutral-200">
               {t('Settings')}
             </div>
-            <div className='group relative py-2 px-4 pb-0 mb-2 rounded-lg border border-slate-700'>
+            <div className="group relative py-2 px-4 pb-0 mb-2 rounded-lg border border-slate-700">
               <div className="text-sm font-bold mb-2 text-neutral-200">
                 {t('Datas')}
               </div>
               {conversations.length > 0 ? (
-                <ClearConversations onClearConversations={handleClearConversations} />
+                <ClearConversations
+                  onClearConversations={handleClearConversations}
+                />
               ) : null}
 
               <Import onImport={handleImportConversations} />
@@ -117,15 +121,13 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
                 />
             </div> */}
 
-            <div className='group relative py-2 px-4 mb-2 rounded-lg border border-slate-700'>
+            <div className="group relative py-2 px-4 mb-2 rounded-lg border border-slate-700">
               <div className="text-sm font-bold mb-2 text-neutral-200">
                 {t('Theme')}
               </div>
-              <div
-                className="w-full rounded-lg border border-neutral-200 bg-transparent pr-2 text-neutral-900 dark:border-neutral-600 dark:text-white"
-                >
+              <div className="w-full rounded-lg border border-neutral-200 bg-transparent pr-2 text-neutral-900 dark:border-neutral-600 dark:text-white">
                 <select
-                className='w-full bg-transparent p-2'
+                  className="w-full bg-transparent p-2"
                   value={state.theme}
                   onChange={(event) =>
                     dispatch({ field: 'theme', value: event.target.value })

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "deploy": "p2 start yarn --name \"openai\" -- startm",
+    "deploy": "p2 start yarn --name \"openai\" -- start",
     "lint": "next lint",
     "format": "prettier --write .",
     "test": "vitest",

@@ -1,10 +1,17 @@
-import { IconColorFilter, IconFileExport, IconSettings } from '@tabler/icons-react';
+import {
+  IconColorFilter,
+  IconFileExport,
+  IconSettings,
+} from '@tabler/icons-react';
 import { useContext, useEffect, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
 
+import { getSettings, saveSettings } from '@/utils/app/settings';
+
 import HomeContext from '@/pages/api/home/home.context';
 
+import SelectLang from '@/components/Select';
 import { SettingDialog } from '@/components/Settings/SettingDialog';
 
 import { Import } from '../../Settings/Import';
@@ -13,31 +20,22 @@ import { SidebarButton } from '../../Sidebar/SidebarButton';
 import ChatbarContext from '../Chatbar.context';
 import { ClearConversations } from './ClearConversations';
 import { PluginKeys } from './PluginKeys';
-import { saveSettings, getSettings } from '@/utils/app/settings';
-import SelectLang from '@/components/Select';
 
 export const ChatbarSettings = () => {
   const { t } = useTranslation('sidebar');
   const [isSettingDialogOpen, setIsSettingDialog] = useState<boolean>(false);
   const [serviceSelected, setServiceSelected] = useState<string>('openai');
-  
+
   const {
-    state: {
-      apiKey,
-      service,
-      serverSideApiKeyIsSet,
-      serverSidePluginKeysSet,
-    },
+    state: { apiKey, service, serverSideApiKeyIsSet, serverSidePluginKeysSet },
     dispatch,
   } = useContext(HomeContext);
 
-  useEffect(()=>{
-    setServiceSelected(service)
-  },[service])
-  
-  const {
-    handleApiKeyChange,
-  } = useContext(ChatbarContext);
+  useEffect(() => {
+    setServiceSelected(service);
+  }, [service]);
+
+  const { handleApiKeyChange } = useContext(ChatbarContext);
 
   return (
     <div className="flex flex-col items-center space-y-1 border-t border-white/20 pt-1 text-md">
@@ -46,7 +44,7 @@ export const ChatbarSettings = () => {
           className="w-full cursor-pointer text-gray-400 bg-transparent p-2 uppercase"
           placeholder={t('Select a model') || ''}
           defaultValue={serviceSelected}
-          onChange={(e)=>{
+          onChange={(e) => {
             let settings = getSettings();
             settings.service = `${e.target.value}`;
             dispatch({
@@ -71,9 +69,9 @@ export const ChatbarSettings = () => {
       <SidebarButton
         text={t('Themes')}
         icon={<IconColorFilter size={18} />}
-        onClick={() =>{
+        onClick={() => {
           let settings = getSettings();
-          settings.theme = settings.theme =='dark' ? 'light' : 'dark';
+          settings.theme = settings.theme == 'dark' ? 'light' : 'dark';
           dispatch({
             field: 'lightMode',
             value: settings.theme,

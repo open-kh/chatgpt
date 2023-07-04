@@ -18,10 +18,10 @@
   "You": "អ្នក",
   "Cancel": "បោះបង់",
   "Save & Submit": "រក្សាទុក & ដាក់​ស្នើ",
-  "Si vous avez effectué cette étape, OpenAI peut rencontrer des problèmes." : "ប្រសិនបើ​លោក​បាន​ធីក​​ជំនួយ​នេះ​ហើយ, OpenAI អាចមានបញ្ហាទំនាក់ទំនង​បាន។",
-  "click if using a .env.local file" : "ចុចប្រសិនបើ​នៅក្នុង​ឯកសារ .env.local",
-  "La limite de message est de {{maxLength}} caractères. Vous avez saisi {{valueLength}} caractères." : "ចំនុច​អតិបរិមាណ​សារគឺ {{maxLength}} តួអក្សរ។ អ្នក​បាន​បញ្ចូល {{valueLength}} តួអក្សរ។",
-  "Veuillez entrer un message" : "សូមបញ្ចូលសារ",
-  "Chatbot UI est un kit de chatbot avancé pour les modèles de chat d'OpenAI visant à imiter l'interface et les fonctionnalités de Open Brain." : "កម្មវិធីជជែកផ្លូវបានគេផ្ដល់ជូននិងត្រូវបានគេផ្ទៀងផ្ទាត់ឱ្យប្រើដើម្បីផ្ដល់ជួរដេកៗចូលគ្នា ដើម្បីឆ្លើយតបតាមការផ្ទុកចាប់ពីផ្លូវជជែក Open Brain។",
-  "Êtes-vous sûr de vouloir effacer tous les messages ?" : "តើ​អ្នក​ប្រាកដ​ឬ​ទេ​ដែល​ចង់លុប​សារ​ទាំងអស់​ឬ?"
+  "Si vous avez effectué cette étape, OpenAI peut rencontrer des problèmes.": "ប្រសិនបើ​លោក​បាន​ធីក​​ជំនួយ​នេះ​ហើយ, OpenAI អាចមានបញ្ហាទំនាក់ទំនង​បាន។",
+  "click if using a .env.local file": "ចុចប្រសិនបើ​នៅក្នុង​ឯកសារ .env.local",
+  "La limite de message est de {{maxLength}} caractères. Vous avez saisi {{valueLength}} caractères.": "ចំនុច​អតិបរិមាណ​សារគឺ {{maxLength}} តួអក្សរ។ អ្នក​បាន​បញ្ចូល {{valueLength}} តួអក្សរ។",
+  "Veuillez entrer un message": "សូមបញ្ចូលសារ",
+  "Chatbot UI est un kit de chatbot avancé pour les modèles de chat d'OpenAI visant à imiter l'interface et les fonctionnalités de Open Brain.": "កម្មវិធីជជែកផ្លូវបានគេផ្ដល់ជូននិងត្រូវបានគេផ្ទៀងផ្ទាត់ឱ្យប្រើដើម្បីផ្ដល់ជួរដេកៗចូលគ្នា ដើម្បីឆ្លើយតបតាមការផ្ទុកចាប់ពីផ្លូវជជែក Open Brain។",
+  "Êtes-vous sûr de vouloir effacer tous les messages ?": "តើ​អ្នក​ប្រាកដ​ឬ​ទេ​ដែល​ចង់លុប​សារ​ទាំងអស់​ឬ?"
 }

@@ -1,6 +1,7 @@
 import { IconDeviceMobile } from '@tabler/icons-react';
-import Image from 'next/image';
 import { ReactNode, memo } from 'react';
+
+import Image from 'next/image';
 
 interface Props {
   children?: ReactNode;
@@ -90,3 +91,5 @@ export const ChatMode = memo(({ children }: Props) => {
     </>
   );
 });
+ChatMode.displayName = 'ChatMode';
+// export default ChatMode;

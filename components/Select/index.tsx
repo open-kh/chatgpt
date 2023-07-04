@@ -5,7 +5,7 @@ import { LANGS } from '@/utils/server';
 
 import HomeContext from '@/pages/api/home/home.context';
 
-export default function SelectLanguage(){
+export default function SelectLanguage() {
   let settings = getSettings();
   const [language, setLanguange] = useState(settings.language);
   const { dispatch } = useContext(HomeContext);
@@ -42,11 +42,11 @@ export default function SelectLanguage(){
               value={i}
               className="dark:bg-[#343541] dark:text-white"
             >
-            {LANGS[i]}
+              {LANGS[i]}
             </option>
           ))}
         </select>
       </div>
     </div>
   );
-};
+}

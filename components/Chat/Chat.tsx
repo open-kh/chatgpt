@@ -32,12 +32,12 @@ import Select from '../Select';
 import Spinner from '../Spinner';
 import { ChatInput } from './ChatInput';
 import { ChatLoader } from './ChatLoader';
+import { ChatMode } from './ChatMod';
 import { ErrorMessageDiv } from './ErrorMessageDiv';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
 import { ModelSelect } from './ModelSelect';
 import { SystemPrompt } from './SystemPrompt';
 import { TemperatureSlider } from './Temperature';
-import { ChatMode } from './ChatMod';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -107,16 +107,16 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           messages: updatedConversation.messages,
           key: apiKey,
           prompt: updatedConversation.prompt + transitions,
-          temperature: updatedConversation.temperature
+          temperature: updatedConversation.temperature,
         };
         const endpoint = getEndpoint(plugin);
         let body;
         if (!plugin) {
-          body = JSON.stringify({...chatBody,service});
+          body = JSON.stringify({ ...chatBody, service });
         } else {
           body = JSON.stringify({
             ...chatBody,
-            service
+            service,
             // googleAPIKey: pluginKeys
             //   .find((key) => key.pluginId === 'google-search')
             //   ?.requiredKeys.find((key) => key.key === 'GOOGLE_API_KEY')?.value,
@@ -389,7 +389,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   // return <ChatMode/>;
   return (
     <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
-      {!(apiKey || serverSideApiKeyIsSet) ? (<></>) : modelError ? <ErrorMessageDiv error={modelError} />: (
+      {!(apiKey || serverSideApiKeyIsSet) ? (
+        <></>
+      ) : modelError ? (
+        <ErrorMessageDiv error={modelError} />
+      ) : (
         <>
           <div
             className="max-h-full overflow-x-hidden"
@@ -461,9 +465,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             ) : (
               <>
                 <div className="max-sm:sticky top-0 z-10 relative flex border justify-around py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
-                   <span className='uppercase w-full'></span>
-                   <span className='uppercase  w-full text-center max-sm:hidden'>{selectedConversation?.name}</span>
-                   <span className='uppercase text-end w-full pr-2'>{`${service}`}</span>
+                  <span className="uppercase w-full"></span>
+                  <span className="uppercase  w-full text-center max-sm:hidden">
+                    {selectedConversation?.name}
+                  </span>
+                  <span className="uppercase text-end w-full pr-2">{`${service}`}</span>
                 </div>
                 <div className="">
                   <div className="">

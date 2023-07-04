@@ -1,6 +1,15 @@
-import { IconFolderPlus, IconMenu, IconMistOff, IconPlus } from '@tabler/icons-react';
+import {
+  IconFolderPlus,
+  IconMenu,
+  IconMistOff,
+  IconPlus,
+} from '@tabler/icons-react';
 import { ReactNode, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import Image from 'next/image';
+
+import HomeContext from '@/pages/api/home/home.context';
 
 import {
   CloseSidebarButton,
@@ -8,8 +17,6 @@ import {
 } from './components/OpenCloseButton';
 
 import Search from '../Search';
-import Image from 'next/image';
-import HomeContext from '@/pages/api/home/home.context';
 
 interface Props<T> {
   isOpen: boolean;
@@ -44,9 +51,7 @@ const Sidebar = <T,>({
 }: Props<T>) => {
   const { t } = useTranslation('promptbar');
   const {
-    state: {
-      appName,
-    },
+    state: { appName },
   } = useContext(HomeContext);
 
   const allowDrop = (e: any) => {

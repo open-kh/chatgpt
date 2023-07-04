@@ -8,6 +8,5 @@
 const url = 'https://chatgpt-api.shn.hk/v1/';
 
 fetch(url, {
-  'Content-Type': "application/json",
-  
-})
+  'Content-Type': 'application/json',
+});

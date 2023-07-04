@@ -368,7 +368,12 @@ const Home = ({
           name="viewport"
           content="height=device-height ,width=device-width, initial-scale=1, user-scalable=no"
         />
-        <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" type="image/png" />
+        <link
+          rel="icon"
+          href="/favicon.ico"
+          sizes="16x16 32x32"
+          type="image/png"
+        />
       </Head>
       {selectedConversation && (
         <main
@@ -410,7 +415,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
   const googleApiKey = process.env.GOOGLE_API_KEY;
   const googleCSEId = process.env.GOOGLE_CSE_ID;
-  
+
   const appName = process.env.APP_NAME || 'Open Brain';
 
   if (googleApiKey && googleCSEId) {

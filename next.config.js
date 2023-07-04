@@ -1,5 +1,5 @@
 const { i18n } = require('./next-i18next.config');
-const withPWA = require('next-pwa')
+const withPWA = require('next-pwa');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -11,7 +11,7 @@ const nextConfig = {
       layers: true,
     };
     return config;
-  }
+  },
 };
 // const nextConfig = withPWA();
 
