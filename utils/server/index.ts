@@ -82,7 +82,8 @@ export const OpenAIStream = async (
   key: string,
   messages: Message[],
 ) => {
-  let url = `http://127.0.0.1:3000/api/chat`;
+  // let url = `http://127.0.0.1:3000/api/chat`;
+  let url = `http://api.openkh.org/chat/completions`;
   // let url = `${process.env.OPENAI_API_LOCAL??OPENAI_API_HOST}/v1/chat/completions`;
   const now = new Date();
   now.setHours(now.getHours() + 7);
@@ -91,6 +92,7 @@ export const OpenAIStream = async (
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENAI_API_KEY}`
     },
     body: JSON.stringify({messages: messages})
   })
