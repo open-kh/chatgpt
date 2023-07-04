@@ -25,6 +25,7 @@ import remarkMath from 'remark-math';
 import Wave from './Wave';
 import Logo from '../Logo';
 import Btn from '../Buttons/Btn';
+import { IconOpenAI } from '../ui/icons';
 
 export interface Props {
   message: Message;
@@ -127,29 +128,33 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
     }
   }, [isEditing]);
 
-  let styleEl = 'relative max-sm:-ml-3 text-base rounded-3xl px-4 py-2 border border-gray-100 bg-gradient-to-br from-gray-50 text-gray-600 prose-pre:my-2 dark:border-gray-800 dark:from-gray-800/40 dark:text-gray-300';
+  let styleEl = 'text-base rounded-xl py-2 prose-pre:my-2 ';
   // styleEl += styleEl+' xl:w-full'
   return (
     <div
-      className="group mx-auto"
+      className={`group max-sm:px-2 ${message.role === 'user'?'dark:bg-[#444654] dark:text-neutral-200':''}`}
       style={{ overflowWrap: 'anywhere' }}
     >
-      <div className="m-auto flex py-2 text-base min-h-[calc(2rem+theme(spacing[3.5]))] md:max-w-2xl lg:max-w-2xl lg:px-0 xl:max-w-3xl">
+      <div className="mx-auto flex py-2 text-base min-h-[calc(2rem+theme(spacing[3.5]))] md:max-w-2xl lg:max-w-2xl lg:px-0 xl:max-w-3xl">
         <div className="min-w-[40px] text-right">
-          {message.role === 'assistant' ? (
-            <Logo width={20} height={20} className='mt-3.5 w-[20px] h-[20px]'/>
-          ) : (
-            <div className="mt-3.5 h-3 w-3 flex-none rounded-full" />
-          )}
+        {message.role === 'user'?
+          <div className='shadow-md text-center py-1.5 rounded-md w-[30px] h-[30px]'>
+            <IconUser className='mx-auto' />
+          </div>
+          :
+          <div className='shadow-md text-center py-1.5 mt-2 rounded-md w-[30px] h-[30px]'>
+            <IconOpenAI className='mx-auto' width={35} height={35} />
+          </div>
+        }
         </div>
-        <div className={message.role === 'assistant'?styleEl:styleEl+'left-0 bg-slate-200 border-slate-200 dark:bg-slate-700 dark:border-slate-600'}>
+        <div className={message.role === 'assistant'?styleEl:styleEl+'left-0'}>
           {message.role === 'user' ? (
             <div className="flex w-full">
               {isEditing ? (
                 <div className="flex w-full flex-col">
                   <textarea
                     ref={textareaRef}
-                    className="resize-none whitespace-pre-wrap rounded-lg dark:bg-[#343541] dark:text-white"
+                    className="whitespace-pre-wrap rounded-lg dark:bg-gray-100 dark:text-gray-400"
                     value={messageContent}
                     onChange={handleInputChange}
                     onKeyDown={handlePressEnter}
