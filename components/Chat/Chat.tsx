@@ -32,6 +32,7 @@ import { ChatLoader } from './ChatLoader';
 import { ChatMode } from './ChatMod';
 import { ErrorMessageDiv } from './ErrorMessageDiv';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
+import { getSettings } from '@/utils/app/settings';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -321,6 +322,13 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   //     homeDispatch({ field: 'currentMessage', value: undefined });
   //   }
   // }, [currentMessage]);
+  useEffect(()=>{
+    const settings = getSettings()
+    homeDispatch({
+      field: 'service',
+      value: settings.service
+    })
+  },[])
 
   useEffect(() => {
     throttledScrollDown();

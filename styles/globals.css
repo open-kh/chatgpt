@@ -32,6 +32,10 @@ html {
   background: #202123;
 }
 
+button, input, optgroup, select, textarea{
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
 @media (max-width: 720px) {
   pre {
     width: calc(100vw - 80px);

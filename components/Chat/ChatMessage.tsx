@@ -178,7 +178,7 @@ export const ChatMessage: FC<Props> = memo(
                       onCompositionStart={() => setIsTyping(true)}
                       onCompositionEnd={() => setIsTyping(false)}
                       style={{
-                        fontFamily: 'inherit',
+                        fontFamily: 'monospace',
                         fontSize: 'inherit',
                         lineHeight: 'inherit',
                         padding: '0',

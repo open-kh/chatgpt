@@ -33,10 +33,6 @@ export const ChatbarSettings = () => {
 
   useEffect(() => {
     const settings = getSettings()
-    dispatch({
-      field: 'service',
-      value: settings.service
-    })
     setServiceSelected(settings.service);
   }, [service]);
 
