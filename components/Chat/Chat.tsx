@@ -32,7 +32,8 @@ import { ChatLoader } from './ChatLoader';
 import { ChatMode } from './ChatMod';
 import { ErrorMessageDiv } from './ErrorMessageDiv';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
-import { getSettings } from '@/utils/app/settings';
+import { getSettings, saveSettings } from '@/utils/app/settings';
+import { Settings } from '@/types/settings';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -66,6 +67,14 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  let settings: Settings;
+  useEffect(()=>{
+    settings = getSettings()
+    homeDispatch({
+      field: 'service',
+      value: settings.service
+    })
+  },[service])
 
   const handleSend = useCallback(
     async (message: Message, deleteCount = 0, plugin: Plugin | null = null) => {
@@ -107,11 +116,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         const endpoint = getEndpoint(plugin);
         let body;
         if (!plugin) {
-          body = JSON.stringify({ ...chatBody, service });
+          body = JSON.stringify({ ...chatBody, service: settings.service });
         } else {
           body = JSON.stringify({
             ...chatBody,
-            service,
+            service: settings.service,
             // googleAPIKey: pluginKeys
             //   .find((key) => key.pluginId === 'google-search')
             //   ?.requiredKeys.find((key) => key.key === 'GOOGLE_API_KEY')?.value,
@@ -120,6 +129,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             //   ?.requiredKeys.find((key) => key.key === 'GOOGLE_CSE_ID')?.value,
           });
         }
+        
         const controller = new AbortController();
         const response = await fetch(endpoint, {
           method: 'POST',
@@ -322,13 +332,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   //     homeDispatch({ field: 'currentMessage', value: undefined });
   //   }
   // }, [currentMessage]);
-  useEffect(()=>{
-    const settings = getSettings()
-    homeDispatch({
-      field: 'service',
-      value: settings.service
-    })
-  },[])
 
   useEffect(() => {
     throttledScrollDown();
