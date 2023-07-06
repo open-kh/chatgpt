@@ -43,7 +43,7 @@ export async function POST(
       ...messages,
     ]),
     parameters: {
-      max_new_tokens: 200,
+      max_new_tokens: 250,
       // @ts-ignore (this is a valid parameter specifically in OpenAssistant models)
       typical_p: 0.2,
       repetition_penalty: 1,

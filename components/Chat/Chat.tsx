@@ -114,6 +114,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           temperature: updatedConversation.temperature,
         };
         const endpoint = getEndpoint(plugin);
+        const settings = getSettings();
         let body;
         if (!plugin) {
           body = JSON.stringify({ ...chatBody, service: settings.service });

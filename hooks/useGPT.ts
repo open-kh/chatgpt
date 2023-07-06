@@ -21,7 +21,7 @@ export async function POST(
   messages: { content: string; role: 'system' | 'user' | 'assistant' }[],
   stream: true,
 ) {
-  let url = `http://api.openkh.org/chat/completions`;
+  let url = `https://api.openkh.org/chat/completions`;
   const res = await fetch(url, {
     method: 'POST',
     headers: {
