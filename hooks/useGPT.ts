@@ -20,6 +20,7 @@ export const OPENAI_API_KEY: String =
 export async function POST(
   messages: { content: string; role: 'system' | 'user' | 'assistant' }[],
   stream: true,
+  model?: string 
 ) {
   // let url = `http://192.168.105.105:1337/chat/completions`;
   let url = `https://api.openkh.org/chat/completions`;
@@ -34,7 +35,7 @@ export async function POST(
         { role: 'system', content: DEFAULT_SYSTEM_PROMPT },
         ...messages,
       ],
-      model: 'gpt-3.5-turbo',
+      model: model??'gpt-3.5-turbo',
       stream,
     }),
   });
