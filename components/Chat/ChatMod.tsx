@@ -54,12 +54,25 @@ export const ChatMode = memo(({ children }: Props) => {
               </span>
             </p>
             <p className="dark:text-gray-400">
-              Give [any,many,more,...] information as OpenBrain can, Mr.Phearum
-              is in charge of all information.
+              Give [any,many,more,...] information as OpenBrain can, The owner is in charge of all information.
               <span className="flex mt-2">
                 <IconDeviceMobile className="mr-1.5 text-xs text-gray-400" />
                 UI supported on mobile
               </span>
+              {/* {
+                [
+                  {name: "HR Management", link: "https://hr.openkh.org", by: "Lim Lenger"},
+                  {name: "Revamp & enhance Deam Computer Int'l website", link: "https://deam.openkh.org", by: "Chhoem Nikkare"}
+                ].map(web=>{
+                    return <div className='m-1 flex shadow-md rounded-md '>
+                      <div className='flex-row w-full items-center p-4'>
+                        <a href={web.link} target="_blank" rel="noreferrer" className='pt-2'>
+                          <iframe src={web.link} frameBorder="0"/>
+                        {web.name} by: <span className='text-md'>Mr. {web.by}</span></a>
+                      </div>
+                    </div>
+                  })
+              } */}
             </p>
           </div>
         </div>

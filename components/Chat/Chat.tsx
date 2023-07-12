@@ -416,7 +416,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                   <p className="max-sm:hidden md:block text-bold font-medium text-3xl uppercase text-center py-10">
                     AI Chat
                   </p>
-                  <div className="mx-auto flex">
+                  <div className="mx-auto">
                     <div className='px-2'>
                       <div className="my-auto grid gap-8 lg:grid-cols-3">
                         <div className="lg:col-span-1">
@@ -468,22 +468,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className='px-2 relative -mt-1'>
-                      {
-                      [
-                        {name: "HR Management", link: "https://hr.openkh.org", by: "Lim Lenger"},
-                        {name: "Revamp & enhance Deam Computer Int'l website", link: "https://deam.openkh.org", by: "Chhoem Nikkare"}
-                      ].map(web=>{
-                          return <div className='m-1 shadow-md rounded-md w-full'>
-                            <div className='flex flex-col items-center p-4'>
-                              <a href={web.link} target="_blank" rel="noreferrer" className='pt-2'>
-                                <iframe src={web.link} frameBorder="0"/>
-                              {web.name} by: <span className='text-md'>Mr. {web.by}</span></a>
-                            </div>
-                          </div>
-                        })
-                      }
                     </div>
                   </div>
                 </div>

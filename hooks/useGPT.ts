@@ -32,7 +32,7 @@ export async function POST(
     },
     body: JSON.stringify({
       messages: [
-        { role: 'system', content: DEFAULT_SYSTEM_PROMPT },
+        // { role: 'system', content: DEFAULT_SYSTEM_PROMPT },
         ...messages,
       ],
       model: model??'gpt-3.5-turbo',
