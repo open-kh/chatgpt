@@ -1,2 +1,5 @@
-torch
-transformers
+# torch
+# transformers
+# sagemaker
+sagemaker==2.15.0
+boto3==1.14.12

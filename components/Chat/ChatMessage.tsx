@@ -143,8 +143,8 @@ export const ChatMessage: FC<Props> = memo(
       <div
         className={`group max-sm:px-2 ${
           message.role === 'user'
-            ? ' bg-slate-50 dark:bg-[#444654] dark:text-neutral-200'
-            : ''
+            ? ''
+            : ' bg-slate-50 dark:bg-[#444654] dark:text-neutral-200'
         }`}
         style={{ overflowWrap: 'anywhere' }}
       >

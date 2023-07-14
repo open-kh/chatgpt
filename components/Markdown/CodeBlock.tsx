@@ -34,10 +34,7 @@ export const CodeBlock: FC<Props> = memo(({ language, value }) => {
   };
   const downloadAsFile = () => {
     const fileExtension = programmingLanguages[language] || '.file';
-    const suggestedFileName = `file-${generateRandomString(
-      3,
-      true,
-    )}${fileExtension}`;
+    const suggestedFileName = `file-${generateRandomString(10,true)}${fileExtension}`;
     const fileName = window.prompt(
       t('Enter file name') || '',
       suggestedFileName,
