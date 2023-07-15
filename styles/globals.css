@@ -33,7 +33,12 @@ html {
 }
 
 button, input, optgroup, select, textarea{
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: Söhne,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+}
+
+code[class^="language-"] {
+  background: inherit !important;
+  /* font-family: Söhne Mono,Monaco,Andale Mono,Ubuntu Mono,monospace!important; */
 }
 
 @media (max-width: 720px) {

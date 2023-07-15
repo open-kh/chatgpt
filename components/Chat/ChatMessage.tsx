@@ -19,6 +19,7 @@ import HomeContext from '@/pages/api/home/home.context';
 import Btn from '../Buttons/Btn';
 import Logo from '../Logo';
 import { CodeBlock } from '../Markdown/CodeBlock';
+import { CodeBlock1 } from '../Markdown/CodeBlock1';
 import { MemoizedReactMarkdown } from '../Markdown/MemoizedReactMarkdown';
 import { IconFacebook, IconOpenAI } from '../ui/icons';
 import Wave from './Wave';
@@ -149,7 +150,7 @@ export const ChatMessage: FC<Props> = memo(
         style={{ overflowWrap: 'anywhere' }}
       >
         <div className="mx-auto flex py-2 min-h-[calc(2rem+theme(spacing[3.5]))] md:max-w-xl lg:max-w-xl lg:px-0 xl:max-w-2xl">
-          <div className="min-w-[40px] text-right">
+          <div className="min-w-[40px] max-sm:mt-1 text-right">
             {message.role === 'user' ? (
               <div className="shadow-md text-center py-1.5 rounded-md w-[30px] h-[30px]">
                 <IconUser className="mx-auto text-slate-400"  width={20} />
@@ -171,7 +172,7 @@ export const ChatMessage: FC<Props> = memo(
                   <div className="flex w-full flex-col">
                     <textarea
                       ref={textareaRef}
-                      className="whitespace-pre-wrap rounded-lg dark:bg-gray-100 dark:text-gray-400"
+                      className="whitespace-pre-wrap py-2 px-2.5 rounded-lg shadow-md text-gray-600 w-[450px] max-sm:w-[320px]"
                       value={messageContent}
                       onChange={handleInputChange}
                       onKeyDown={handlePressEnter}
@@ -181,13 +182,12 @@ export const ChatMessage: FC<Props> = memo(
                         fontFamily: 'monospace',
                         fontSize: 'inherit',
                         lineHeight: 'inherit',
-                        padding: '0',
-                        margin: '0',
+                        // width: '300px',
                         overflow: 'hidden',
                       }}
                     />
 
-                    <div className="mt-5 flex justify-center">
+                    <div className="mt-5 flex w-[170px] justify-center">
                       <Btn
                         onClick={handleEditMessage}
                         className="dark:bg-gray-800"

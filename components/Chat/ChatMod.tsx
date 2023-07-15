@@ -14,7 +14,7 @@ export const ChatMode = memo(({ children }: Props) => {
         <span className="mr-2 inline-flex items-center rounded-lg bg-gradient-to-br from-yellow-300 px-2 py-1 text-xxs font-medium uppercase leading-3 text-yellow-700 dark:from-[#373010] dark:text-yellow-400">
           New
         </span>
-        Upcomming GPT-4 and CHAT-IMAGE
+        <span className=' dark:text-white'>GPT-4 is using and CHAT-IMAGE is implemeneting</span>
         <div className="ml-auto shrink-0"></div>
       </div>
       <div className="group max-sm:h-[auto] overflow-hidden rounded-xl border dark:border-gray-800">

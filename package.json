@@ -20,6 +20,7 @@
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",
     "eventsource-parser": "^0.1.0",
+    "highlight.js": "^11.8.0",
     "i18next": "^22.5.1",
     "nanoid": "^4.0.2",
     "next": "13.2.4",

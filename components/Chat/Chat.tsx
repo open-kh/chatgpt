@@ -416,7 +416,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                   <p className="max-sm:hidden md:block text-bold font-medium text-3xl uppercase text-center py-10">
                     AI Chat
                   </p>
-                  <div className="my-auto md:px-20 grid gap-8 lg:grid-cols-3">
+                  <div className="my-auto md:px-40 grid gap-8 lg:grid-cols-3">
                     <div className="lg:col-span-1">
                       <div>
                         <div className="mb-3 flex items-end text-2xl font-semibold">
@@ -470,7 +470,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               </div>
             ) : (
               <>
-                <div className="sticky mb-1 bg-slate-50 max-sm:hidden top-0 z-10 flex border justify-around py-2 text-sm text-neutral-500 dark:border-none shadow-md dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
+                <div className="sticky mb-1 bg-slate-50 max-sm:hidden flex hidden top-0 z-10 border justify-around py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
                   {/* <span className="uppercase w-full"></span> */}
                   <span className="uppercase  w-full text-center max-sm:hidden">
                     {selectedConversation?.name}

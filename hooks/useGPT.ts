@@ -17,6 +17,8 @@ function RAN_API_KEY(): string {
 export const OPENAI_API_KEY: String =
   process.env.OPENAI_API_KEY ?? RAN_API_KEY();
 
+const PROMPT = process.env.DEFAULT_SYSTEM_PROMPT;
+
 export async function POST(
   messages: { content: string; role: 'system' | 'user' | 'assistant' }[],
   stream: true,
@@ -24,6 +26,7 @@ export async function POST(
 ) {
   // let url = `http://192.168.105.105:1337/chat/completions`;
   let url = `https://api.openkh.org/chat/completions`;
+  // let url = `https://free.easychat.work/api/openai/v1/chat/completions`;
   const res = await fetch(url, {
     method: 'POST',
     headers: {
@@ -32,7 +35,7 @@ export async function POST(
     },
     body: JSON.stringify({
       messages: [
-        // { role: 'system', content: DEFAULT_SYSTEM_PROMPT },
+        { role: 'system', content: PROMPT },
         ...messages,
       ],
       // model: model??'gpt-3.5-turbo',

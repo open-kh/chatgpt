@@ -33,8 +33,8 @@ export const CodeBlock: FC<Props> = memo(({ language, value }) => {
     });
   };
   const downloadAsFile = () => {
-    const fileExtension = programmingLanguages[language] || '.file';
-    const suggestedFileName = `file-${generateRandomString(10,true)}${fileExtension}`;
+    const fileExtension = programmingLanguages[language] || `.${language}`;
+    const suggestedFileName = `openkh-code-${generateRandomString(10,true)}${fileExtension}`;
     const fileName = window.prompt(
       t('Enter file name') || '',
       suggestedFileName,
@@ -57,7 +57,7 @@ export const CodeBlock: FC<Props> = memo(({ language, value }) => {
     URL.revokeObjectURL(url);
   };
   return (
-    <div className="codeblock group/code relative font-sans text-[14px]">
+    <div className="codeblock group/code relative font-sans text-[1rem]">
       <div className="absolute flex items-center justify-between right-0 p-1">
         <div className="flex invisible group-hover/code:visible group-focus/code:visible items-center border border-slate-700 rounded-md">
           <button
@@ -80,7 +80,7 @@ export const CodeBlock: FC<Props> = memo(({ language, value }) => {
       <SyntaxHighlighter
         language={language}
         style={oneDark}
-        customStyle={{ margin: 0 }}
+        customStyle={{ margin: 0, backgroundColor: 'black' }}
       >
         {value}
       </SyntaxHighlighter>
