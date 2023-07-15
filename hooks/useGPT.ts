@@ -47,7 +47,7 @@ export async function POST(
   if(res.body instanceof ReadableStream){
     res = res;
   }else{
-    model = 'falcon-40';
+    model = 'falcon-40b';
     res = await resGet();
   }
   const streamRes = OpenAIStream(res);
