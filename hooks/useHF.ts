@@ -18,11 +18,13 @@ function buildPompt(
         if (role == 'system') {
           // return `<|system|>${content}<|system|>`
           return `<|prefix_begin|>${content}<|prefix_end|>`;
-        } else if (role === 'user') {
+        } 
+        if (role === 'user') {
           return `<|prompter|>${content}<|endoftext|>`;
-        } else {
-          return `<|assistant|>${content}<|endoftext|>`;
         }
+        // else {
+        //   return `<|assistant|>${content}<|endoftext|>`;
+        // }
       })
       .join('') + '<|assistant|>'
   );
@@ -36,6 +38,7 @@ export async function POST(
     // model: 'OpenAssistant/oasst-sft-6-llama-30b-xor',
     // model: 'tiiuae/falcon-7b-instruct',
     model: 'OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5',
+    // model: 'gpt2',
     // model: 'OpenAssistant/oasst-sft-6-llama-30b-xor',
     inputs: buildPompt([
       {
