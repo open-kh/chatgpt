@@ -416,56 +416,52 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                   <p className="max-sm:hidden md:block text-bold font-medium text-3xl uppercase text-center py-10">
                     AI Chat
                   </p>
-                  <div className="mx-auto">
-                    <div className='px-2'>
-                      <div className="my-auto grid gap-8 lg:grid-cols-3">
-                        <div className="lg:col-span-1">
-                          <div>
-                            <div className="mb-3 flex items-end text-2xl font-semibold">
-                              <Image
-                                alt=""
-                                width={45}
-                                height={45}
-                                src="/favicon.ico"
-                                className="flex-none select-none"
-                              />
-                              {appName}
-                            </div>
-                            <p className="text-base text-gray-600 dark:text-gray-400">
-                              Making the community`s best AI chat models
-                              available to everyone.
-                            </p>
-                          </div>
+                  <div className="my-auto md:px-20 grid gap-8 lg:grid-cols-3">
+                    <div className="lg:col-span-1">
+                      <div>
+                        <div className="mb-3 flex items-end text-2xl font-semibold">
+                          <Image
+                            alt=""
+                            width={45}
+                            height={45}
+                            src="/favicon.ico"
+                            className="flex-none select-none"
+                          />
+                          {appName}
                         </div>
-                        <div className="lg:col-span-2">
-                          <ChatMode />
-                        </div>
-                        <div className="lg:col-span-3 lg:mt-12">
-                          <p className="mb-3 text-gray-600 dark:text-gray-300">
-                            Examples
-                          </p>
-                          <div className="max-sm:mb-[150px]">
-                            <div className="grid gap-3 lg:grid-cols-3 lg:gap-5">
-                              {messages.map((m, i) => (
-                                <button
-                                  key={i}
-                                  type="button"
-                                  title="Prefix Example"
-                                  className="rounded-2xl border bg-gray-50 p-2.5 text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 sm:p-4"
-                                  onClick={() => {
-                                    let message: Message = {
-                                      role: 'user',
-                                      content: m.body,
-                                    };
-                                    setCurrentMessage(message);
-                                    handleSend(message, 0, null);
-                                  }}
-                                >
-                                  {m.title}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
+                        <p className="text-base text-gray-600 dark:text-gray-400">
+                          Making the community`s best AI chat models available
+                          to everyone.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="lg:col-span-2">
+                      <ChatMode />
+                    </div>
+                    <div className="lg:col-span-3 lg:mt-12">
+                      <p className="mb-3 text-gray-600 dark:text-gray-300">
+                        Examples
+                      </p>
+                      <div className="max-sm:mb-[150px]">
+                        <div className="grid gap-3 lg:grid-cols-3 lg:gap-5">
+                          {messages.map((m, i) => (
+                            <button
+                              key={i}
+                              type="button"
+                              title="Prefix Example"
+                              className="rounded-2xl border bg-gray-50 p-2.5 text-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 sm:p-4"
+                              onClick={() => {
+                                let message: Message = {
+                                  role: 'user',
+                                  content: m.body,
+                                };
+                                setCurrentMessage(message);
+                                handleSend(message, 0, null);
+                              }}
+                            >
+                              {m.title}
+                            </button>
+                          ))}
                         </div>
                       </div>
                     </div>
