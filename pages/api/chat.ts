@@ -1,5 +1,6 @@
 import * as gpt from '@/hooks/useGPT';
 import * as hf from '@/hooks/useHF';
+import * as img from '@/hooks/useImage';
 
 import { DEFAULT_SYSTEM_PROMPT, DEFAULT_TEMPERATURE } from '@/utils/app/const';
 import { OpenAIError, OpenAIStream } from '@/utils/server';
@@ -11,6 +12,7 @@ import wasm from '../../node_modules/@dqbd/tiktoken/lite/tiktoken_bg.wasm?module
 
 import tiktokenModel from '@dqbd/tiktoken/encoders/cl100k_base.json';
 import { Tiktoken, init } from '@dqbd/tiktoken/lite/init';
+import { NextResponse } from 'next/server';
 
 export const config = {
   runtime: 'edge',
@@ -55,6 +57,17 @@ const handler = async (req: Request): Promise<Response> => {
       messagesToSend = [message, ...messagesToSend];
     }
     encoding.free();
+
+    let imageGen = messages[messages.length-1]['content'];
+    const bearer = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFhZjI0ZTQ5LTFiMDUtNDBlMy1iMDU2LTFmM2FlYmViNzEyMCIsImlhdCI6MTY4OTQ5NjY3NCwiZXhwIjoxNjg5NzU1ODc0LCJhY3Rpb24iOiJhdXRoIiwiaXNzIjoidGhlYi5haSJ9.z5t72OxVK9xMxe8kC3huAqo6qPqkv92TG3SxqcGs0sg'
+
+    if(imageGen.startsWith('/image')){
+      imageGen = imageGen.replaceAll('/image','').trim()
+      messages[messages.length-1]['content'] = imageGen
+      const usechat = await img.POST(imageGen)
+      return usechat
+    }
+    messages[messages.length-1]['content'] = imageGen.replaceAll('/chat','').trim()
 
     if (service == 'facebook') {
       const usechat = await hf.POST(messagesToSend);

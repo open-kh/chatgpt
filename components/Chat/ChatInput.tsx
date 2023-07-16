@@ -30,6 +30,7 @@ import { PromptList } from './PromptList';
 import { VariableModal } from './VariableModal';
 import { IconOpenAI } from '../ui/icons';
 import { ChatIcon } from './ChatIcon';
+import { ChatSelect } from './ChatSelect';
 
 interface Props {
   onSend: (message: Message, plugin: Plugin | null) => void;
@@ -75,6 +76,29 @@ export const ChatInput = ({
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     const maxLength = selectedConversation?.model.maxLength;
+    // Check if the input value starts with a "/"
+    if (value.startsWith('/')) {
+      // Extract the command from the input value
+      const command = value.substring(1);
+
+      // Perform actions based on the command
+      switch (command) {
+        case 'image':
+          // Action for "/image"
+          setShowPluginSelect(true);
+          console.log('Displaying image');
+          break;
+        case 'chat':
+          // Action for "/chat"
+          setShowPluginSelect(true);
+          console.log('Opening chat');
+          break;
+        default:
+          // Action for unrecognized command
+          console.log('Unrecognized command');
+          break;
+      }
+    }
 
     if (maxLength && value.length > maxLength) {
       alert(
@@ -319,7 +343,7 @@ export const ChatInput = ({
 
           {showPluginSelect && (
             <div className="absolute left-0 bottom-14 rounded-3xl bg-white dark:bg-[#343541]">
-              <PluginSelect
+              <ChatSelect
                 plugin={plugin}
                 onKeyDown={(e: any) => {
                   if (e.key === 'Escape') {

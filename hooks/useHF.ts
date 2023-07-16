@@ -17,6 +17,7 @@ function buildPompt(
       .map(({ content, role }) => {
         if (role == 'system') {
           // return `<|system|>${content}<|system|>`
+          // content+='. You can use any emojis which related';
           return `<|prefix_begin|>${content}<|prefix_end|>`;
         } 
         if (role === 'user') {
@@ -38,7 +39,7 @@ export async function POST(
     // model: 'OpenAssistant/oasst-sft-6-llama-30b-xor',
     // model: 'tiiuae/falcon-7b-instruct',
     model: 'OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5',
-    // model: 'gpt2',
+    // model: 'CarperAI/stable-vicuna-13b-delta',
     // model: 'OpenAssistant/oasst-sft-6-llama-30b-xor',
     inputs: buildPompt([
       {
