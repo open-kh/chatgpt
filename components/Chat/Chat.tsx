@@ -368,10 +368,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
 
   const messages = [
     {
-      title: '"Code a snake game"',
-      body: 'Code a basic snake game in python, give explanations for each step.',
-    },
-    {
       title: '"How do I make an HTTP request in Javascript?"',
       body: 'How do I make an HTTP request in Javascript?',
     },
@@ -382,14 +378,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
     {
       title: '"Got any creative ideas for a 10 year old\'s birthday?"',
       body: "Got any creative ideas for a 10 year old's birthday?",
-    },
-    {
-      title: '"Assist in a task"',
-      body: 'How do I make a delicious lemon cheesecake?',
-    },
-    {
-      title: '"Explain quantum computing in simple terms"',
-      body: 'Explain quantum computing in simple terms',
     },
   ];
   // return <div className="relative flex-1 justify-center overflow-hidden bg-white dark:bg-[#343541]">
