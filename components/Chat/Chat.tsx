@@ -424,7 +424,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           Optimized conversation model, more natural and vivid language. Powered by OpenAI and HuggingFace.
                           <br />
                           <code>Dynamic model: 
-                            {['Falcon 40b(on tradding)', 'GPT-3.5-turbo(16k)', 'GPT-4(32k)'].map(model=>{
+                            {['Falcon 40b(on trading)', 'GPT-3.5-turbo(16k)', 'GPT-4(32k)'].map(model=>{
                               return <p key={model} className=' text-sm dark:text-white'>{model}</p>
                             })}
                           </code>
