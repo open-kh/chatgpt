@@ -368,12 +368,12 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
 
   const messages = [
     {
-      title: '"How do I make an HTTP request in Javascript?"',
-      body: 'How do I make an HTTP request in Javascript?',
+      title: '"Generate Image using `/image ...`"',
+      body: '/image Rope ladder from space station, astronauts climbing the ladder, UHD, 32K, Hyper, Dynamic Colors, Cinematic scene',
     },
     {
-      title: '"Write an email from bullet list"',
-      body: 'As a restaurant owner, write a professional email to the supplier to get these products every week: \n\n- Wine (x10)\n- Eggs (x24)\n- Bread (x12)',
+      title: '"How do I make an HTTP request in Javascript?"',
+      body: 'How do I make an HTTP request in Javascript?',
     },
     {
       title: '"Got any creative ideas for a 10 year old\'s birthday?"',
