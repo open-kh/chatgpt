@@ -420,6 +420,14 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         <p className="text-base text-gray-600 dark:text-gray-400">
                           Making the community`s best AI chat models available
                           to everyone.
+                          <br />
+                          Optimized conversation model, more natural and vivid language. Powered by OpenAI and HuggingFace.
+                          <br />
+                          <code>Dynamic model: 
+                            {['Falcon 40b(on tradding)', 'GPT-3.5-turbo(16k)', 'GPT-4(32k)'].map(model=>{
+                              return <p key={model} className=' text-sm dark:text-white'>{model}</p>
+                            })}
+                          </code>
                         </p>
                       </div>
                     </div>
