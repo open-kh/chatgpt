@@ -39,7 +39,7 @@ export async function POST(
         { role: 'system', content: PROMPT },
         ...messages,
       ],
-      model: model??'gpt-3.5-turbo',
+      model: model??'falcon-40b',
       stream,
     }),
   });

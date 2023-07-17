@@ -36,7 +36,7 @@ button, input, optgroup, select, textarea{
   font-family: Söhne,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Helvetica Neue,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
 }
 
-code[class^="language-"] {
+code[class^="language-"], pre code {
   background: inherit !important;
   /* font-family: Söhne Mono,Monaco,Andale Mono,Ubuntu Mono,monospace!important; */
 }
