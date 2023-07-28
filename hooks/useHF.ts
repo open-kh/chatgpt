@@ -12,6 +12,7 @@ export const runtime = 'edge';
 function buildPompt(
   messages: { content: string; role: 'system' | 'user' | 'assistant' }[],
 ) {
+  let count = messages.length
   return (
     messages
       .map(({ content, role }) => {
@@ -22,10 +23,9 @@ function buildPompt(
         } 
         if (role === 'user') {
           return `<|prompter|>${content}<|endoftext|>`;
+        }else {
+          return `<|assistant|>${content}<|endoftext|>`;
         }
-        // else {
-        //   return `<|assistant|>${content}<|endoftext|>`;
-        // }
       })
       .join('') + '<|assistant|>'
   );

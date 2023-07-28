@@ -265,6 +265,16 @@ function IconFacebook({ className, ...props }: React.ComponentProps<'svg'>) {
     </svg>
   );
 }
+function IconMeta({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+    className={cn('h-6 w-6', className)}
+    {...props}
+    >
+      <img src="/icons/meta-icon.svg" alt="Icon Meta" />
+    </div>
+  );
+}
 
 function IconTrash({ className, ...props }: React.ComponentProps<'svg'>) {
   return (
@@ -490,6 +500,7 @@ function IconChevronUpDown({
 
 export {
   IconFacebook,
+  IconMeta,
   IconEdit,
   IconNextChat,
   IconOpenAI,

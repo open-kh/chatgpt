@@ -55,7 +55,7 @@ export const ChatbarSettings = () => {
             saveSettings(settings);
           }}
         >
-          {['openai', 'facebook'].map((model) => (
+          {['openai', 'meta'].map((model) => (
             <option
               key={model}
               value={model}

@@ -69,7 +69,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
     messages[messages.length-1]['content'] = imageGen.replaceAll('/chat','').trim()
 
-    if (service == 'facebook') {
+    if (service == 'meta') {
       const usechat = await hf.POST(messagesToSend);
       return usechat;
     } else {

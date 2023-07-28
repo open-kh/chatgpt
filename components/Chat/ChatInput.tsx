@@ -335,10 +335,7 @@ export const ChatInput = ({
             // }}
             // onKeyDown={(e) => {}}
           >
-            {/* <IconMessage size={20} /> */}
             <ChatIcon/>
-            {/* {service=='facebook' ? <IconMessage size={20} /> : <IconOpenAI className="mx-auto" width={20}/>} */}
-            {/* {!plugin && <IconBolt size={20} />} */}
           </button>
 
           {showPluginSelect && (
