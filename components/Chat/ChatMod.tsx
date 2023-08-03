@@ -95,7 +95,7 @@ export const ChatMode = memo(({ children }: Props) => {
               ></path>
             </svg>
             {/* <IconSquareRoundedArrowRight className="mr-1.5 text-xs text-gray-400" /> */}
-            Support me by (ABA: 015949757)
+            Coffee/Donate by (ABA: 015949757)
             <div className="max-sm:hidden">&nbsp;</div>
           </a>
         </div>

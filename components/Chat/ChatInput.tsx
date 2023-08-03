@@ -338,7 +338,7 @@ export const ChatInput = ({
             <ChatIcon/>
           </button>
 
-          {showPluginSelect && (
+          {showPluginSelect && false && (
             <div className="absolute left-0 bottom-14 rounded-3xl bg-white dark:bg-[#343541]">
               <ChatSelect
                 plugin={plugin}
