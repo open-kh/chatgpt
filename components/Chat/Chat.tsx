@@ -423,7 +423,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           {appName}
                         </div>
                         <p className="text-base text-gray-600 dark:text-gray-400">
-                          Making the community's best AI chat models available
+                          Making the community`s best AI chat models available
                           to everyone.
                           <br />
                           Optimized conversation model, more natural and vivid language. Powered by OpenAI and HuggingFace.

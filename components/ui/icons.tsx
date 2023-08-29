@@ -3,6 +3,7 @@
 import * as React from 'react';
 
 import { cn } from '@/utils/cn';
+import Image from 'next/image';
 
 function IconNextChat({
   className,
@@ -271,7 +272,8 @@ function IconMeta({ className, ...props }: React.ComponentProps<'div'>) {
     className={cn('h-6 w-6', className)}
     {...props}
     >
-      <img src="/icons/meta-icon.svg" alt="Meta Service" />
+      <Image src="/icons/meta-icon.svg" width={32} height={32} alt="Icon Meta" />
+      {/* <img src="/icons/meta-icon.svg" alt="Icon Meta" /> */}
     </div>
   );
 }
