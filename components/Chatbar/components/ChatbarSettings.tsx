@@ -40,32 +40,6 @@ export const ChatbarSettings = () => {
 
   return (
     <div className="flex flex-col items-center space-y-1 border-t border-white/20 pt-1 text-md">
-      <div className="w-full rounded-lg border border-neutral-200 bg-transparent pr-2 text-neutral-900 dark:text-white">
-        <select
-          className="w-full cursor-pointer text-gray-400 bg-transparent p-2 uppercase"
-          placeholder={t('Select a model') || ''}
-          value={serviceSelected}
-          onChange={(e) => {
-            let settings = getSettings();
-            settings.service = `${e.target.value}`;
-            dispatch({
-              field: 'service',
-              value: settings.service,
-            });
-            saveSettings(settings);
-          }}
-        >
-          {['openai', 'meta'].map((model) => (
-            <option
-              key={model}
-              value={model}
-              className="bg-[#343541] text-white"
-            >
-              Service {model}
-            </option>
-          ))}
-        </select>
-      </div>
       {/* <SelectLang /> */}
       <SidebarButton
         text={t('Themes')}

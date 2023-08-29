@@ -34,6 +34,7 @@ import { ChatLoader } from './ChatLoader';
 import { ChatMode } from './ChatMod';
 import { ErrorMessageDiv } from './ErrorMessageDiv';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
+import ModelSelect2 from './ModelSelect2';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -401,13 +402,17 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             {selectedConversation?.messages.length === 0 ? (
               <div className="max-sm:max-h-[730px]">
                 <div className="mx-auto flex flex-col space-y-5 md:space-y-5 px-3 pt-5 md:pt-12 sm:max-w-[1200px]">
-                  <p className="max-sm:hidden md:block text-bold font-medium text-3xl uppercase text-center py-10">
+                  <div className='w-full flex justify-center py-5'>
+                    <ModelSelect2/>
+                  </div>
+                  {/* <p className="max-sm:hidden md:block text-slate-600 dark:text-white text-bold font-medium text-3xl uppercase text-center py-10">
                     AI Chat
-                  </p>
-                  <div className="my-auto md:px-40 grid gap-8 lg:grid-cols-3">
+                  </p> */}
+
+                  <div className="my-auto md:px-[80px] grid gap-8 lg:grid-cols-2">
                     <div className="lg:col-span-1">
                       <div>
-                        <div className="mb-3 flex items-end text-2xl font-semibold">
+                        <div className="mb-3 flex items-end text-2xl font-semibold text-slate-600 dark:text-white">
                           <Image
                             alt=""
                             width={45}
@@ -418,18 +423,14 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           {appName}
                         </div>
                         <p className="text-base text-gray-600 dark:text-gray-400">
-                          Making the community`s best AI chat models available
+                          Making the community's best AI chat models available
                           to everyone.
                           <br />
                           Optimized conversation model, more natural and vivid language. Powered by OpenAI and HuggingFace.
-                          <br />
-                          <code>Dynamic model: 
-                            {['Falcon 40b(on trading)', 'GPT-3.5-turbo(16k)', 'GPT-4(32k)'].map(model=>{
-                              return <p key={model} className=' text-sm dark:text-white'>{model}</p>
-                            })}
-                          </code>
                         </p>
                       </div>
+                      <br />
+                      <code className='text-black dark:text-white'>Dynamic model: {['GPT-4(32k)','GPT-3.5-turbo(16k)','Falcon 40b(on trading)', 'Llama 2(upcomming)'].join(", ")}</code>
                     </div>
                     <div className="lg:col-span-2">
                       <ChatMode />
@@ -502,6 +503,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             )}
           </div>
           {/* <Instanse slot={3884568135} client={5328097012407543} /> */}
+
+          {/* <div className='w-full text-center'>
+          </div> */}
+          {/* <ModelSelect2/> */}
 
           <ChatInput
             stopConversationRef={stopConversationRef}

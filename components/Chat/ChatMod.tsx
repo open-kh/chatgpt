@@ -10,13 +10,13 @@ interface Props {
 export const ChatMode = memo(({ children }: Props) => {
   return (
     <>
-      <div className="flex items-center rounded-xl bg-gray-100 text-gray-700 p-1 text-sm dark:bg-gray-800 mb-4">
+      {/* <div className="flex items-center rounded-xl bg-gray-100 text-gray-700 p-1 text-sm dark:bg-gray-800 mb-4">
         <span className="mr-2 inline-flex items-center rounded-lg bg-gradient-to-br from-yellow-300 px-2 py-1 text-xxs font-medium uppercase leading-3 text-yellow-700 dark:from-[#373010] dark:text-yellow-400">
           New
         </span>
         <span className=' dark:text-white'>GPT-4 is using and CHAT-IMAGE is implemeneting</span>
         <div className="ml-auto shrink-0"></div>
-      </div>
+      </div> */}
       <div className="group max-sm:h-[auto] overflow-hidden rounded-xl border dark:border-gray-800">
         <div className="flex max-sm:group-hover:h-[350px] max-sm:relative p-3">
           <div className="w-0 h-0 transition-all ease-in-out invisible group-hover:w-[170px] max-sm:group-hover:w-full group-hover:visible group-focus:visible group-focus:w-full hover:-translate-y-1 hover:scale-110 duration-900">

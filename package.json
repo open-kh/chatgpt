@@ -15,6 +15,7 @@
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.7",
     "@huggingface/inference": "^2.6.0",
+    "@material-tailwind/react": "^2.1.1",
     "@tabler/icons-react": "^2.23.0",
     "ai": "^2.1.12",
     "clsx": "^1.2.1",

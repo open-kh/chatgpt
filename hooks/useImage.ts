@@ -22,6 +22,7 @@ export async function POST(
   messages: string
 ) {
   let url = `https://api.openkh.org/chat/image_generation`;
+  // let url = `http://0.0.0.0:1333/chat/image_generation`;
   const response = await fetch(url, {
     method: 'POST',
     headers: {

@@ -18,6 +18,8 @@ import { TemperatureSlider } from '../Chat/Temperature';
 import ChatbarContext from '../Chatbar/Chatbar.context';
 import { SidebarButton } from '../Sidebar/SidebarButton';
 import { Import } from './Import';
+import ModelSelect2 from '@/components/Chat/ModelSelect2';
+
 
 interface Props {
   open: boolean;
@@ -80,13 +82,15 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             className="hidden sm:inline-block sm:h-screen sm:align-middle"
             aria-hidden="true"
           />
-
           <div
             ref={modalRef}
             //sm:max-h-[600px]
             className="inline-block flex-col gap-2 transform overflow-y-auto rounded-3xl border px-4 pt-5 pb-4 align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 sm:align-middle bg-gray-800 text-left"
             role="dialog"
-          >
+            >
+              <div className='w-full px-32'>
+                <ModelSelect2/>
+              </div>
             <div className="text-lg pb-4 font-bold text-neutral-200">
               {t('Settings')}
             </div>

@@ -1,6 +1,7 @@
 import * as gpt from '@/hooks/useGPT';
 import * as hf from '@/hooks/useHF';
 import * as img from '@/hooks/useImage';
+import * as tr from '@/hooks/useChatTran';
 
 import { DEFAULT_SYSTEM_PROMPT, DEFAULT_TEMPERATURE } from '@/utils/app/const';
 import { OpenAIError, OpenAIStream } from '@/utils/server';
@@ -66,11 +67,19 @@ const handler = async (req: Request): Promise<Response> => {
       messages[messages.length-1]['content'] = imageGen
       const usechat = await img.POST(imageGen)
       return usechat
+    }else if(imageGen.startsWith('/trans')){
+      // imageGen = imageGen.replaceAll('/trans','').trim()
+      // messages[messages.length-1]['content'] = imageGen
+      const usechat = await tr.translate()
+      return usechat
     }
     messages[messages.length-1]['content'] = imageGen.replaceAll('/chat','').trim()
 
     if (service == 'meta') {
       const usechat = await hf.POST(messagesToSend);
+      return usechat;
+    } else if(service == 'trans') {
+      const usechat = await tr.translate();
       return usechat;
     } else {
       const usechat = await gpt.POST(messagesToSend, true);
