@@ -4,7 +4,7 @@ import HomeContext from "@/pages/api/home/home.context";
 import { getSettings, saveSettings } from '@/utils/app/settings';
 
 
-const models = {
+const models:any = {
   meta: <IconMeta className="mx-auto w-5 h-5 pt-1" />,
   openai: <IconOpenAI className="mx-auto text-green-400 w-5 h-5" />,
   claude: <IconClaude className="mx-auto w-6 h-6 -mt-0.5" />,
