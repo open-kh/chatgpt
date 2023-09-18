@@ -9,6 +9,13 @@ import {
 import HomeContext from "@/pages/api/home/home.context";
 import { useContext } from "react";
 import { getSettings, saveSettings } from "@/utils/app/settings";
+import { IconClaude, IconMeta, IconOpenAI } from "../ui/icons";
+
+const models = {
+  meta: <IconMeta className="mx-auto w-5 h-5 pt-1" />,
+  openai: <IconOpenAI className="mx-auto text-green-400 w-5 h-5" />,
+  claude: <IconClaude className="mx-auto w-6 h-6 -mt-0.5" />,
+}
  
 export default function RadioHorizontalList() {
   const {
@@ -27,16 +34,20 @@ export default function RadioHorizontalList() {
         saveSettings(settings);
   }
   return (
-    <Card className="relative w-full max-w-[15rem] dark:bg-gray-700 dark:text-white  shadow">
+    <Card className="relative w-full max-w-[20rem] rounded-xl bg-white text-gray-900 dark:bg-gray-900">
       <List className="flex-row">
-        {[{name:'Meta',id: 'meta'}, {name: 'OpenAI',id: 'openai'}].map(e =>{
+        {[
+          {name:'Meta',id: 'meta'},
+          {name: 'OpenAI',id: 'openai'}, 
+          {name: 'Claude 2',id: 'claude'}
+        ].map(e =>{
           return <ListItem className="p-0" key={e.id}>
               <label
                 htmlFor="horizontal-list-react"
                 onClick={()=>handleChange(e.id)}
-                className={`flex w-full cursor-pointer rounded-md justify-center items-center px-3 py-2 `+(service === e.id&&'bg-slate-100 dark:text-black')}
+                className={`flex w-24 cursor-pointer rounded-md justify-center items-center px-3 py-2 text-gray-300 hover:text-gray-400 `+(service === e.id&&'bg-[#4e4f61] dark:text-white')}
               >
-                {/* <ListItemPrefix className="mr-3">
+                {/* <ListItemPrefix className="mr-0">
                   <Radio
                     name="horizontal-list"
                     id="horizontal-list-react"
@@ -47,9 +58,12 @@ export default function RadioHorizontalList() {
                     }}
                   />
                 </ListItemPrefix> */}
-                <Typography color="blue-gray" className="font-medium">
-                  {e.name}
-                </Typography>
+                {/* <div className="flex w-28">
+                  {models[e.id]}
+                </div> */}
+                  <Typography color="blue-gray" className="flex font-medium pl-1.5">
+                    {e.name}
+                  </Typography>
               </label>
             </ListItem>
         })}

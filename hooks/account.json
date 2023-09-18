@@ -1,0 +1,15 @@
+{
+  "chat": {
+    "completion": {
+      "prompt": "You are Open Brain",
+      "timezone": "Asia/Phnom_Penh",
+      "model": "claude-2"
+    },
+    "organization_uuid": "833da1d7-4120-4e88-8851-49fcd9fd2e95",
+    "conversation_uuid": "ff2a0d1f-df8a-444b-8183-41dbc7c271fa",
+    "text": "Hello",
+    "attachments": []
+  },
+  "userId": "'833da1d7-4120-4e88-8851-49fcd9fd2e95'",
+  "cookie": "__cf_bm=E8CexzJLtUfu4dqzSxHHBG49BHZjxakoCW0qMZSfaW0-1694969320-0-AROU/yOOhasNPRVpmIqepOSWq0AuTKJ8nWYIc7qEThPwZVaaGo099T+R+jyphPh4zqwEckAOPBKxD1d+nJ/yFHs=; cf_clearance=3ffDu8v_LyJADh3ODmGrElVEstx.yhSQiJz5uwqM7g8-1694969294-0-1-2f3824f8.56cd1da8.78397b18-0.2.1694969294; sessionKey=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; intercom-session-lupk8zyo=ajdGbktkMDlpdHZiYVdYUVRYdmtuRGQ4ZnhkenFabjc3WkFNK3pTSWY2aDkveU5BSWNDVDZtYUliR1VCY0dKbS0tMnhpRXA1a2s0NVdGYklpejdiUy9LQT09--a7ec90a1328d2ed8abc3f4d5812d26ef5bcf609f; intercom-device-id-lupk8zyo=e55a4f6b-924c-43ae-8ad8-50bac4107dfb"
+}

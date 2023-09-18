@@ -25,6 +25,7 @@ export async function POST(
   model?: string 
 ) {
   let url = `https://api.openkh.org/chat/completions`;
+  
   // let url = `http://0.0.0.0:1337/chat/completions`;
   // model = 'falcon-40b';
   // let url = `https://free.easychat.work/api/openai/v1/chat/completions`;

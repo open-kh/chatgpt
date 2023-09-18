@@ -266,13 +266,23 @@ function IconFacebook({ className, ...props }: React.ComponentProps<'svg'>) {
     </svg>
   );
 }
+function IconClaude({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+    className={cn('h-6 w-6', className)}
+    {...props}
+    >
+      <Image src="/images/anthropic-model.png" width={32} height={32} alt="Icon Claude" className='rounded-full' />
+    </div>
+  );
+}
 function IconMeta({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
     className={cn('h-6 w-6', className)}
     {...props}
     >
-      <Image src="/icons/meta-icon.svg" width={32} height={32} alt="Icon Meta" />
+      <Image src="/icons/meta-icon.svg" color='red' width={32} height={32} alt="Icon Meta" />
       {/* <img src="/icons/meta-icon.svg" alt="Icon Meta" /> */}
     </div>
   );
@@ -502,6 +512,7 @@ function IconChevronUpDown({
 
 export {
   IconFacebook,
+  IconClaude,
   IconMeta,
   IconEdit,
   IconNextChat,
