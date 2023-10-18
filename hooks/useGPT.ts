@@ -49,7 +49,6 @@ export async function POST(
   let res = await resGPT();
   
   if(res.body instanceof ReadableStream){
-    continue;
   }else {
     return res;
   }
