@@ -2,7 +2,7 @@ import { DEFAULT_SYSTEM_PROMPT } from '@/utils/app/const';
 import { OPENAI_API_KEY } from '@/utils/server';
 
 import { HfInference } from '@huggingface/inference';
-import { HuggingFaceStream, StreamingTextResponse } from 'ai';
+import { HuggingFaceStream,OpenAIStream, StreamingTextResponse } from 'ai';
 
 // Create a new HuggingFace Inference instance
 const Hf = new HfInference(process.env.HUGGINGFACE_API_KEY);
@@ -27,10 +27,10 @@ function buildPompt(
         if (role === 'user') {
           return `<|prompter|>${content}<|endoftext|>`;
         }else {
-          return `<|assistant|>${content}<|endoftext|>`;
+          return `<|response|>${content}<|endoftext|>`;
         }
       })
-      .join('') + '<|assistant|>'
+      .join('') + '<|response|>'
   );
 }
 
@@ -56,7 +56,9 @@ export async function POST(
       stream: true,
     }),
   });
-  return await resGPT();
+  let res = await resGPT();
+  const streamRes = OpenAIStream(res);
+  return new StreamingTextResponse(streamRes);
 
   // const response = await Hf.textGenerationStream({
   //   model: 'meta-llama/Llama-2-70b-chat-hf',
