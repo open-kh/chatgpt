@@ -48,7 +48,8 @@ export async function POST(
   });
   let res = await resGPT();
   
-  if(res.body !instanceof ReadableStream){
+  if(res.body instanceof ReadableStream){
+  else {
     return res;
   }
   const streamRes = OpenAIStream(res);
