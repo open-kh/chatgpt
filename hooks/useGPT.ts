@@ -50,7 +50,7 @@ export async function POST(
   
   if(res.body instanceof ReadableStream){
     continue;
-  else {
+  }else {
     return res;
   }
   const streamRes = OpenAIStream(res);
