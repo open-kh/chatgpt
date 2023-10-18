@@ -1,4 +1,5 @@
 import { DEFAULT_SYSTEM_PROMPT } from '@/utils/app/const';
+import { OPENAI_API_KEY } from '@/utils/server';
 
 import { HfInference } from '@huggingface/inference';
 import { HuggingFaceStream, StreamingTextResponse } from 'ai';
@@ -37,34 +38,48 @@ export async function POST(
   messages: { content: string; role: 'system' | 'user' | 'assistant' }[],
 ) {
   // Extract the `messages` from the body of the request
-  const response = await Hf.textGenerationStream({
-    // model: 'tiiuae/falcon-7b-instruct',
-    // model: 'upstage/Llama-2-70b-instruct-v2',
-    // model: 'meta-llama/Llama-2-7b-chat-hf',
-    model: 'OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5',
-    // model: 'OpenAssistant/oasst-sft-6-llama-30b',
-    // model: 'CarperAI/stable-vicuna-13b-delta',
-    // model: 'OpenAssistant/oasst-sft-6-llama-30b-xor',
-    inputs: buildPompt([
-      {
-        role: 'system',
-        content: DEFAULT_SYSTEM_PROMPT_V2,
-      },
-      ...messages,
-    ]),
-    parameters: {
-      temperature: 0.1, 
-      truncate: 1000, 
-      max_new_tokens: 1024, 
-      // stop: `[</s>]`,
-      repetition_penalty:	1.2,
-      return_full_text:	false,
-      top_k:50,
-      top_p: 0.95,
+  const resGPT = async () => await fetch(`${process.env.AI_URL}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${OPENAI_API_KEY}`,
     },
+    body: JSON.stringify({
+      messages: [{"content":buildPompt([
+        {
+          role: 'system',
+          content: DEFAULT_SYSTEM_PROMPT_V2,
+        },
+        ...messages,
+      ])}],
+      model: 'llama-2-70b',
+      stream: true,
+    }),
   });
+  return await resGPT();
 
-  // Convert the response into a friendly text-stream
-  const stream = HuggingFaceStream(response);
-  return new StreamingTextResponse(stream);
+  // const response = await Hf.textGenerationStream({
+  //   model: 'meta-llama/Llama-2-70b-chat-hf',
+    // inputs: buildPompt([
+    //   {
+    //     role: 'system',
+    //     content: DEFAULT_SYSTEM_PROMPT_V2,
+    //   },
+    //   ...messages,
+    // ]),
+  //   parameters: {
+  //     temperature: 0.1, 
+  //     truncate: 1000, 
+  //     max_new_tokens: 1024, 
+  //     // stop: `[</s>]`,
+  //     repetition_penalty:	1.2,
+  //     return_full_text:	false,
+  //     top_k:50,
+  //     top_p: 0.95,
+  //   },
+  // });
+
+  // // Convert the response into a friendly text-stream
+  // const stream = HuggingFaceStream(response);
+  // return new StreamingTextResponse(stream);
 }

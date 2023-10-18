@@ -75,14 +75,15 @@ const handler = async (req: Request): Promise<Response> => {
     }
     messages[messages.length-1]['content'] = imageGen.replaceAll('/chat','').trim()
 
-    if (service == 'meta') {
-      const usechat = await hf.POST(messagesToSend);
-      return usechat;
-    } else if(service == 'trans') {
+    // if (service == 'meta') {
+    //   const usechat = await hf.POST(messagesToSend);
+    //   return usechat;
+    // } 
+    if(service == 'trans') {
       const usechat = await tr.translate();
       return usechat;
     } else {
-      const usechat = await gpt.POST(messagesToSend, true);
+      const usechat = await gpt.POST(messagesToSend, true, service);
       return usechat;
     }
 

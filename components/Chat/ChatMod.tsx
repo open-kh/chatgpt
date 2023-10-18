@@ -29,9 +29,9 @@ export const ChatMode = memo(({ children }: Props) => {
             />
           </div>
           <div className="pl-2 text-base text-gray-600 w-auto max-sm:w-full max-sm:group-focus:invisible max-sm:group-hover:invisible">
-            <p className=" dark:text-red-500 flex">
-              MAINTENANCE MOD
-              <span className="pl-2 flex text-brack dark:text-white">
+            <p className=" dark:text-red-400 flex">
+              Welcome
+              {/* <span className="pl-2 flex text-brack dark:text-white">
                 <svg
                   viewBox="0 0 32 32"
                   width="1.2em"
@@ -51,15 +51,15 @@ export const ChatMode = memo(({ children }: Props) => {
                 >
                   TEST HERE
                 </a>
-              </span>
+              </span> */}
             </p>
             <p className="dark:text-gray-400">
-              Give [any,many,more,...] information as OpenBrain can, The owner is in charge of all information.
+              Hello! My name is Open Brain, and I'm here to assist you with any questions or tasks you may have. I'm managed by Mr. Phearum, who has entrusted me with the responsibility of helping users like you. How can I help you today?
               <span className="flex mt-2">
                 <IconDeviceMobile className="mr-1.5 text-xs text-gray-400" />
                 UI supported on mobile
               </span>
-              {/* {
+              {/* {ChatMode
                 [
                   {name: "HR Management", link: "https://hr.openkh.org", by: "Lim Lenger"},
                   {name: "Revamp & enhance Deam Computer Int'l website", link: "https://deam.openkh.org", by: "Chhoem Nikkare"}

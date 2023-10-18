@@ -38,8 +38,8 @@ export default function RadioHorizontalList() {
       <List className="flex-row">
         {[
           {name:'Meta',id: 'meta'},
-          {name: 'OpenAI',id: 'openai'}, 
-          {name: 'Claude 2',id: 'claude'}
+          {name: 'ChatGPT',id: 'openai'}, 
+          {name: 'Bard',id: 'bard'}
         ].map(e =>{
           return <ListItem className="p-0" key={e.id}>
               <label
@@ -61,7 +61,7 @@ export default function RadioHorizontalList() {
                 {/* <div className="flex w-28">
                   {models[e.id]}
                 </div> */}
-                  <Typography color="blue-gray" className="flex font-medium pl-1.5">
+                  <Typography color="blue-gray" className="flex font-medium">
                     {e.name}
                   </Typography>
               </label>

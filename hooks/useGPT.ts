@@ -24,12 +24,14 @@ export async function POST(
   stream: true,
   model?: string 
 ) {
-  let url = `https://api.openkh.org/chat/completions`;
+  // let url = `https://api.openkh.org/chat/completions`;
   
   // let url = `http://0.0.0.0:1337/chat/completions`;
   // model = 'falcon-40b';
+  // console.log(model);
+  
   // let url = `https://free.easychat.work/api/openai/v1/chat/completions`;
-  const resGPT = async () => await fetch(url, {
+  const resGPT = async () => await fetch(`${process.env.AI_URL}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -40,7 +42,7 @@ export async function POST(
         { role: 'system', content: PROMPT },
         ...messages,
       ],
-      model: model??'falcon-40b',
+      model: model,
       stream,
     }),
   });
@@ -49,7 +51,6 @@ export async function POST(
   if(res.body instanceof ReadableStream){
     res = res;
   }else{
-    model = 'falcon-40b';
     res = await resGPT();
   }
   const streamRes = OpenAIStream(res);

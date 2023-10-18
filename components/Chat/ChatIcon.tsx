@@ -1,5 +1,5 @@
 import { memo, useContext, useState } from "react";
-import { IconClaude, IconFacebook, IconMeta, IconOpenAI } from "../ui/icons";
+import { IconBard, IconClaude, IconFacebook, IconMeta, IconOpenAI } from "../ui/icons";
 import HomeContext from "@/pages/api/home/home.context";
 import { getSettings, saveSettings } from '@/utils/app/settings';
 
@@ -7,7 +7,8 @@ import { getSettings, saveSettings } from '@/utils/app/settings';
 const models:any = {
   meta: <IconMeta className="mx-auto w-5 h-5 pt-1" />,
   openai: <IconOpenAI className="mx-auto text-green-400 w-5 h-5" />,
-  claude: <IconClaude className="mx-auto w-6 h-6 -mt-0.5" />,
+  // claude: <IconClaude className="mx-auto w-6 h-6 -mt-0.5" />,
+  bard: <IconBard className="mx-auto w-8 h-8" />,
 }
 
 export const ChatIcon = memo(()=>{

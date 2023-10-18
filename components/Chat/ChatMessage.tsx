@@ -149,7 +149,7 @@ export const ChatMessage: FC<Props> = memo(
         }`}
         style={{ overflowWrap: 'anywhere' }}
       >
-        <div className="mx-auto flex py-2 min-h-[calc(2rem+theme(spacing[3.5]))] md:max-w-xl lg:max-w-xl lg:px-0 xl:max-w-2xl">
+        <div className="mx-auto flex py-2 min-h-[calc(2rem+theme(spacing[3.5]))] md:max-w-2xl xl:max-w-2xl lg:px-0">
           <div className="min-w-[40px] max-sm:mt-1 text-right">
             {message.role === 'user' ? (
               <div className="shadow-md text-center py-1.5 rounded-md w-[30px] h-[30px]">
