@@ -54,7 +54,7 @@ export const ChatMode = memo(({ children }: Props) => {
               </span> */}
             </p>
             <p className="dark:text-gray-400">
-              Hello! My name is Open Brain, and I'm here to assist you with any questions or tasks you may have. I'm managed by Mr. Phearum, who has entrusted me with the responsibility of helping users like you. How can I help you today?
+              Hello! My name is Open Brain, and I`m here to assist you with any questions or tasks you may have. I`m managed by Mr. Phearum, who has entrusted me with the responsibility of helping users like you. How can I help you today?
               <span className="flex mt-2">
                 <IconDeviceMobile className="mr-1.5 text-xs text-gray-400" />
                 UI supported on mobile
