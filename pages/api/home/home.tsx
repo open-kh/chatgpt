@@ -379,7 +379,12 @@ const Home = ({
         <main
           className={`flex h-screen w-screen flex-col text-sm text-white dark:text-white ${lightMode}`}
         >
-          <div className="max-sm:fixed top-0 w-full md:hidden">
+          <div className="max-sm:fixed top-0 w-full md:hidden text-gray-800 bg-white dark:bg-[#343541] shadow-md shadow-gray-200 
+            bg-gradient-to-b
+            from-bg-200
+            from-25%
+            to-bg-200/0
+            pointer-events-none">
             <Navbar
               selectedConversation={selectedConversation}
               onNewConversation={handleNewConversation}

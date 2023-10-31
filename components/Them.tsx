@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { IconBing, IconClaude, IconMeta, IconOpenAI } from "./ui/icons";
 export default function Them() {
   return (
     <>
@@ -14,4 +15,12 @@ export default function Them() {
       </div>
     </>
   );
+}
+
+
+export const models:any = {
+  meta: <IconMeta className="mx-auto w-5 h-5 pt-1" />,
+  openai: <IconOpenAI className="mx-auto text-green-400 w-5 h-5" />,
+  // claude: <IconClaude className="mx-auto w-6 h-6 -mt-0.5" />,
+  bing: <IconBing className="mx-auto w-[15px] h-[15px] -mt-0.5" />,
 }
