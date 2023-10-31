@@ -276,6 +276,16 @@ function IconClaude({ className, ...props }: React.ComponentProps<'div'>) {
     </div>
   );
 }
+export function IconBing({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+    className={cn('h-6 w-6', className)}
+    {...props}
+    >
+      <Image src="/icons/bing-icon.svg" width={32} height={32} alt="Icon Bing" className='rounded-full' />
+    </div>
+  );
+}
 export function IconBard({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div

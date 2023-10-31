@@ -37,9 +37,9 @@ export default function RadioHorizontalList() {
     <Card className="relative w-full max-w-[20rem] rounded-xl bg-white text-gray-900 dark:bg-gray-900">
       <List className="flex-row">
         {[
-          {name:'Meta',id: 'meta'},
+          {name: 'Bing',id: 'bing'},
           {name: 'ChatGPT',id: 'openai'}, 
-          {name: 'Bard',id: 'bard'}
+          {name:'Meta',id: 'meta'},
         ].map(e =>{
           return <ListItem className="p-0" key={e.id}>
               <label
