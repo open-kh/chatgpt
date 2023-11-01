@@ -13,7 +13,7 @@ export const Navbar: FC<Props> = ({
   onNewConversation,
 }) => {
   return (
-    <nav className="flex w-full justify-between py-3 px-4">
+    <nav className="flex w-full justify-between pt-3 py-3 px-4 z-20 text-gray-800 dark:text-white">
       <div className="mr-4"></div>
 
       <div className="max-w-[240px] overflow-hidden text-ellipsis whitespace-nowrap">

@@ -9,7 +9,7 @@ import {
 import HomeContext from "@/pages/api/home/home.context";
 import { JSXElementConstructor, Key, ReactElement, ReactFragment, ReactPortal, useContext } from "react";
 import { getSettings, saveSettings } from "@/utils/app/settings";
-import { model_names } from "../Them";
+import { model_names, models } from "../Them";
  
 export default function RadioHorizontalList() {
   const {
@@ -28,32 +28,26 @@ export default function RadioHorizontalList() {
         saveSettings(settings);
   }
   return (
-    <Card className="relative w-full max-w-[35rem] rounded-xl bg-white text-gray-900 dark:bg-gray-900">
-      <List className="flex-row">
+    <Card className="relative max-w-[20rem] rounded-xl overflow-scroll bg-white text-gray-900 dark:bg-gray-900">
+      <List className="flex-row snap-x w-[27rem] mx:auto">
         {model_names.map((e: { id: any; name: any }) =>{
-          return <ListItem className="p-0 mx-1" key={e.id}>
+          return <ListItem className="p-0 w-auto flex snap-center" key={e.id} onClick={()=>handleChange(e.id)}>
               <label
                 htmlFor="horizontal-list-react"
-                onClick={()=>handleChange(e.id)}
-                className={`flex w-full cursor-pointer rounded-md justify-center items-center px-3 py-2 text-gray-300 hover:text-gray-400 `+(service === e.id&&'bg-[#4e4f61] dark:text-white')}
+                className={`flex cursor-pointer rounded-md justify-center items-center px-3 py-2 text-gray-300 hover:text-gray-400 `+(service === e.id&&'bg-[#4e4f61] dark:text-white')}
               >
                 {/* <ListItemPrefix className="mr-0">
-                  <Radio
-                    name="horizontal-list"
-                    id="horizontal-list-react"
-                    ripple={false}
-                    className="hover:before:opacity-0"
-                    containerProps={{
-                      className: "p-0",
-                    }}
-                  />
-                </ListItemPrefix> */}
-                {/* <div className="flex w-28">
                   {models[e.id]}
-                </div> */}
-                  <Typography color="blue-gray" className="flex font-medium text-base">
-                    <code className="px-3">{e.name}</code>
-                  </Typography>
+                </ListItemPrefix> */}
+                  
+                  <div className={`group/item text-center`}>
+                    <div className="flex group-hover/item:-ml-1.5">
+                      <div className={"invisible w-0 group-hover/item:w-6 group-hover/item:visible"}>{models[e.id]}</div>
+                      <Typography color="blue-gray" className={"font-medium group-hover/item:font-mono"}>
+                        <code>{e.name}</code>
+                      </Typography>
+                    </div>
+                  </div>
               </label>
             </ListItem>
         })}

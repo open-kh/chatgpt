@@ -409,7 +409,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                     AI Chat
                   </p> */}
 
-                  <div className="my-auto md:px-[80px] grid gap-8 lg:grid-cols-2">
+                  <div className="my-auto md:px-[80px] grid gap-8 lg:grid-cols-2 text-gray-800 dark:text-white">
                     <div className="lg:col-span-1">
                       <div>
                         <div className="mb-3 flex items-end text-2xl font-semibold text-slate-600 dark:text-white">
@@ -423,10 +423,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           {appName}
                         </div>
                         <p className="text-base text-gray-600 dark:text-gray-400">
-                          Making the community`s best AI chat models available
+                          Making the community best AI chat models available
                           to everyone.
                           <br />
-                          Optimized conversation model, more natural and vivid language. Powered by OpenAI, Google and Meta.
+                          Optimized real time data conversation, more natural and vivid language. Powered by OpenAI, Google and Meta.
                         </p>
                       </div>
                       <br />

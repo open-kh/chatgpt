@@ -1,4 +1,4 @@
-import { IconDeviceMobile } from '@tabler/icons-react';
+import { IconDeviceMobile, IconSquareRoundedArrowRight } from '@tabler/icons-react';
 import { ReactNode, memo } from 'react';
 
 import Image from 'next/image';
@@ -10,48 +10,27 @@ interface Props {
 export const ChatMode = memo(({ children }: Props) => {
   return (
     <>
-      {/* <div className="flex items-center rounded-xl bg-gray-100 text-gray-700 p-1 text-sm dark:bg-gray-800 mb-4">
+      <div className="flex items-center rounded-xl bg-gray-100 text-gray-700 p-1 text-sm dark:bg-gray-800 mb-4">
         <span className="mr-2 inline-flex items-center rounded-lg bg-gradient-to-br from-yellow-300 px-2 py-1 text-xxs font-medium uppercase leading-3 text-yellow-700 dark:from-[#373010] dark:text-yellow-400">
           New
         </span>
-        <span className=' dark:text-white'>GPT-4 is using and CHAT-IMAGE is implemeneting</span>
+        <span className=' dark:text-white font-mono text-xs'>Bing: GPT-4, ChatGPT: GPT-3.5-turbo, Image: Diffusion SDXL</span>
         <div className="ml-auto shrink-0"></div>
-      </div> */}
+      </div>
       <div className="group max-sm:h-[auto] overflow-hidden rounded-xl border dark:border-gray-800">
         <div className="flex max-sm:group-hover:h-[350px] max-sm:relative p-3">
-          <div className="w-0 h-0 transition-all ease-in-out invisible group-hover:w-[170px] max-sm:group-hover:w-full group-hover:visible group-focus:visible group-focus:w-full hover:-translate-y-1 hover:scale-110 duration-900">
+          <div className="w-0 h-0 transition-all ease-in-out invisible group-hover:w-full group-hover:visible group-focus:visible group-focus:w-full hover:-translate-y-1 hover:scale-110 duration-900">
             <Image
               alt=""
               width={350}
               height={350}
               src="/ABA.png"
-              className="hidden max-sm:px-7 max-sm:absolute cursor-pointer group-focus:block group-hover:block"
+              className="hidden max-sm:px-7 rounded-md max-sm:absolute cursor-pointer group-focus:block group-hover:block"
             />
           </div>
           <div className="pl-2 text-base text-gray-600 w-auto max-sm:w-full max-sm:group-focus:invisible max-sm:group-hover:invisible">
-            <p className=" dark:text-red-400 flex">
+            <p className=" dark:text-red-500 flex">
               Welcome
-              {/* <span className="pl-2 flex text-brack dark:text-white">
-                <svg
-                  viewBox="0 0 32 32"
-                  width="1.2em"
-                  height="1.2em"
-                  className="mr-1.5 mt-1 text-xs"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M10 6v2h12.59L6 24.59L7.41 26L24 9.41V22h2V6H10z"
-                  ></path>
-                </svg>
-                <a
-                  href="http://chat.openkh.org"
-                  className=" shadow-xl rounded-md px-2 border border-red-600 cursor-pointer"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  TEST HERE
-                </a>
-              </span> */}
             </p>
             <p className="dark:text-gray-400">
               Hello! My name is Open Brain, I`m managed by Mr. Phearum, who has entrusted me with the responsibility of helping users like you. How can I help you today?
@@ -83,7 +62,7 @@ export const ChatMode = memo(({ children }: Props) => {
             rel="noreferrer"
             className="flex items-center hover:underline"
           >
-            <svg
+            {/* <svg
               viewBox="0 0 32 32"
               width="1.2em"
               height="1.2em"
@@ -93,9 +72,9 @@ export const ChatMode = memo(({ children }: Props) => {
                 fill="currentColor"
                 d="M10 6v2h12.59L6 24.59L7.41 26L24 9.41V22h2V6H10z"
               ></path>
-            </svg>
-            {/* <IconSquareRoundedArrowRight className="mr-1.5 text-xs text-gray-400" /> */}
-            Coffee/Donate by (ABA: 015949757)
+            </svg> */}
+            <IconSquareRoundedArrowRight className="mr-2 text-gray-400" />
+            <code>Coffee me by (ABA: 015949757)</code>
             <div className="max-sm:hidden">&nbsp;</div>
           </a>
         </div>

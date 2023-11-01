@@ -383,8 +383,7 @@ const Home = ({
             bg-gradient-to-b
             from-bg-200
             from-25%
-            to-bg-200/0
-            pointer-events-none">
+            to-bg-200/0">
             <Navbar
               selectedConversation={selectedConversation}
               onNewConversation={handleNewConversation}
