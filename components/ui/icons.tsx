@@ -286,6 +286,16 @@ export function IconBing({ className, ...props }: React.ComponentProps<'div'>) {
     </div>
   );
 }
+export function IconPerplexity({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+    className={cn('h-6 w-6', className)}
+    {...props}
+    >
+      <Image src="/icons/perplexity-icon.svg" width={32} height={32} alt="Icon Perplexity" className='rounded-full' />
+    </div>
+  );
+}
 export function IconBard({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div

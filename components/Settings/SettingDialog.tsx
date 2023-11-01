@@ -88,9 +88,9 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             className="inline-block flex-col gap-2 transform overflow-y-auto rounded-3xl border px-4 pt-5 pb-4 align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 sm:align-middle bg-gray-800 text-left"
             role="dialog"
             >
-              <div className='w-full px-32'>
+              {/* <div className='w-full px-32'>
                 <ModelSelect2/>
-              </div>
+              </div> */}
             <div className="text-lg pb-4 font-bold text-neutral-200">
               {t('Settings')}
             </div>

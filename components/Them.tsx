@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { IconBing, IconClaude, IconMeta, IconOpenAI } from "./ui/icons";
+import { IconBing, IconClaude, IconMeta, IconOpenAI, IconPerplexity } from "./ui/icons";
 export default function Them() {
   return (
     <>
@@ -19,8 +19,15 @@ export default function Them() {
 
 
 export const models:any = {
-  meta: <IconMeta className="mx-auto w-5 h-5 pt-1" />,
+  bing: <IconBing className="mx-auto w-[16px] h-[16px] -mt-0.5" />,
   openai: <IconOpenAI className="mx-auto text-green-400 w-5 h-5" />,
-  // claude: <IconClaude className="mx-auto w-6 h-6 -mt-0.5" />,
-  bing: <IconBing className="mx-auto w-[15px] h-[15px] -mt-0.5" />,
+  perplexity: <IconPerplexity className="mx-auto w-5 h-5 -mt-0.5" />,
+  meta: <IconMeta className="mx-auto w-5 h-5 pt-1" />,
 }
+
+export const model_names: any = [
+  {name:'BingAI',       id: 'bing'},
+  {name:'ChatGPT',    id: 'openai'}, 
+  {name:'PerplexityAI', id: 'perplexity'},
+  {name:'MetaAI',       id: 'meta'},
+]
