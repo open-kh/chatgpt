@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import HomeContext from "@/pages/api/home/home.context";
-import { useContext } from "react";
+import { JSXElementConstructor, Key, ReactElement, ReactFragment, ReactPortal, useContext } from "react";
 import { getSettings, saveSettings } from "@/utils/app/settings";
 import { model_names } from "../Them";
  
@@ -30,7 +30,7 @@ export default function RadioHorizontalList() {
   return (
     <Card className="relative w-full max-w-[35rem] rounded-xl bg-white text-gray-900 dark:bg-gray-900">
       <List className="flex-row">
-        {model_names.map(e =>{
+        {model_names.map((e: { id: any; name: any }) =>{
           return <ListItem className="p-0 mx-1" key={e.id}>
               <label
                 htmlFor="horizontal-list-react"
