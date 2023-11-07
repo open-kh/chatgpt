@@ -370,7 +370,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   const messages = [
     {
       title: '"Generate Image using `/image An astronaut riding a rainbow unicorn`"',
-      body: '/image An astronaut riding a rainbow unicorn',
+      body: '/image --count=2 An astronaut riding a rainbow unicorn',
     },
     {
       title: '"How do I make an HTTP request in Javascript?"',
