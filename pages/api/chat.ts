@@ -63,11 +63,13 @@ const handler = async (req: Request): Promise<Response> => {
     const bearer = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFhZjI0ZTQ5LTFiMDUtNDBlMy1iMDU2LTFmM2FlYmViNzEyMCIsImlhdCI6MTY4OTQ5NjY3NCwiZXhwIjoxNjg5NzU1ODc0LCJhY3Rpb24iOiJhdXRoIiwiaXNzIjoidGhlYi5haSJ9.z5t72OxVK9xMxe8kC3huAqo6qPqkv92TG3SxqcGs0sg'
     if(imageGen.startsWith('/image')){
       var pattern = /--count=(\d+)/;
-      var match = imageGen.match(pattern);
-      imageGen = imageGen.replaceAll('/image','').replace(match[0],'').trim()
+      const match: Array<string> | null = imageGen.match(pattern);
+      imageGen = imageGen.replaceAll('/image','').trim()
       messages[messages.length-1]['content'] = imageGen
       let usechat = null;
       if (match) {
+        imageGen = imageGen.replace(match[0],'').trim();
+        messages[messages.length-1]['content'] = imageGen
         var count = parseInt(match[1], 10);
         usechat = await img.POST(imageGen, count=count)
       }
