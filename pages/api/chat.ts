@@ -61,11 +61,17 @@ const handler = async (req: Request): Promise<Response> => {
 
     let imageGen = messages[messages.length-1]['content'];
     const bearer = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFhZjI0ZTQ5LTFiMDUtNDBlMy1iMDU2LTFmM2FlYmViNzEyMCIsImlhdCI6MTY4OTQ5NjY3NCwiZXhwIjoxNjg5NzU1ODc0LCJhY3Rpb24iOiJhdXRoIiwiaXNzIjoidGhlYi5haSJ9.z5t72OxVK9xMxe8kC3huAqo6qPqkv92TG3SxqcGs0sg'
-
     if(imageGen.startsWith('/image')){
-      imageGen = imageGen.replaceAll('/image','').trim()
+      var pattern = /--count=(\d+)/;
+      var match = imageGen.match(pattern);
+      imageGen = imageGen.replaceAll('/image','').replace(match[0],'').trim()
       messages[messages.length-1]['content'] = imageGen
-      const usechat = await img.POST(imageGen)
+      let usechat = null;
+      if (match) {
+        var count = parseInt(match[1], 10);
+        usechat = await img.POST(imageGen, count=count)
+      }
+      usechat = await img.POST(imageGen)
       return usechat
     }else if(imageGen.startsWith('/trans')){
       // imageGen = imageGen.replaceAll('/trans','').trim()

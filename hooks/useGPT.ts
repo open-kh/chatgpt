@@ -31,7 +31,7 @@ export async function POST(
   // console.log(model);
   
   // let url = `https://free.easychat.work/api/openai/v1/chat/completions`;
-  const resGPT = async () => await fetch(`${process.env.AI_URL}`, {
+  const resGPT = async () => await fetch(`${process.env.AI_URL}/chat/completions`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

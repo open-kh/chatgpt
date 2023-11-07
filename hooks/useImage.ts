@@ -17,12 +17,13 @@ function RAN_API_KEY(): string {
 
 export const OPENAI_API_KEY: String =
   process.env.OPENAI_API_KEY ?? RAN_API_KEY();
+const AI_IP = process.env.AI_URL
 
 export async function POST(
-  messages: string
+  messages: string,
+  count: number = 1,
 ) {
-  let url = `https://api.openkh.org/chat/image_generation`;
-  // let url = `http://0.0.0.0:1333/chat/image_generation`;
+  let url = `${AI_IP}/chat/image_generation`;
   const response = await fetch(url, {
     method: 'POST',
     headers: {

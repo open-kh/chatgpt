@@ -38,7 +38,7 @@ export async function POST(
   messages: { content: string; role: 'system' | 'user' | 'assistant' }[],
 ) {
   // Extract the `messages` from the body of the request
-  const resGPT = async () => await fetch(`${process.env.AI_URL}`, {
+  const resGPT = async () => await fetch(`${process.env.AI_URL}/chat/completions`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

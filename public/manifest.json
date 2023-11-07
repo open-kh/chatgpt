@@ -4,8 +4,8 @@
   "description": "Open Brain is a powerful and versatile platform for machine learning development and deployment, offering a streamlined and intuitive interface for users of all skill levels, along with robust tools and resources for advanced experimentation and research.",
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "transparent",
-  "background_color": "transparent",
+  "theme_color": "rgb(52, 53, 65)",
+  "background_color": "rgb(52, 53, 65)",
   "icons": [
     {
       "src": "/images/1024.png",
