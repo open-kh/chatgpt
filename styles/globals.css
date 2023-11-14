@@ -40,8 +40,14 @@ code[class^="language-"], pre code {
   background: inherit !important;
   /* font-family: Söhne Mono,Monaco,Andale Mono,Ubuntu Mono,monospace!important; */
 }
+body .zoom{
+  zoom: 110%;
+}
 
 @media (max-width: 720px) {
+  body .zoom {
+    zoom: 100%;
+  }
   pre {
     width: calc(100vw - 80px);
     margin-left: -8px;
