@@ -307,6 +307,17 @@ export function IconBard({ className, ...props }: React.ComponentProps<'div'>) {
     </div>
   );
 }
+function IconSeaLLM({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+    className={cn('h-6 w-6', className)}
+    {...props}
+    >
+      <Image src="/icons/seallm-icon.png" color='red' width={32} height={32} alt="Icon Meta" />
+      {/* <img src="/icons/meta-icon.svg" alt="Icon Meta" /> */}
+    </div>
+  );
+}
 function IconMeta({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
@@ -572,4 +583,5 @@ export {
   IconUsers,
   IconExternalLink,
   IconChevronUpDown,
+  IconSeaLLM
 };
