@@ -34,14 +34,14 @@ export default function RadioHorizontalList() {
           return <ListItem className="p-0 w-auto flex snap-center" key={e.id} onClick={()=>handleChange(e.id)}>
               <label
                 htmlFor="horizontal-list-react"
-                className={`flex cursor-pointer rounded-md justify-center items-center px-3 py-2 text-gray-300 hover:text-gray-400 `+(service === e.id&&'bg-[#4e4f61] dark:text-white')}
+                className={`flex cursor-pointer rounded-md justify-center items-center px-3 py-2 text-gray-300 hover:text-gray-400 `+(service === e.id&&'bg-[#4e4f61] dark:text-white w-[230px]')}
               >
                 {/* <ListItemPrefix className="mr-0">
                   {models[e.id]}
                 </ListItemPrefix> */}
                   
                   <div className={`group/item text-center`}>
-                    <div className="flex group-hover/item:-ml-1.5">
+                    <div className="flex group-hover/item:-ml-1.5 group-hover/item:w-full">
                       <div className={"invisible w-0 group-hover/item:w-6 group-hover/item:visible"}>{models[e.id]}</div>
                       <Typography color="blue-gray" className={"font-medium group-hover/item:font-mono"}>
                         <code>{e.name}</code>

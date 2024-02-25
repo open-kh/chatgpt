@@ -314,7 +314,16 @@ function IconSeaLLM({ className, ...props }: React.ComponentProps<'div'>) {
     {...props}
     >
       <Image src="/icons/seallm-icon.png" color='red' width={32} height={32} alt="Icon Meta" />
-      {/* <img src="/icons/meta-icon.svg" alt="Icon Meta" /> */}
+    </div>
+  );
+}
+function IconGoogle({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+    className={cn('h-6 w-6', className)}
+    {...props}
+    >
+      <Image src="/icons/google-icon.png" color='red' width={32} height={32} alt="Icon Meta" />
     </div>
   );
 }
@@ -555,6 +564,7 @@ function IconChevronUpDown({
 export {
   IconFacebook,
   IconClaude,
+  IconGoogle,
   IconMeta,
   IconEdit,
   IconNextChat,

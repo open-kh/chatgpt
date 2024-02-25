@@ -35,6 +35,7 @@ import { ChatMode } from './ChatMod';
 import { ErrorMessageDiv } from './ErrorMessageDiv';
 import { MemoizedChatMessage } from './MemoizedChatMessage';
 import ModelSelect2 from './ModelSelect2';
+import { BgIcon } from './BgIcon';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -467,7 +468,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               </div>
             ) : (
               <>
-                <div className="sticky mb-1 bg-slate-50 max-sm:hidden hidden top-0 z-10 border justify-around py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
+                <div className="sticky mb-1 bg-slate-50 max-sm:hidden top-0 z-10 border justify-around py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
                   {/* <span className="uppercase w-full"></span> */}
                   <span className="uppercase  w-full text-center max-sm:hidden">
                     {selectedConversation?.name}
@@ -507,7 +508,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           {/* <div className='w-full text-center'>
           </div> */}
           {/* <ModelSelect2/> */}
-
           <ChatInput
             stopConversationRef={stopConversationRef}
             textareaRef={textareaRef}
