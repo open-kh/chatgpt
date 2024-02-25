@@ -427,11 +427,14 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           Making the community best AI chat models available
                           to everyone.
                           <br />
-                          Optimized real time data conversation, more natural and vivid language. Powered by OpenAI, Google and Meta.
+                          Optimized real time data conversation, more natural and vivid language. 
+                          Powered by OpenAI, Google, Perplexity and Meta.
                         </p>
                       </div>
                       <br />
-                      Dynamic model: <code className='text-black dark:text-white'>{['GPT-4(32k)','GPT-3.5-turbo(16k)', 'Meta-Llama 2 70b'].join(", ")}</code>
+                      Dynamic model: <code className='text-black dark:text-white'>{
+                      ['GPT-4(32k)','GPT-3.5-turbo(16k)', 'Meta-Llama 2', 'Perplexity', 'SeaLLM', 'Google'].join(", ")
+                      }</code>
                     </div>
                     <div className="lg:col-span-2">
                       <ChatMode />
@@ -468,7 +471,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               </div>
             ) : (
               <>
-                <div className="sticky mb-1 bg-slate-50 max-sm:hidden top-0 z-10 border justify-around py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
+                <div className="sticky hidden mb-1 bg-slate-50 max-sm:hidden top-0 z-10 border justify-around py-2 text-sm text-neutral-500 dark:border-none dark:bg-[#444654] dark:text-neutral-200 max-sm:bg-transparent">
                   {/* <span className="uppercase w-full"></span> */}
                   <span className="uppercase  w-full text-center max-sm:hidden">
                     {selectedConversation?.name}

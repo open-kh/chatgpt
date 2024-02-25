@@ -214,7 +214,7 @@ export const ChatMessage: FC<Props> = memo(
                 )}
 
                 {!isEditing && (
-                  <div className="relative max-sm:absolute max-sm:left-1 left-2 bottom-1 max-sm:top-3.5 items-center">
+                  <div className="relative max-sm:left-1 left-2 bottom-1 max-sm:top-3.5 items-center">
                     <div className="text-gray-500 absolute hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 border border-slate-700 rounded-md invisible group-hover:visible focus:visible flex flex-row gap-1 p-1">
                       <button className="" onClick={toggleEditing}>
                         <IconEdit size={17} />
