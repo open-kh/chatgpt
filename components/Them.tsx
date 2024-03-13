@@ -23,13 +23,13 @@ export const models:any = {
   openai: <IconOpenAI className="mx-auto text-green-400 w-5 h-5" />,
   perplexity: <IconPerplexity className="mx-auto w-5 h-5 -mt-0.5" />,
   "ollama/seallm": <IconSeaLLM className="mx-auto w-5 h-5" />,
-  "ollama/gemma": <IconGoogle className="mx-auto w-5 h-5" />,
+  "ollama/llava": <IconGoogle className="mx-auto w-5 h-5" />,
   meta: <IconMeta className="mx-auto w-5 h-5 pt-1" />,
 }
 
 export const model_names: any = [
   {name:'SeaLLM',       id: 'ollama/seallm'},
-  {name:'Gemma',        id: 'ollama/gemma'},
+  {name:'Gemini',        id: 'ollama/llava'},
   {name:'BingAI',       id: 'bing'},
   {name:'ChatGPT',      id: 'openai'}, 
   {name:'PerplexityAI', id: 'perplexity'},
